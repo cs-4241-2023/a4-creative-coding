@@ -1,0 +1,13 @@
+{
+    "name": "Audio File Visualizer",
+    "version": "1.0",
+    "description": "Web application that visualizes an audio file and gives the user control over a number of parameters defining the visual experience.",
+    "author": "Matthew McAlarney",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "mime": "^2.6.0"
+    }
+}
