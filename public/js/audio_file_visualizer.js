@@ -18,14 +18,14 @@ const beginAudioVisualization = function() {
     canvas.width = canvas.height = 512 //Set the canvas width and height
     const canvasRenderingContext = canvas.getContext('2d') //getContext returns an object that provides methods and properties for drawing and manipulating images and graphics on a canvas element.
                                                          //This object is the Canvas rendering context, which is stored in the variable on the left.
-    //Initialize the Audio Context and Audio HTML element
+    //Initialize the Audio Context and append Audio HTML element
     const audioContext = new AudioContext() //Create an Audio Context; an audio processing graph built from audio modules linked together.
     visualizationDivision.appendChild(audioElement) //Append the audio element to the HTML document.
     audioElement.setAttribute('id', 'audioPresent')
 
     //Audio Graph Setup
     const analyser = audioContext.createAnalyser() //The createAnalyser() method of the BaseAudioContext interface creates an AnalyserNode, which can be used to expose audio time and frequency data and create data visualizations.
-    //ANalyser allows us to actually create the music visualization.
+    //Analyser allows us to actually create the music visualization.
     analyser.fftSize = 1024 //512 bins
     //The fftSize property of the AnalyserNode interface is an unsigned long value and represents the window size in samples that is used when performing a Fast Fourier Transform (FFT) to get frequency domain data.
     const player = audioContext.createMediaElementSource(audioElement)
