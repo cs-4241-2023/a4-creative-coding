@@ -61,6 +61,11 @@ function updateVisualizer() {
         const x = i * (barWidth + barSpacing);
         const y = canvas.height - barHeight;
 
+        // Apply the selected preset's style class to the bar
+        const selectedPreset = presetsDropdown.value;
+        const presetStyleClass = presets[selectedPreset].barStyle;
+        canvas.classList.add(presetStyleClass);
+
         // Draw a styled bar with gradient
         ctx.fillRect(x, y, barWidth, barHeight);
     }
@@ -79,3 +84,50 @@ audioElement.addEventListener("play", () => {
 
 // Initial update of bar color
 updateColor();
+
+// Add event listener to the presets dropdown
+const presetsDropdown = document.getElementById("visualizerPresets");
+presetsDropdown.addEventListener("change", applyPreset);
+
+// Define preset settings as JavaScript objects
+const presets = {
+    default: {
+        barHeightMultiplier: 2,
+        barSpacing: 5,
+        barColor: "#ff5733",
+    },
+    preset1: {
+        barHeightMultiplier: 1.5,
+        barSpacing: 8,
+        barColor: "#00ff00",
+    },
+    preset2: {
+        barHeightMultiplier: 3,
+        barSpacing: 3,
+        barColor: "#0000ff",
+    },
+    // Add more presets with different settings as needed
+};
+
+// Function to apply the selected preset
+function applyPreset() {
+    const selectedPreset = presetsDropdown.value;
+    const presetSettings = presets[selectedPreset];
+
+    // Update the visualizer with preset settings
+    updateVisualizerSettings(presetSettings);
+}
+
+// Function to update the visualizer settings
+function updateVisualizerSettings(settings) {
+    // Apply settings to the visualizer
+    barHeightMultiplierInput.value = settings.barHeightMultiplier;
+    barSpacingInput.value = settings.barSpacing;
+    colorPicker.value = settings.barColor;
+
+    // Trigger the visualizer update with the new settings
+    updateVisualizer();
+}
+
+// Initial update of the visualizer based on the default preset
+applyPreset();
