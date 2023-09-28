@@ -1,5 +1,24 @@
 {
   "dependencies": {
     "express": "^4.18.2"
-  }
+  },
+  "name": "a4-creative-coding",
+  "description": "Assignment 4 - Creative Coding: Interactive Multimedia Experiences ===",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eramadani3/a4-eramadani.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eramadani3/a4-eramadani/issues"
+  },
+  "homepage": "https://github.com/eramadani3/a4-eramadani#readme"
 }
