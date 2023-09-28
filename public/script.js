@@ -34,15 +34,18 @@ function updateVisualizer() {
 
     // Customize your visualizer here
     // For example, draw bars based on frequency data
-    const barWidth = canvas.width / dataArray.length;
+    const barWidth = (canvas.width / dataArray.length) * 1.5; // Adjust for spacing
+    const barSpacing = 5;
+    const barHeightMultiplier = 2; // Adjust for visual effect
+    const barColor = "#ff5733"; // Bar color
 
     for (let i = 0; i < dataArray.length; i++) {
-        const barHeight = dataArray[i] * 2; // Adjust for visual effect
-        const x = i * barWidth;
+        const barHeight = dataArray[i] * barHeightMultiplier;
+        const x = i * (barWidth + barSpacing);
         const y = canvas.height - barHeight;
 
         // Draw a bar
-        ctx.fillStyle = `rgb(${i}, ${255 - i}, 100)`;
+        ctx.fillStyle = barColor;
         ctx.fillRect(x, y, barWidth, barHeight);
     }
 
