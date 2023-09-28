@@ -1,61 +1,94 @@
-Assignment 4 - Creative Coding: Interactive Multimedia Experiences
-===
+# Expense Tracker
 
-Due: October 2nd, by 11:59 AM.
+### Live on Render: https://cs4241-assignment3.onrender.com/
+**Username:** cs4241
 
-For this assignment we will focus on client-side development using popular audio/graphics/visualization technologies. The goal of this assignment is to refine our JavaScript knowledge while exploring the multimedia capabilities of the browser.
+**Password:** ihatejs
 
-[WebAudio / Canvas Tutorial](https://github.com/cs-4241-2023/cs4241-2023.github.io/blob/main/using.webaudio_and_canvas.md)  
-[SVG + D3 tutorial](https://github.com/cs-4241-2023/cs-4241-2023.github.io/blob/main/using.svg_and_d3.md)  
+![Image or screenshot of your application](/ExpenseTracker.png)
 
-Baseline Requirements
+### Summary
+
+Expense Tracker is a web application designed to assist users in monitoring their expenses. It categorizes expenditures and provides monthly summaries. The main challenges were integrating OAuth for authentication, transitioning to Express, and deploying the application to a new host.
+
+### Authentication Strategy
+
+I opted for OAuth authentication because it offers a secure and streamlined login process. Using OAuth also allowed for easy integration with various social media platforms, enhancing user convenience.
+
+### CSS Framework
+
+I chose Materialize CSS for styling the web application. Materialize CSS provides a rich set of pre-designed components, is highly customizable, and follows Google's Material Design guidelines. These features made it an ideal choice for creating a visually appealing and user-friendly interface.
+
+### Middleware Packages
+
+1. **express**: Fast, unopinionated, minimalist web framework for Node.js.
+2. **passport**: Authentication middleware for Node.js, extremely flexible and modular.
+3. **express-session**: Creates a session middleware with the given options, good for storing user data between HTTP requests.
+4. **passport-local**: Local username and password authentication strategy for Passport.
+5. **passport-google-oauth20**: OAuth 2.0 strategy for authenticating with Google.
+
 ---
 
-Your application is required to implement the following functionalities:
+## Technical Achievements
 
-- A server created using Express. This server can be as simple as needed.
-- A client-side interactive experience using at least one of the following web technologies frameworks.
-  - [Three.js](https://threejs.org/): A library for 3D graphics / VR experiences
-  - [D3.js](https://d3js.org): A library that is primarily used for interactive data visualizations
-  - [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D raster drawing API included in all modern browsers
-  - [SVG](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D vector drawing framework that enables shapes to be defined via XML.
-  - [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API): An API for audio synthesis, analysis, processing, and file playback.
-- A user interface for interaction with your project, which must expose at least four parameters for user control. [tweakpane](https://cocopon.github.io/tweakpane/) is highly recommended for this, but you can also use regular HTML `<input>` tags (the `range` type is useful to create sliders). You might also explore interaction by tracking mouse movement via the `window.onmousemove` event handler in tandem with the `event.clientX` and `event.clientY` properties. Consider using the [Pointer Events API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events) to ensure that that both mouse and touch events will both be supported in your app.
-- Your application should display basic documentation for the user interface when the application first loads.
+### Hosting on Render
 
-The interactive experience should possess a reasonable level of complexity. Some examples:
-### Three.js
-- A generative algorithm creates simple agents that move through a virtual world. Your interface controls the behavior / appearance of these agents.
-- A simple 3D game... you really want this to be a simple as possible or it will be outside the scope of this assignment.
-- An 3D audio visualization of a song of your choosing. User interaction should control aspects of the visualization. 
-### Canvas
-- Implement a generative algorithm such as [Conway's Game of Life](https://bitstorm.org/gameoflife/) (or 1D cellular automata) and provide interactive controls. Note that the Game of Life has been created by 100s of people using `<canvas>`; we'll be checking to ensure that your implementation is not a copy of these.
-- Design a 2D audio visualizer of a song of your choosing. User interaction should control visual aspects of the experience. 
-### Web Audio API
-- Create a screen-based musical instrument using the Web Audio API. You can use projects such as [Interface.js](http://charlie-roberts.com/interface/) or [Nexus UI](https://nexus-js.github.io/ui/api/#Piano) to provide common musical interface elements, or use dat.GUI in combination with mouse/touch events (use the Pointer Events API). Your GUI should enable users to control aspects of sound synthesis. If you want to use higher-level instruments instead of the raw WebAudio API sounds, consider trying the instruments provided by [Tone.js]() or [Gibber](https://github.com/charlieroberts/gibber.audio.lib).
-### D3.js
-- Create visualizations using the datasets found at [Awesome JSON Datasets](https://github.com/jdorfman/Awesome-JSON-Datasets). Experiment with providing different visualizations of the same data set, and providing users interactive control over visualization parameters and/or data filtering. Alternatively, create a single visualization with using one of the more complicated techniques shown at [d3js.org](d3js.org) and provide meaningful points of interaction for users.
+I opted for Render as my hosting platform, diverging from suggested options like Heroku and Digital Ocean. The transition required me to delve into GitHub Actions to facilitate automatic deployments. Setting up GitHub Actions was challenging, as it required a keen understanding of workflows and action configurations. Additionally, I had to ensure the npm environment was set up both on my local machine and the host, aligning all dependencies and package versions.
 
-Deliverables
+### OAuth Authentication
+
+Implementing OAuth was a complex yet rewarding task. The initial challenge was in handling OAuth callbacks alongside the main server logic. To resolve this, I used the Express package, which abstracted most of the intricacies related to OAuth. This allowed me to concentrate on the core application logic, making the implementation more streamlined.
+
+### 100% Lighthouse Score
+
+My website initially scored 96% on the Lighthouse tests. Upon investigation, I found that the site was missing meta tags for viewport settings. After adding them, the score improved to 100%. Achieving this perfect score was challenging, as it necessitated a detailed understanding of web performance metrics and how Lighthouse evaluates them.
+
+### Switch to MongoDB
+
+The shift to MongoDB initially posed challenges, particularly in understanding how to work with the `_id` field for data identification. However, once I grasped the concept, it simplified data manipulation significantly. The unique IDs made it easier to perform CRUD operations, making the entire development process more efficient.
+
 ---
 
-Do the following to complete this assignment:
+## Design/Evaluation Achievements
 
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. *NOTE: If you don't use Glitch for hosting (where we can see the files) then you must include all project files that you author in your repo for this assignment*.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
+### Materialize CSS
 
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
+For styling, I employed Materialize CSS. This framework not only elevated the overall aesthetics but also simplified the implementation of responsive design features. It provided a range of components and utilities that enriched the user interface and experience.
 
-## Your Web Application Title
+### Web Accessibility Implementation
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+My site conscientiously implements the following twelve tips for web accessibility as outlined by the W3C Web Accessibility Initiative:
 
-Include a very brief summary of your project here. Images are encouraged when needed, along with concise, high-level text. Be sure to include:
+- **Associate a Label with Every Form Control**: All form controls in the application have associated labels, making it easier for screen readers to interpret the required input.
 
-- the goal of the application
-- challenges you faced in realizing the application
-- the instructions you present in the website should be clear enough to use the application, but if you feel any need to provide additional instructions please do so here.
+- **Identify Page Language and Language Changes**: The primary language of each page is identified using the `lang` attribute, aiding translation tools and screen readers.
+
+- **Use Markup to Convey Meaning and Structure**: Semantic HTML tags like `<nav>` and `<aside>` are used to properly structure the content, making it more understandable for both users and screen readers.
+
+- **Help Users Avoid and Correct Mistakes**: The site offers clear instructions and error messages, making it easier for users to complete forms and rectify errors.
+
+- **Reflect the Reading Order in the Code Order**: The HTML markup is structured to reflect the logical reading order, improving accessibility for screen readers.
+
+- **Write Code that Adapts to the User’s Technology**: The site uses responsive design to adapt to various screen sizes and zoom states, ensuring a consistent experience across devices.
+
+- **Provide Meaning for Non-standard Interactive Elements**: WAI-ARIA roles and attributes are used to provide additional information on custom widgets and interactive elements.
+
+- **Ensure All Interactive Elements are Keyboard Accessible**: All interactive elements like buttons and forms are navigable and usable via keyboard events.
+
+- **Name, Role, Value for Custom Elements**: WAI-ARIA is used to define custom interactive elements, ensuring they are accessible and properly described for screen readers.
+
+### Use of CRAP Principles
+
+My site employs the CRAP principles of Contrast, Repetition, Alignment, and Proximity to enhance its design and user experience.
+
+- **Contrast**: I used a distinct color scheme to differentiate between various elements like headers, text, and buttons. This not only captures attention but also guides the user through the site's content effectively.
+
+- **Repetition**: I maintained a consistent style throughout the site. For instance, all buttons share a common design, reinforcing the site's visual identity and making it easier for users to interact with the application.
+
+- **Alignment**: Elements are aligned in a manner that guides the user's eyes in a logical flow. For example, form fields and buttons are left-aligned, creating a visual line that's easy to follow.
+
+- **Proximity**: Related elements are grouped closely together to signify their relationship. This makes it easier for users to understand the layout and find what they're looking for, such as the expense categories and their corresponding monthly summaries.
+
+### CSS Targeting
+
+In addition to using classes for styling, I employed CSS selectors to target specific elements precisely. For instance, the code `td:nth-child(5) .edit-button` allowed me to apply styles specifically to the edit button in the fifth column of a table. This level of granularity gave me greater control over the look and feel of individual components, without affecting other elements.
