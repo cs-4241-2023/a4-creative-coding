@@ -3,7 +3,7 @@
 This is a simple 3D game created using Three.js where you control a cube to avoid obstacles and collect points.
 
 ## Play the Game
-You can play the game by clicking [here]().
+You can play the game by clicking [here](fluorescent-meteor-albertosaurus.glitch.me).
 
 ## Features
 - 3D graphics using Three.js.
