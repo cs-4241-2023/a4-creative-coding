@@ -16,7 +16,28 @@ function main(){
     var drawX, drawY;
     
     choice.addEventListener('change', e => {
-
+        const selected = coloringPage.value;
+        var pic = new Image();
+        switch(selected){
+            case 'Cat':
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                pic.src = '../svgs/cat.svg';
+                context.drawImage(pic, 0, 0, pic.width, pic.height);
+                break;
+            case 'Space':
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                pic.src = '../svgs/space.svg';
+                context.drawImage(pic, 0, 0, pic.width, pic.height);
+                break;
+            case 'Sunflower':
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                pic.src = '../svgs/sunflowers.svg';
+                context.drawImage(pic, 0, 0, pic.width, pic.height);
+                break;
+            case 'Blank':
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                break;
+        }
     })
 
     color.addEventListener('change', e => {
