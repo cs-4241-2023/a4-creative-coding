@@ -8,24 +8,25 @@
         <script src="./index.js"></script>
     </head>
     <body onload="main()">
+        <h1>Make Art</h1>
+        <div class="fullScreen">
         <section class="container">
-            <div>
+            <div id="choices">
                 <label for="coloringPage">Coloring Page Choice</label>
                 <select id="coloringPage" name="coloringPage">
-                    <option value="Blank"></option>
-                    <option value="Cat"></option>
-                    <option value="Space"></option>
-                    <option value="Sunflower"></option>
+                    <option value="Blank">Blank</option>
+                    <option value="Cat">Cat</option>
+                    <option value="Space">Space</option>
+                    <option value="Sunflower">Sunflower</option>
                 </select>
-                <label>Brush Color</label>
+                <label for="brushColor">Brush Color</label>
                 <input id="brushColor" name="brushColor" type="color">
-                <label>Line Width</label>
+                <label for="lineWidth">Line Width</label>
                 <input id="lineWidth" name="lineWidth" type="range" min="1" max="25" value="5" class="slider">
                 <button id="clear">Clear Screen</button>
             </div>
-            <div>
-                <canvas id="drawingCanvas"></canvas>
-            </div>
         </section>
+                <canvas id="drawingCanvas"></canvas>
+        </div>
     </body>
 </html>

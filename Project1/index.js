@@ -45,7 +45,7 @@ function main(){
         context.lineWidth = lineWidth;
         context.lineCap = 'round';
     
-        context.lineTo(e.clientX - offsetX/2, e.clientY - offsetY);
+        context.lineTo(e.clientX - offsetX/2, e.clientY - offsetY + 10);
         context.stroke();
     }
 
