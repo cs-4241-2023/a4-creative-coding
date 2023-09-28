@@ -40,8 +40,6 @@ barHeightMultiplierInput.addEventListener("input", updateVisualizer);
 barSpacingInput.addEventListener("input", updateVisualizer);
 colorPicker.addEventListener("input", updateColor);
 
-// ... (existing code) ...
-
 // Function to update the visualizer
 function updateVisualizer() {
     // Clear the canvas
@@ -52,7 +50,6 @@ function updateVisualizer() {
     const barSpacing = parseFloat(barSpacingInput.value);
     const barColor = colorPicker.value; // Get the selected color
 
-    // Get frequency data
     analyser.getByteFrequencyData(dataArray);
 
     // Customize your visualizer here
@@ -77,9 +74,6 @@ function updateVisualizer() {
     // Repeat the visualization
     requestAnimationFrame(updateVisualizer);
 }
-
-// ... (existing code) ...
-
 // Start audio playback and visualization
 audioElement.addEventListener("play", () => {
     audioContext.resume().then(() => {
