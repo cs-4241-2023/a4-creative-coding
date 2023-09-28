@@ -1,12 +1,20 @@
+/* public/styles.css */
+
 body {
     text-align: center;
     background-color: #111;
     color: #fff;
     font-family: Arial, sans-serif;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    overflow: hidden; /* Prevent scrollbars */
 }
 
+/* Adjust the size of the canvas */
 canvas {
+    background-color: #000;
+    max-width: 80%; /* Set the maximum width */
+    max-height: 80vh; /* Set the maximum height */
     display: block;
     margin: 0 auto;
-    background-color: #000;
 }
