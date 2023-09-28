@@ -24,28 +24,44 @@ const dataArray = new Uint8Array(analyser.frequencyBinCount);
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+// Get references to user options
+const barHeightMultiplierInput = document.getElementById("barHeightMultiplier");
+const barSpacingInput = document.getElementById("barSpacing");
+const colorPicker = document.getElementById("colorPicker");
+
+// Function to update the bar color based on user choice
+function updateColor() {
+    const color = colorPicker.value;
+    ctx.fillStyle = color;
+}
+
+// Add event listeners to user options
+barHeightMultiplierInput.addEventListener("input", updateVisualizer);
+barSpacingInput.addEventListener("input", updateVisualizer);
+colorPicker.addEventListener("input", updateColor);
+
 // Function to update the visualizer
 function updateVisualizer() {
     // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Get user-selected options
+    const barHeightMultiplier = parseFloat(barHeightMultiplierInput.value);
+    const barSpacing = parseFloat(barSpacingInput.value);
+
     // Get frequency data
     analyser.getByteFrequencyData(dataArray);
 
     // Customize your visualizer here
-    // For example, draw bars based on frequency data
-    const barWidth = (canvas.width / dataArray.length) * 1.5; // Adjust for spacing
-    const barSpacing = 5;
-    const barHeightMultiplier = 2; // Adjust for visual effect
-    const barColor = "#ff5733"; // Bar color
+    const barCount = dataArray.length;
+    const barWidth = (canvas.width - (barCount - 1) * barSpacing) / barCount;
 
-    for (let i = 0; i < dataArray.length; i++) {
+    for (let i = 0; i < barCount; i++) {
         const barHeight = dataArray[i] * barHeightMultiplier;
         const x = i * (barWidth + barSpacing);
         const y = canvas.height - barHeight;
 
-        // Draw a bar
-        ctx.fillStyle = barColor;
+        // Draw a styled bar with gradient
         ctx.fillRect(x, y, barWidth, barHeight);
     }
 
@@ -60,3 +76,6 @@ audioElement.addEventListener("play", () => {
         updateVisualizer();
     });
 });
+
+// Initial update of bar color
+updateColor();
