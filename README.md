@@ -1,9 +1,16 @@
 # Expense Tracker
 
 ### Live on Render: https://cs4241-assignment3.onrender.com/
+
 **Username:** cs4241
 
 **Password:** ihatejs
+
+## Project 4 Updates
+
+- Added a sound to play on login for enhanced user experience.
+- Integrated SVGs into the page for better visual quality.
+- Implemented animations to make the page more interactive and engaging.
 
 ![Image or screenshot of your application](/ExpenseTracker.png)
 
@@ -31,6 +38,8 @@ I chose Materialize CSS for styling the web application. Materialize CSS provide
 
 ## Technical Achievements
 
+- Implemented a sound to play on login for a better user interaction.
+
 ### Hosting on Render
 
 I opted for Render as my hosting platform, diverging from suggested options like Heroku and Digital Ocean. The transition required me to delve into GitHub Actions to facilitate automatic deployments. Setting up GitHub Actions was challenging, as it required a keen understanding of workflows and action configurations. Additionally, I had to ensure the npm environment was set up both on my local machine and the host, aligning all dependencies and package versions.
@@ -49,7 +58,9 @@ The shift to MongoDB initially posed challenges, particularly in understanding h
 
 ---
 
-## Design/Evaluation Achievements
+## Design
+
+- Integrated SVGs and animations for a visually appealing interface./Evaluation Achievements
 
 ### Materialize CSS
 

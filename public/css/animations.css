@@ -11,3 +11,17 @@
 .fadeIn {
   animation: fadeIn ease 1s;
 }
+
+/* Fade-out animation */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  animation: fadeOut ease 1.5s;
+}
