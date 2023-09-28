@@ -1,3 +1,4 @@
+//Audio and visualization:
 const visualizationDivision = document.getElementById('visualization')
 const canvas = document.createElement('canvas') //Create a Canvas HTML element in our HTML document
 const audioElement = document.createElement('audio') //Create an Audio element in our HTML document
@@ -6,6 +7,41 @@ const musicIsPlayingInfoParagraph = document.createElement('p')
 let player = null
 let isMusicPlaying = false
 let hasMusicEndedAfterFullPlaying = false
+
+//Colors, fills, and strokes:
+let redFillInputIntVal = null
+let greenFillInputIntVal = null
+let blueFillInputIntVal = null
+
+let redStrokeInputIntVal = null
+let greenStrokeInputIntVal = null
+let blueStrokeInputIntVal = null
+
+const colorFillSubmit = function(event) {
+    
+    event.preventDefault()
+
+    redFillInputIntVal = parseInt(document.querySelector('#RFill').value)
+    greenFillInputIntVal = parseInt(document.querySelector('#GFill').value)
+    blueFillInputIntVal = parseInt(document.querySelector('#BFill').value)
+
+    console.log(redFillInputIntVal)
+    console.log(greenFillInputIntVal)
+    console.log(blueFillInputIntVal)
+}
+
+const colorStrokeSubmit = function(event) {
+
+    event.preventDefault()
+
+    redStrokeInputIntVal = parseInt(document.querySelector('#RStroke').value)
+    greenStrokeInputIntVal = parseInt(document.querySelector('#GStroke').value)
+    blueStrokeInputIntVal = parseInt(document.querySelector('#BStroke').value)
+
+    console.log(redStrokeInputIntVal)
+    console.log(greenStrokeInputIntVal)
+    console.log(blueStrokeInputIntVal)
+}
 
 const beginAudioVisualization = function() {
     
@@ -67,11 +103,23 @@ const beginAudioVisualization = function() {
           
           //Fill the canvas with a black box that takes up the entire canvas width and height by default.
           //By doing the above every frame we 'clear' the canvas
-          canvasRenderingContext.fillStyle = 'green' 
+          canvasRenderingContext.fillStyle = 'lightgreen' 
           canvasRenderingContext.fillRect(0, 0, canvas.width, canvas.height)
           
           //Set the color to red for drawing our visualization
-          canvasRenderingContext.fillStyle = 'red' 
+          if(redFillInputIntVal === null && greenFillInputIntVal === null && blueFillInputIntVal === null) {
+            canvasRenderingContext.fillStyle = 'black' 
+          }
+          else {
+            canvasRenderingContext.fillStyle = `rgb(${redFillInputIntVal}, ${greenFillInputIntVal}, ${blueFillInputIntVal})`
+          }
+
+          if(redStrokeInputIntVal === null && greenStrokeInputIntVal === null && blueStrokeInputIntVal === null) {
+            canvasRenderingContext.strokeStyle = 'black' 
+          }
+          else {
+            canvasRenderingContext.strokeStyle = `rgb(${redStrokeInputIntVal}, ${greenStrokeInputIntVal}, ${blueStrokeInputIntVal})`
+          }
           
           //The getByteFrequencyData() method of the AnalyserNode interface copies the current frequency data into a Uint8Array (unsigned byte array) passed into it as a parameter.
           //The results variable is a Uint8Array as declared above, and so it gets filled with all frequency data as shown below.
@@ -79,19 +127,33 @@ const beginAudioVisualization = function() {
           analyser.getByteFrequencyData(results)
           
           for(let x = 0; x < analyser.frequencyBinCount; x++ ) {
-            canvasRenderingContext.fillRect(x, 0, 1, results[x]) //fillRect(x, y, width, height)
-            //The above line fills rectangles upside down since the y parameter is set to 0 and results[i] moves down the canvas.
+            canvasRenderingContext.fillRect(x, 0, 100, results[x]) //fillRect(x, y, width, height)
+            //The above line fills rectangles upside down since the y parameter is set to 0 and results[x] generates rectangles down the canvas.
+            canvasRenderingContext.lineWidth = 2
+            canvasRenderingContext.strokeRect(x, 0, 100, results[x])
           }
         }
         draw() //Recursive function here so that the canvas drawings can keep updated with new byte frequency data as the song keeps playing at the destination.
     }
-  }
+}
 
 window.addEventListener('load', function() {
     document.querySelector('button').onclick = beginAudioVisualization
+})
+
+window.addEventListener('load', function() { 
+    const submitColorFillAdjustmentButton = document.getElementById("colorFillSubmit")
+    submitColorFillAdjustmentButton.onclick = colorFillSubmit
+})
+
+window.addEventListener('load', function() { 
+    const submitColorStrokeAdjustmentButton = document.getElementById("colorStrokeSubmit")
+    submitColorStrokeAdjustmentButton.onclick = colorStrokeSubmit
 })
 
 audioElement.addEventListener('ended', function() {
     isMusicPlaying = false
     hasMusicEndedAfterFullPlaying = true
 })
+
+
