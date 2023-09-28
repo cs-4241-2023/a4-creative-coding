@@ -23,3 +23,20 @@ canvas {
     overflow: auto;
     height: 100%; /* Ensure the container takes full height */
 }
+/* Define custom bar styles for each preset */
+.default-bars {
+    /* Define default bar styles here */
+    background-color: #ff5733; /* Example color */
+}
+
+.preset1-bars {
+    /* Define preset 1 bar styles here */
+    background-color: #00ff00; /* Example color */
+}
+
+.preset2-bars {
+    /* Define preset 2 bar styles here */
+    background-color: #0000ff; /* Example color */
+}
+
+
