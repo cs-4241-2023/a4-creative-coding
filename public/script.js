@@ -51,7 +51,6 @@ function updateVisualizer() {
     const barSpacing = parseFloat(barSpacingInput.value);
     const barColor = colorPicker.value; // Get the selected color
 
-    // Get frequency data
     analyser.getByteFrequencyData(dataArray);
 
     // Customize your visualizer here
