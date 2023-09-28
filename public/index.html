@@ -17,14 +17,19 @@
     <!-- Minified CSS Files -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/animations.min.css">
     <link rel="stylesheet" href="/css/main.min.css">
 </head>
 
 <body>
-    <div class="container card-container" role="main">
+    <div id="form-container" class="container card-container fadeIn" role="main">
         <div class="card" role="form">
-            <header>
-                <h1 aria-label="Title">Login</h1>
+            <header style="text-align: center; margin-bottom: 0px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor"
+                    class="bi bi-person-fill" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                </svg>
+                <h1 aria-label="Title" style="margin-top: 0px; margin-bottom: 10px;">Login</h1>
             </header>
 
             <!-- Login Form -->
