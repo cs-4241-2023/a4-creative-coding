@@ -12,8 +12,8 @@ body {
 /* Adjust the size of the canvas */
 canvas {
     background-color: #000;
-    max-width: 80%; /* Set the maximum width */
-    max-height: 80vh; /* Set the maximum height */
+    max-width: 60%; /* Set the maximum width */
+    max-height: 60vh; /* Set the maximum height */
     display: block;
     margin: 0 auto;
 }
