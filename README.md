@@ -1,6 +1,6 @@
 # Expense Tracker
 
-### Live on Glitch: https://brash-factual-consonant.glitch.me
+### Live on Glitch: https://a4-amitai-erfanian.glitch.me
 
 **Username:** cs4241
 
