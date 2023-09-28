@@ -40,6 +40,7 @@ barHeightMultiplierInput.addEventListener("input", updateVisualizer);
 barSpacingInput.addEventListener("input", updateVisualizer);
 colorPicker.addEventListener("input", updateColor);
 
+
 // Function to update the visualizer
 function updateVisualizer() {
     // Clear the canvas
@@ -48,6 +49,7 @@ function updateVisualizer() {
     // Get user-selected options
     const barHeightMultiplier = parseFloat(barHeightMultiplierInput.value);
     const barSpacing = parseFloat(barSpacingInput.value);
+    const barColor = colorPicker.value; // Get the selected color
 
     // Get frequency data
     analyser.getByteFrequencyData(dataArray);
@@ -66,14 +68,14 @@ function updateVisualizer() {
         const presetStyleClass = presets[selectedPreset].barStyle;
         canvas.classList.add(presetStyleClass);
 
-        // Draw a styled bar with gradient
+        // Draw a styled bar with the selected color
+        ctx.fillStyle = barColor; // Use the selected color
         ctx.fillRect(x, y, barWidth, barHeight);
     }
 
     // Repeat the visualization
     requestAnimationFrame(updateVisualizer);
 }
-
 // Start audio playback and visualization
 audioElement.addEventListener("play", () => {
     audioContext.resume().then(() => {
@@ -89,7 +91,6 @@ updateColor();
 const presetsDropdown = document.getElementById("visualizerPresets");
 presetsDropdown.addEventListener("change", applyPreset);
 
-// Define preset settings as JavaScript objects
 const presets = {
     default: {
         barHeightMultiplier: 2,
@@ -106,8 +107,13 @@ const presets = {
         barSpacing: 3,
         barColor: "#0000ff",
     },
-    // Add more presets with different settings as needed
+    preset3: {
+        barHeightMultiplier: 2,
+        barSpacing: 5,
+        barColor: "#ffcc00",
+    },
 };
+
 
 // Function to apply the selected preset
 function applyPreset() {
