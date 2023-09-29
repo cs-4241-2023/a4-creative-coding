@@ -8,21 +8,31 @@ let player = null
 let isMusicPlaying = false
 let hasMusicEndedAfterFullPlaying = false
 
+//Shape selection
+let shapeSelection = "rectangle"
+
 //Colors, fills, strokes, and shadows:
-let redFillInputIntVal = null
-let greenFillInputIntVal = null
-let blueFillInputIntVal = null
+let redFillInputIntVal = 0
+let greenFillInputIntVal = 0
+let blueFillInputIntVal = 0
 
-let redStrokeInputIntVal = null
-let greenStrokeInputIntVal = null
-let blueStrokeInputIntVal = null
+let redStrokeInputIntVal = 0
+let greenStrokeInputIntVal = 0
+let blueStrokeInputIntVal = 0
 
-let redShadowColorInputIntVal = null
-let greenShadowColorInputIntVal = null
-let blueShadowColorInputIntVal = null
-let shadowBlurInputIntVal = null
-let shadowOffsetXInputIntVal = null
-let shadowOffsetYInputIntVal = null
+let redShadowColorInputIntVal = 0
+let greenShadowColorInputIntVal = 0
+let blueShadowColorInputIntVal = 0
+let shadowBlurInputIntVal = 0
+let shadowOffsetXInputIntVal = 0
+let shadowOffsetYInputIntVal = 0
+
+const shapeSubmit = function(event) {
+
+    event.preventDefault()
+
+    shapeSelection = document.getElementById('shape').value
+}
 
 const colorFillSubmit = function(event) {
     
@@ -130,49 +140,33 @@ const beginAudioVisualization = function() {
           canvasRenderingContext.fillRect(0, 0, canvas.width, canvas.height)
           
           //Set the color to red for drawing our visualization
-          if(redFillInputIntVal === null && greenFillInputIntVal === null && blueFillInputIntVal === null) {
-            canvasRenderingContext.fillStyle = 'black' 
-          }
-          else {
-            canvasRenderingContext.fillStyle = `rgb(${redFillInputIntVal}, ${greenFillInputIntVal}, ${blueFillInputIntVal})`
-          }
-
-          if(redStrokeInputIntVal === null && greenStrokeInputIntVal === null && blueStrokeInputIntVal === null) {
-            canvasRenderingContext.strokeStyle = 'black' 
-          } else {
-            canvasRenderingContext.strokeStyle = `rgb(${redStrokeInputIntVal}, ${greenStrokeInputIntVal}, ${blueStrokeInputIntVal})`
-          }
-
-          if(redShadowColorInputIntVal === null && greenShadowColorInputIntVal === null && blueShadowColorInputIntVal === null) {
-            canvasRenderingContext.shadowColor = 'black'
-          } else {
-            canvasRenderingContext.shadowColor = `rgb(${redShadowColorInputIntVal}, ${greenShadowColorInputIntVal}, ${blueShadowColorInputIntVal})`
-          }
-
-          if(shadowBlurInputIntVal === null) {
-            canvasRenderingContext.shadowBlur = 0;
-          } else {
-            canvasRenderingContext.shadowBlur = shadowBlurInputIntVal
-          }
-            
-          if(shadowOffsetXInputIntVal === null && shadowOffsetYInputIntVal === null) {
-            canvasRenderingContext.shadowOffsetX = 0;
-            canvasRenderingContext.shadowOffsetY = 0;
-          } else {
-            canvasRenderingContext.shadowOffsetX = shadowOffsetXInputIntVal;
-            canvasRenderingContext.shadowOffsetY = shadowOffsetYInputIntVal;
-          }
-            
+          canvasRenderingContext.fillStyle = `rgb(${redFillInputIntVal}, ${greenFillInputIntVal}, ${blueFillInputIntVal})`
+          canvasRenderingContext.strokeStyle = `rgb(${redStrokeInputIntVal}, ${greenStrokeInputIntVal}, ${blueStrokeInputIntVal})`
+          canvasRenderingContext.shadowColor = `rgb(${redShadowColorInputIntVal}, ${greenShadowColorInputIntVal}, ${blueShadowColorInputIntVal})`
+          canvasRenderingContext.shadowBlur = shadowBlurInputIntVal 
+          canvasRenderingContext.shadowOffsetX = shadowOffsetXInputIntVal
+          canvasRenderingContext.shadowOffsetY = shadowOffsetYInputIntVal
+          
           //The getByteFrequencyData() method of the AnalyserNode interface copies the current frequency data into a Uint8Array (unsigned byte array) passed into it as a parameter.
           //The results variable is a Uint8Array as declared above, and so it gets filled with all frequency data as shown below.
           //The frequency data is composed of integers on a scale from 0 to 255.
           analyser.getByteFrequencyData(results)
           
           for(let x = 0; x < analyser.frequencyBinCount; x++ ) {
-            canvasRenderingContext.fillRect(x, 0, 20, results[x]) //fillRect(x, y, width, height)
-            //The above line fills rectangles upside down since the y parameter is set to 0 and results[x] generates rectangles down the canvas.
-            canvasRenderingContext.lineWidth = 2
-            canvasRenderingContext.strokeRect(x, 0, 20, results[x])
+            
+            if(shapeSelection === "rectangle") {
+                canvasRenderingContext.lineWidth = 2
+                canvasRenderingContext.fillRect(x, 0, 20, results[x]) //fillRect(x, y, width, height)
+                //The above line fills rectangles upside down since the y parameter is set to 0 and results[x] generates rectangles down the canvas.
+                canvasRenderingContext.strokeRect(x, 0, 20, results[x])
+            } else if (shapeSelection === "circle") {
+                canvasRenderingContext.lineWidth = 2
+                canvasRenderingContext.fill()
+                canvasRenderingContext.beginPath()
+                canvasRenderingContext.arc(x, (results[x] / 2), (results[x] / 2), 0, 2 * Math.PI)
+                canvasRenderingContext.stroke()
+            }
+            
           }
         }
         draw() //Recursive function here so that the canvas drawings can keep updated with new byte frequency data as the song keeps playing at the destination.
@@ -181,6 +175,11 @@ const beginAudioVisualization = function() {
 
 window.addEventListener('load', function() {
     document.querySelector('button').onclick = beginAudioVisualization
+})
+
+window.addEventListener('load', function() {
+    const submitShapeSelection = document.getElementById("shapeSubmit")
+    submitShapeSelection.onclick = shapeSubmit
 })
 
 window.addEventListener('load', function() { 
@@ -194,6 +193,11 @@ window.addEventListener('load', function() {
 })
 
 window.addEventListener('load', function() {
+    const submitShadowOffsetsAdjustmentButton = document.getElementById('offsetsShadowSubmit')
+    submitShadowOffsetsAdjustmentButton.onclick = shadowOffsetsSubmit
+})
+
+window.addEventListener('load', function() {
     const submitShadowColorAdjustmentButton = document.getElementById('colorShadowSubmit')
     submitShadowColorAdjustmentButton.onclick = shadowColorSubmit
 })
@@ -201,11 +205,6 @@ window.addEventListener('load', function() {
 window.addEventListener('load', function() {
     const submitShadowBlurAdjustmentButton = document.getElementById('blurShadowSubmit')
     submitShadowBlurAdjustmentButton.onclick = shadowBlurSubmit
-})
-
-window.addEventListener('load', function() {
-    const submitShadowOffsetsAdjustmentButton = document.getElementById('offsetsShadowSubmit')
-    submitShadowOffsetsAdjustmentButton.onclick = shadowOffsetsSubmit
 })
 
 audioElement.addEventListener('ended', function() {

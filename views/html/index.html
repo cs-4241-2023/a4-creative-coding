@@ -24,7 +24,18 @@
                 <div>
                     <h2>Visualization Appearance Control Parameters</h2>
                     <div>
-                        <p>The following fields should be used to change the fill color of the visualization rectangle drawings using the RGB scale:</p>
+                        <p>Step 1: Use the dropdown selection below to set the visualization drawing to generate occurrences of a listed shape. The two options currently available are rectangles and circles. Be default, the visualization drawing generates occurrences of a rectangle.</p>
+                        <form>
+                            <label for = "shape">Select a shape:</label>
+                            <select name = "shape" id = "shape">
+                              <option value = "rectangle">Rectangle</option>
+                              <option value = "circle">Circle</option>
+                            </select>
+                            <button id = "shapeSubmit">Submit Shape Selection</button>
+                        </form>
+                    </div>
+                    <div>
+                        <p>Step 2: The following fields should be used to change the fill color of the visualization rectangle or circle drawings using the RGB scale. The default fill color of the drawings is black (RGB(0,0,0)):</p>
                         <form>
                             <label for = "RFill">Red (between 0 and 255):</label>
                             <input type = "range" id = "RFill" name = "redFill" min = "0" max = "255">
@@ -36,7 +47,7 @@
                         </form>
                     </div>
                     <div>
-                        <p>The following fields should be used to change the stroke color of the visualization rectangle drawings using the RGB scale:</p>
+                        <p>Step 3: The following fields should be used to change the stroke color of the visualization rectangle or circle drawings using the RGB scale. The default stroke color of the drawings is black (RGB(0,0,0)):</p>
                         <form>
                             <label for = "RStroke">Red (between 0 and 255):</label>
                             <input type = "range" id = "RStroke" name = "redStroke" min = "0" max = "255">
@@ -48,9 +59,19 @@
                         </form>
                     </div>
                     <div>
-                        <p>The following fields should be used to change the appearance of the shadow of the visualization rectangle drawings. Enter information for all fields below, which include the shadow color, shadow blur, shadow offset along the x-axis, and shadow offset along the y-axis:</p>
+                        <p>Step 4: The following fields should be used to change the appearance of the shadow of the visualization rectangle or circle drawings. Enter information for all fields below, which include the shadow color, shadow blur, shadow offset along the x-axis, and shadow offset along the y-axis:</p>
                         <div>
-                            <p>Change the shadow color using the RGB scale:</p>
+                            <p>Step 4.a: Change the shadow offset along the x-axis (horizontal) and y-axis (vertical):</p>
+                            <form>
+                                <label for = "ShadowOffsetX">Shadow Offset X (between 0 and 20)</label>
+                                <input type = "range" id = "ShadowOffsetX" name = "shadowOffsetX" min = "0" max = "20"></input>
+                                <label for = "ShadowOffsetY">Shadow Offset Y (between 0 and 20)</label>
+                                <input type = "range" id = "ShadowOffsetY" name = "shadowOffsetY" min = "0" max = "20"></input>
+                                <button id = "offsetsShadowSubmit">Submit Shadow X and Y Offset Adjustment</button>
+                            </form>
+                        </div>
+                        <div>
+                            <p>Step 4.b: Change the shadow color using the RGB scale:</p>
                             <form>
                                 <label for = "RShadow">Red (between 0 and 255):</label>
                                 <input type = "range" id = "RShadow" name = "redShadow" min = "0" max = "255">
@@ -62,21 +83,11 @@
                             </form>
                         </div>
                         <div>
-                            <p>Change the amount of shadow blur:</p>
+                            <p>Step 4.c: Change the amount of shadow blur. An increase in value along the slider corresponds to a greater degree of shadow blur:</p>
                             <form>
-                                <label for = "ShadowBlur">Shadow Blur (between 0 and 100)</label>
-                                <input type = "range" id = "ShadowBlur" name = "shadowBlur" min = "0" max = "20"></input>
+                                <label for = "ShadowBlur">Shadow Blur (between 0 and 10)</label>
+                                <input type = "range" id = "ShadowBlur" name = "shadowBlur" min = "0" max = "10"></input>
                                 <button id = "blurShadowSubmit">Submit Shadow Blur Adjustment</button>
-                            </form>
-                        </div>
-                        <div>
-                            <p>Change the shadow offset along the x-axis and y-axis:</p>
-                            <form>
-                                <label for = "ShadowOffsetX">Shadow Offset X (between 0 and 20)</label>
-                                <input type = "range" id = "ShadowOffsetX" name = "shadowOffsetX" min = "0" max = "20"></input>
-                                <label for = "ShadowOffsetY">Shadow Offset Y (between 0 and 20)</label>
-                                <input type = "range" id = "ShadowOffsetY" name = "shadowOffsetY" min = "0" max = "20"></input>
-                                <button id = "offsetsShadowSubmit">Submit Shadow X and Y Offset Adjustment</button>
                             </form>
                         </div>
                     </div>
