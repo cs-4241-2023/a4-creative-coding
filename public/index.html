@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>CS4241 Assignment 4</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Elixir Chess">
+        <script src="client.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+        <!-- get rid of favicon error -->
+        <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    </head>
+    <body>
+        <div>
+            <canvas id="board" width="900" height="950" style="border: 1px solid black;">
+                Browser does not support the canvas tag.
+            </canvas>
+        </div>
+        <div>
+            <h1 style="text-align: center;">Elixir Chess</h1>
+            <h2 style="text-align: center;">Michael Oliveira</h2>
+            <p>Elixir Chess is a variant of realtime chess.</p>
+            <p>Movement is restricted in two ways:</p>
+            <ul>
+                <li>A piece is put on "cooldown" after it is moved, and cannot be moved again for 2 seconds. This is denoted by the piece appearing transparent.</li>
+                <li>An elixir/mana bar slowly fills up over time, and a piece can only be moved if you have enough elixir to cover its "move cost".</li>
+            </ul>
+            <p>The move cost of each piece is as follows:</p>
+            <ul>
+                <li>Queen - 9</li>
+                <li>Rook - 5</li>
+                <li>Bishop - 3</li>
+                <li>Knight - 3</li>
+                <li>Knight - 3</li>
+                <li>King/Castling - 2</li>
+                <li>Pawn - 1</li>
+            </ul>
+            <p>
+                Pieces are moved by clicking and dragging them to a new square.
+                A move will only be considered "valid" if it is a legal chess move, the piece is not on cooldown, and the required elixir cost is satisfied.
+            </p>
+            <p>
+                This game does not include a "check/checkmate" mechanic due to the realtime nature of the game.
+                Instead, the game is won when a piece is able to capture the enemy king.
+            </p>
+        </div>
+    </body>
+</html>
