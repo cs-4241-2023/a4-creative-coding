@@ -1,4 +1,4 @@
-Jazz Audio Visualizer (Assignemnt 4)
+Jazz Audio Visualizer (Assignment 4)
 ===
 https://a4-colin-fyock.glitch.me/
 
