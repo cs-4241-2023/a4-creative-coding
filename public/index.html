@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>CS4241 Assignment 4</title>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- get rid of favicon error -->
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+  </head>
+
+  <body>
+    <div id="top_div">
+      <form>
+        <label for="bars">Choose a number of bars:</label>
+        <select id="num_bars" name="num_bars">
+          <option value="32">2^5</option>
+          <option value="64">2^6</option>
+          <option value="128">2^7</option>
+          <option value="256">2^8</option>
+          <option value="512">2^9</option>
+          <option value="1024">2^10</option>
+          <option value="2048">2^11</option>
+          <option value="4096">2^12</option>
+          <option value="8192">2^13</option>
+          <option value="16384">2^14</option>
+        </select>
+      </form>
+
+      <form>
+        <label for="centered_bars">Center the bars: </label>
+        <input type="checkbox" id="centered_bars" name="centered_bars"/>
+        <br>
+        
+        <label for="add_color">Add color: </label>
+        <input type="checkbox" id="add_color" name="add_color"/>
+        <br>
+                
+        <label for="increase_size">Increase bar size: </label>
+        <input type="checkbox" id="increase_size" name="increase_size"/>
+        <br>
+        
+        <button type="button" id="button">Generate and Play</button>
+      </form>
+
+      <audio id="audio_controller"></audio>
+    </div>
+
+    <div id="viz_box">
+      <canvas id="audio_visualizer"></canvas>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
