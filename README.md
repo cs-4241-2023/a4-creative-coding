@@ -1,61 +1,28 @@
-Assignment 4 - Creative Coding: Interactive Multimedia Experiences
+Jazz Audio Visualizer (Assignemnt 4)
 ===
-
-Due: October 2nd, by 11:59 AM.
-
-For this assignment we will focus on client-side development using popular audio/graphics/visualization technologies. The goal of this assignment is to refine our JavaScript knowledge while exploring the multimedia capabilities of the browser.
-
-[WebAudio / Canvas Tutorial](https://github.com/cs-4241-2023/cs4241-2023.github.io/blob/main/using.webaudio_and_canvas.md)  
-[SVG + D3 tutorial](https://github.com/cs-4241-2023/cs-4241-2023.github.io/blob/main/using.svg_and_d3.md)  
-
-Baseline Requirements
----
-
-Your application is required to implement the following functionalities:
-
-- A server created using Express. This server can be as simple as needed.
-- A client-side interactive experience using at least one of the following web technologies frameworks.
-  - [Three.js](https://threejs.org/): A library for 3D graphics / VR experiences
-  - [D3.js](https://d3js.org): A library that is primarily used for interactive data visualizations
-  - [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D raster drawing API included in all modern browsers
-  - [SVG](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D vector drawing framework that enables shapes to be defined via XML.
-  - [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API): An API for audio synthesis, analysis, processing, and file playback.
-- A user interface for interaction with your project, which must expose at least four parameters for user control. [tweakpane](https://cocopon.github.io/tweakpane/) is highly recommended for this, but you can also use regular HTML `<input>` tags (the `range` type is useful to create sliders). You might also explore interaction by tracking mouse movement via the `window.onmousemove` event handler in tandem with the `event.clientX` and `event.clientY` properties. Consider using the [Pointer Events API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events) to ensure that that both mouse and touch events will both be supported in your app.
-- Your application should display basic documentation for the user interface when the application first loads.
-
-The interactive experience should possess a reasonable level of complexity. Some examples:
-### Three.js
-- A generative algorithm creates simple agents that move through a virtual world. Your interface controls the behavior / appearance of these agents.
-- A simple 3D game... you really want this to be a simple as possible or it will be outside the scope of this assignment.
-- An 3D audio visualization of a song of your choosing. User interaction should control aspects of the visualization. 
-### Canvas
-- Implement a generative algorithm such as [Conway's Game of Life](https://bitstorm.org/gameoflife/) (or 1D cellular automata) and provide interactive controls. Note that the Game of Life has been created by 100s of people using `<canvas>`; we'll be checking to ensure that your implementation is not a copy of these.
-- Design a 2D audio visualizer of a song of your choosing. User interaction should control visual aspects of the experience. 
-### Web Audio API
-- Create a screen-based musical instrument using the Web Audio API. You can use projects such as [Interface.js](http://charlie-roberts.com/interface/) or [Nexus UI](https://nexus-js.github.io/ui/api/#Piano) to provide common musical interface elements, or use dat.GUI in combination with mouse/touch events (use the Pointer Events API). Your GUI should enable users to control aspects of sound synthesis. If you want to use higher-level instruments instead of the raw WebAudio API sounds, consider trying the instruments provided by [Tone.js]() or [Gibber](https://github.com/charlieroberts/gibber.audio.lib).
-### D3.js
-- Create visualizations using the datasets found at [Awesome JSON Datasets](https://github.com/jdorfman/Awesome-JSON-Datasets). Experiment with providing different visualizations of the same data set, and providing users interactive control over visualization parameters and/or data filtering. Alternatively, create a single visualization with using one of the more complicated techniques shown at [d3js.org](d3js.org) and provide meaningful points of interaction for users.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. *NOTE: If you don't use Glitch for hosting (where we can see the files) then you must include all project files that you author in your repo for this assignment*.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+https://a4-colin-fyock.glitch.me/
 
 Include a very brief summary of your project here. Images are encouraged when needed, along with concise, high-level text. Be sure to include:
 
 - the goal of the application
+The goal of my application was to make an audio visualizer for a song of my choosing. I chose a caged person by SaXi because it was a nice Jazz song that had a nice variety of instruments and loudness. I thought that this would be a good display of my visualizer.
 - challenges you faced in realizing the application
+For many hours I had a bug that only appeared when running the website on Google Chrome. I normally use FireFox for everything, but the glitch 'open preview panel' button would open a window that did nothing.
+Whenever I would open it in a new tab in FireFox is would run perfectly fine and the code would run as I was expecting it to.
+I checked on chrome in case something was wrong and I was getting a 'Uncaught DOMException: Failed to execute 'createMediaElementSource'
+every single time I tried to use the app in chrome. The solution involved wrapping audio_source in an if to check if it existed. 
+I think the bug happened whenever I used the app once in chrome but tried to generate a new visualization it would reuse the same
+audio_source or at least redeclare it and fail. I would liken it to trying to plug an audio jack into an aux that already had a jack in it.
+If audio_source did not exist I would create it, and if not I would just assume it existed and moved on with the rest of the visualization.
 - the instructions you present in the website should be clear enough to use the application, but if you feel any need to provide additional instructions please do so here.
+The instructions that are included in the alert should be sufficient but I will explain a little more. 
+The number of bars at the top is a number between 32 and 32,768, which is 2^5 to 2^14 and you can only move in 2^x increments.
+The user didn't really need to know this so I was just going to make a slider that incremeneted by 2^x but I looked around and 
+html does not support custom sliders that go up by special increments its only 1-5 in increments of 1 for instance.
+The dropdown represents this, and since their aren't too many options it suffices. It change the number of rectangles that canvas
+draws making a more smooth or more rigid visualization. The higher numbers act more like a wave.
+The center bars check centers the peak of the visualization around the center of the screen instead of the left side.
+The add color check makes the canvas rectangles a random color using math.random instead of only being white rectangles.
+When using centered, the two sides (should) be different colors as they are both generated with different math.randoms.
+The increase bar size doubles the y of the rectangles in the visualization.
+The generate and play button plays the song and starts the visualization. 
