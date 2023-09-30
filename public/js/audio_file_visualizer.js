@@ -158,9 +158,9 @@ const beginAudioVisualization = function() {
             
             if(shapeSelection === "rectangle") {
                 canvasRenderingContext.lineWidth = 2
-                canvasRenderingContext.fillRect(x, 0, 20, results[x]) //fillRect(x, y, width, height)
+                canvasRenderingContext.fillRect(x, 0, 10, results[x]) //fillRect(x, y, width, height)
                 //The above line fills rectangles upside down since the y parameter is set to 0 and results[x] generates rectangles down the canvas.
-                canvasRenderingContext.strokeRect(x, 0, 20, results[x])
+                canvasRenderingContext.strokeRect(x, 0, 10, results[x])
             } else if (shapeSelection === "circle") {
                 canvasRenderingContext.lineWidth = 2
                 canvasRenderingContext.fill()
