@@ -123,6 +123,7 @@ const beginAudioVisualization = function() {
         //The destination property of the BaseAudioContext interface returns an AudioDestinationNode representing the final destination of all audio in the context. It often represents an actual audio-rendering device such as your device's speakers.
         player.connect(analyser) //analyser is the target here, which allows the player to send audio time and frequency data to the analyser over time.
     
+        audioElement.crossOrigin = 'anonymous'
         audioElement.src = '../../SepulturaLookaway.mp3' //Set the URL of the media/music source for the HTML audio element.
         audioElement.play() //Have the HTML audio element play the audio stored at the location of the URL specified above.
         isMusicPlaying = true
@@ -131,7 +132,7 @@ const beginAudioVisualization = function() {
         //We obtain the frequencyBinCount through the analyser. Use the total number of data points available to the AudioContext as the array size of the results array.
         const results = new Uint8Array(analyser.frequencyBinCount)
     
-        draw = function() {
+        const draw = function() {
           //Request an animation frame for drawing for each call of the draw function as necessary.
           window.requestAnimationFrame(draw)
           
