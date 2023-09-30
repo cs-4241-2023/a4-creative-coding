@@ -1,0 +1,14 @@
+{
+    "name": "Sepultura Lookaway Audio Visualizer",
+    "version": "1.0",
+    "description": "Web application that visualizes an audio file (Lookaway by Sepultura) and gives the user control over a number of parameters defining the visual experience.",
+    "author": "Matthew McAlarney",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "mime": "^2.6.0"
+    }
+}
