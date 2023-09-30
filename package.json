@@ -1,0 +1,10 @@
+{
+    "name": "Webware_Assignment_4",
+    "version": "0.0.1",
+    "description": "Particle System",
+    "author": "Andrew Hariyanto",
+    "scripts": {},
+    "dependencies": {
+        "http-server": "^14.1.1"
+    }
+}
