@@ -22,7 +22,7 @@ html does not support custom sliders that go up by special increments its only 1
 The dropdown represents this, and since their aren't too many options it suffices. It change the number of rectangles that canvas
 draws making a more smooth or more rigid visualization. The higher numbers act more like a wave.
 The center bars check centers the peak of the visualization around the center of the screen instead of the left side.
-The add color check makes the canvas rectangles a random color using math.random instead of only being white rectangles.
+The add color check makes the canvas rectangles a random color using math.random instead of only being purple rectangles.
 When using centered, the two sides (should) be different colors as they are both generated with different math.randoms.
 The increase bar size doubles the y of the rectangles in the visualization.
 The generate and play button plays the song and starts the visualization. 
