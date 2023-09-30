@@ -5,101 +5,123 @@
     <meta charset = "utf-8">
     <meta name = "description" content = "Sepultura Lookaway audio visualizer">
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"></link>
   </head>
-  <body>
+  <body class = "has-background-danger-light">
     <header>
-      <h1>Sepultura Lookaway Audio Visualizer</h1>
+        <h1 class = "title is-2 is-family-monospace has-text-black-ter has-text-weight-bold has-text-centered">Sepultura Lookaway Audio Visualizer</h1>
     </header>
     <main>
-        <div>
-            <div>
-                <div>
-                    <h2>Activate Sepultura Lookaway Audio Visualizer</h2>
-                    <button id = "activateVisualizer">Activate Visualizer</button>
-                    <div id = "musicIsPlaying"></div>
-                    <div id = "visualization"></div>
-                </div>
-            </div>
-            <div>
-                <div>
-                    <h2>Visualization Appearance Control Parameters</h2>
-                    <div>
-                        <p>Step 1: Use the dropdown selection below to set the visualization drawing to generate occurrences of a listed shape. The two options currently available are rectangles and circles. Be default, the visualization drawing generates occurrences of a rectangle.</p>
-                        <form>
-                            <label for = "shape">Select a shape:</label>
+        <section class = "section">
+            <h2 class = "title is-3 is-family-sans-serif has-text-grey-dark">Activate Sepultura Lookaway Audio Visualizer</h2>
+            <button class = "button is-family-code has-background-danger-dark has-text-white is-size-6" id = "activateVisualizer">Activate Visualizer</button>
+            <div id = "musicIsPlaying"></div>
+            <div class = "mt-3" id = "visualization"></div>
+        </section>
+        <section class = "section">
+            <h2 class = "title is-3 is-family-sans-serif has-text-grey-dark">Visualization Appearance Control Parameters</h2>
+                <p class = "is-family-sans-serif has-text-success-dark has-text-weight-bold mb-3">Although it is recommended to go through the following steps for controlling the visualization appearance in the presented order, moving through the steps in any desired order is also acceptable. Furthermore, a user can set the parameters below before activating the audio visualization and also during the visual experience.</p>
+                <div class = "block">
+                    <p class = "is-family-sans-serif has-text-success-dark has-text-weight-bold mb-3">Step 1: Use the dropdown selection below to set the visualization drawing to generate occurrences of a listed shape. The two options currently available are rectangles and circles. By default, the visualization drawing generates occurrences of a rectangle.</p>
+                    <form>
+                        <label class = "label is-family-secondary has-text-grey-dark is-size-6" for = "shape">Select a shape:</label>
+                        <div class = "select">
                             <select name = "shape" id = "shape">
-                              <option value = "rectangle">Rectangle</option>
-                              <option value = "circle">Circle</option>
+                                <option value = "rectangle">Rectangle</option>
+                                <option value = "circle">Circle</option>
                             </select>
-                            <button id = "shapeSubmit">Submit Shape Selection</button>
-                        </form>
-                    </div>
-                    <div>
-                        <p>Step 2: The following fields should be used to change the fill color of the visualization rectangle or circle drawings using the RGB scale. The default fill color of the drawings is black (RGB(0,0,0)):</p>
-                        <form>
-                            <label for = "RFill">Red (between 0 and 255):</label>
+                        </div>
+                        <button class = "button is-family-code has-background-danger-dark has-text-white is-size-6" id = "shapeSubmit">Submit Shape Selection</button>
+                    </form>
+                </div>
+                <div class = "block">
+                    <p class = "is-family-sans-serif has-text-success-dark has-text-weight-bold mb-3">Step 2: The following fields should be used to change the fill color of the visualization rectangle or circle drawings using the RGB scale. The default fill color of the drawings is black (RGB(0,0,0)):</p>
+                    <form>
+                        <div class = "field">
+                            <label class = "label is-family-secondary has-text-grey-dark is-size-6" for = "RFill">Red (between 0 and 255):</label>
                             <input type = "range" id = "RFill" name = "redFill" min = "0" max = "255">
-                            <label for = "GFill">Green (between 0 and 255):</label>
+                        </div>
+                        <div class = "field">
+                            <label class = "label is-family-secondary has-text-grey-dark is-size-6" for = "GFill">Green (between 0 and 255):</label>
                             <input type = "range" id = "GFill" name = "greenFill" min = "0" max = "255">
-                            <label for = "BFill">Blue (between 0 and 255):</label>
+                        </div>
+                        <div class = "field">
+                            <label class = "label is-family-secondary has-text-grey-dark is-size-6" for = "BFill">Blue (between 0 and 255):</label>
                             <input type = "range" id = "BFill" name = "blueFill" min = "0" max = "255">
-                            <button id = "colorFillSubmit">Submit Color Fill Adjustment</button>
-                        </form>
-                    </div>
-                    <div>
-                        <p>Step 3: The following fields should be used to change the stroke color of the visualization rectangle or circle drawings using the RGB scale. The default stroke color of the drawings is black (RGB(0,0,0)):</p>
-                        <form>
-                            <label for = "RStroke">Red (between 0 and 255):</label>
+                        </div>
+                        <button class = "button is-family-code has-background-danger-dark has-text-white is-size-6" id = "colorFillSubmit">Submit Color Fill Adjustment</button>
+                    </form>
+                </div>
+                <div class = "block">
+                    <p class = "is-family-sans-serif has-text-success-dark has-text-weight-bold mb-3">Step 3: The following fields should be used to change the stroke color of the visualization rectangle or circle drawings using the RGB scale. The default stroke color of the drawings is black (RGB(0,0,0)):</p>
+                    <form>
+                        <div class = "field">
+                            <label class = "label is-family-secondary has-text-grey-dark is-size-6" for = "RStroke">Red (between 0 and 255):</label>
                             <input type = "range" id = "RStroke" name = "redStroke" min = "0" max = "255">
-                            <label for = "GStroke">Green (between 0 and 255):</label>
+                        </div>
+                        <div class = "field">
+                            <label class = "label is-family-secondary has-text-grey-dark is-size-6" for = "GStroke">Green (between 0 and 255):</label>
                             <input type = "range" id = "GStroke" name = "greenStroke" min = "0" max = "255">
-                            <label for = "BStroke">Blue (between 0 and 255):</label>
+                        </div>
+                        <div class = "field">
+                            <label class = "label is-family-secondary has-text-grey-dark is-size-6" for = "BStroke">Blue (between 0 and 255):</label>
                             <input type = "range" id = "BStroke" name = "blueStroke" min = "0" max = "255">
-                            <button id = "colorStrokeSubmit">Submit Color Stroke Adjustment</button>
+                        </div>
+                        <button class = "button is-family-code has-background-danger-dark has-text-white is-size-6" id = "colorStrokeSubmit">Submit Color Stroke Adjustment</button>
+                    </form>
+                </div>
+                <div class = "block">
+                    <p class = "is-family-sans-serif has-text-success-dark has-text-weight-bold mb-3">Step 4: The following fields should be used to change the appearance of the shadow of the visualization rectangle or circle drawings. Enter information for all fields below, which include the shadow color, shadow blur, shadow offset along the x-axis, and shadow offset along the y-axis:</p>
+                    <div class = "block">
+                        <p class = "is-family-sans-serif has-text-success-dark has-text-weight-bold mb-3">Step 4.a: Change the shadow offset along the x-axis (horizontal) and y-axis (vertical). Both offsets are set to 0 by default:</p>
+                        <form>
+                            <div class = "field">
+                                <label class = "label is-family-secondary has-text-grey-dark is-size-6" for = "ShadowOffsetX">Shadow Offset X (between 0 and 20):</label>
+                                <input type = "range" id = "ShadowOffsetX" name = "shadowOffsetX" min = "0" max = "20"></input>
+                            </div>
+                            <div class = "field">
+                                <label class = "label is-family-secondary has-text-grey-dark is-size-6" for = "ShadowOffsetY">Shadow Offset Y (between 0 and 20):</label>
+                                <input type = "range" id = "ShadowOffsetY" name = "shadowOffsetY" min = "0" max = "20"></input>
+                            </div>
+                            <button class = "button is-family-code has-background-danger-dark has-text-white is-size-6" id = "offsetsShadowSubmit">Submit Shadow X and Y Offset Adjustment</button>
                         </form>
                     </div>
-                    <div>
-                        <p>Step 4: The following fields should be used to change the appearance of the shadow of the visualization rectangle or circle drawings. Enter information for all fields below, which include the shadow color, shadow blur, shadow offset along the x-axis, and shadow offset along the y-axis:</p>
-                        <div>
-                            <p>Step 4.a: Change the shadow offset along the x-axis (horizontal) and y-axis (vertical):</p>
-                            <form>
-                                <label for = "ShadowOffsetX">Shadow Offset X (between 0 and 20)</label>
-                                <input type = "range" id = "ShadowOffsetX" name = "shadowOffsetX" min = "0" max = "20"></input>
-                                <label for = "ShadowOffsetY">Shadow Offset Y (between 0 and 20)</label>
-                                <input type = "range" id = "ShadowOffsetY" name = "shadowOffsetY" min = "0" max = "20"></input>
-                                <button id = "offsetsShadowSubmit">Submit Shadow X and Y Offset Adjustment</button>
-                            </form>
-                        </div>
-                        <div>
-                            <p>Step 4.b: Change the shadow color using the RGB scale:</p>
-                            <form>
-                                <label for = "RShadow">Red (between 0 and 255):</label>
+                    <div class = "block">
+                        <p class = "is-family-sans-serif has-text-success-dark has-text-weight-bold mb-3">Step 4.b: Change the shadow color using the RGB scale. The shadow color is set to black (RGB(0,0,0)) by default:</p>
+                        <form>
+                            <div class = "field">
+                                <label class = "label is-family-secondary has-text-grey-dark is-size-6" for = "RShadow">Red (between 0 and 255):</label>
                                 <input type = "range" id = "RShadow" name = "redShadow" min = "0" max = "255">
-                                <label for = "GShadow">Green (between 0 and 255):</label>
+                            </div>
+                            <div class = "field">
+                                <label class = "label is-family-secondary has-text-grey-dark is-size-6" for = "GShadow">Green (between 0 and 255):</label>
                                 <input type = "range" id = "GShadow" name = "greenShadow" min = "0" max = "255">
-                                <label for = "BShadow">Blue (between 0 and 255):</label>
+                            </div>
+                            <div class = "field">
+                                <label class = "label is-family-secondary has-text-grey-dark is-size-6" for = "BShadow">Blue (between 0 and 255):</label>
                                 <input type = "range" id = "BShadow" name = "blueShadow" min = "0" max = "255">
-                                <button id = "colorShadowSubmit">Submit Shadow Color Adjustment</button>
-                            </form>
-                        </div>
-                        <div>
-                            <p>Step 4.c: Change the amount of shadow blur. An increase in value along the slider corresponds to a greater degree of shadow blur:</p>
-                            <form>
-                                <label for = "ShadowBlur">Shadow Blur (between 0 and 10)</label>
+                            </div>
+                            <button class = "button is-family-code has-background-danger-dark has-text-white is-size-6" id = "colorShadowSubmit">Submit Shadow Color Adjustment</button>
+                        </form>
+                    </div>
+                    <div class = "block">
+                        <p class = "is-family-sans-serif has-text-success-dark has-text-weight-bold mb-3">Step 4.c: Change the amount of shadow blur. The shadow blur value is set to 0 by default, and an increase in value along the slider corresponds to a greater degree of shadow blur:</p>
+                        <form>
+                            <div class = "field">
+                                <label class = "label is-family-secondary has-text-grey-dark is-size-6" for = "ShadowBlur">Shadow Blur (between 0 and 10):</label>
                                 <input type = "range" id = "ShadowBlur" name = "shadowBlur" min = "0" max = "10"></input>
-                                <button id = "blurShadowSubmit">Submit Shadow Blur Adjustment</button>
-                            </form>
-                        </div>
+                            </div>
+                            <button class = "button is-family-code has-background-danger-dark has-text-white is-size-6" id = "blurShadowSubmit">Submit Shadow Blur Adjustment</button>
+                        </form>
                     </div>
                 </div>
-            </div>
-        </div>
+            </section>
     </main>
-      <footer>
-        <div>
-           Sepultura Lookaway Audio Visualizer created by Matthew McAlarney
+    <footer class = "footer">
+        <div class = "content has-text-centered">
+            Sepultura Lookaway Audio Visualizer created by Matthew McAlarney
         </div>
-      </footer>
+    </footer>
   </body>
   <script src = "/audio_file_visualizer.js"></script>
 </html>

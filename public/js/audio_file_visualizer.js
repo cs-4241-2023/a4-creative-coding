@@ -99,7 +99,8 @@ const beginAudioVisualization = function() {
        //Set up Canvas in HTML document
         visualizationDivision.appendChild(canvas) //Append the canvas to the HTML body
         canvas.setAttribute('id', 'canvasPresent')
-        canvas.width = canvas.height = 512 //Set the canvas width and height
+        canvas.width = 1024 //Set the canvas width
+        canvas.height = 512 //Set the canvas height
         const canvasRenderingContext = canvas.getContext('2d') //getContext returns an object that provides methods and properties for drawing and manipulating images and graphics on a canvas element.
                                                              //This object is the Canvas rendering context, which is stored in the variable on the left.
         //Initialize the Audio Context and append Audio HTML element
@@ -136,7 +137,7 @@ const beginAudioVisualization = function() {
           
           //Fill the canvas with a black box that takes up the entire canvas width and height by default.
           //By doing the above every frame we 'clear' the canvas
-          canvasRenderingContext.fillStyle = 'lightgreen' 
+          canvasRenderingContext.fillStyle = 'red' 
           canvasRenderingContext.fillRect(0, 0, canvas.width, canvas.height)
           
           //Set the color to red for drawing our visualization
