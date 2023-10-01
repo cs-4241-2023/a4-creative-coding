@@ -1,9 +1,11 @@
 body {
-	height: 100vh;
+	min-height: 100vh;
 	margin: 0;
+	padding: 1em;
 	display: flex;
 	align-items: center;
 	overflow-y: auto;
+	box-sizing: border-box;
 }
 
 main {
@@ -15,7 +17,7 @@ main {
 }
 
 canvas {
-	background-color: hotpink;
+	background-color: black;
 	border: 1px solid black;
 }
 
@@ -31,5 +33,5 @@ canvas {
 }
 
 #optionsDiv > * {
-	min-width: 290px;
+	min-width: 333px;
 }

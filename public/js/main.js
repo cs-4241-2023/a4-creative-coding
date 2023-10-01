@@ -94,7 +94,6 @@ window.onload = function() {
 	ctx.fillRect(0, 0, canvas.width, canvas.height)
 	canvas.onpointerdown = dragStart
 	canvas.onpointermove = drag
-	canvas.onpointerup = dragEnd
 
 	paintCells()
 
@@ -131,7 +130,7 @@ window.onload = function() {
 
 	generalFolder.addButton({title: 'Fill Random'}).on('click', randomFill)
 	generalFolder.addButton({title: 'Clear Grid'}).on('click', clearGrid)
-	
+
 	generalFolder.addBlade({view: 'separator'})
 	
 	generalFolder.addButton({title: 'Play/Pause'}).on('click', toggleTime)
@@ -258,7 +257,7 @@ const dragStart = function(event) {
 	let [x, y] = coordToGrid(event.offsetX, event.offsetY)
 
 	const cellValue = gridManager.getCell(x, y)
-	if(cellValue !== undefined) {
+	if((event.buttons & 1) && (cellValue !== undefined)) {
 		fillType = !cellValue
 		gridManager.setCell(x, y, fillType)
 	}
@@ -267,11 +266,7 @@ const dragStart = function(event) {
 const drag = function(event) {
 	let [x, y] = coordToGrid(event.offsetX, event.offsetY)
 
-	if((x >= 0) && (y >= 0) && (fillType !== undefined)) {
+	if((x >= 0) && (y >= 0) && (event.buttons & 1)) {
 		gridManager.setCell(x, y, fillType)
 	}
-}
-
-const dragEnd = function(event) {
-	fillType = undefined
 }
