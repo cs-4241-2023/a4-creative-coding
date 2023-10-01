@@ -22,7 +22,7 @@ canvas {
 }
 
 #canvasDiv {
-	padding: 0 2em;
+	padding: 0 1em;
 }
 
 #optionsDiv {
@@ -34,4 +34,9 @@ canvas {
 
 #optionsDiv > * {
 	min-width: 333px;
+}
+
+.tp-rotv {
+	/*font-size: 13px !important;*/
+	font-size: smaller !important;
 }

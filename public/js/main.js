@@ -108,9 +108,10 @@ window.onload = function() {
 	infoFolder.addBlade({
 		view: "infodump",
 		content: `This is an implementation of Conway's Game of Life. There are various ways to interact with and impact the game.
+
 		By clicking and dragging on the canvas, you are able to enable or disable cells within the grid. You can use this to create\
 		any shape you want and see how it develops as time moves along.
-			
+		
 		Under the 'General' tab, you have access to the time controls for the game, allowing you start and stop the simulation\
 		as well as change the simulation speed.
 		
@@ -119,6 +120,7 @@ window.onload = function() {
 		
 		Under the 'Rules: Generation' tab you are able to select what number of enabled neighbors a cell is able to have that\
 		will enable it from a disabled state. By default only 3 neighbors is selected.`,
+		
 		border: false,
 		markdown: true,
 	})
