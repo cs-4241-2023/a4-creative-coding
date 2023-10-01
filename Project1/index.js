@@ -5,6 +5,7 @@ function main(){
     const clear = document.getElementById('clear');
     const line = document.getElementById('lineWidth');
     const context = canvas.getContext('2d');
+    const eraser = document.getElementById('eraser');
 
     const offsetX = canvas.offsetLeft;
     const offsetY = canvas.offsetTop;
@@ -13,6 +14,8 @@ function main(){
 
     var lineWidth = 5;
     var isDrawing = false;
+    var eraserOn = false;
+    var lastColor;
     var drawX, drawY;
     
     choice.addEventListener('change', e => {
@@ -22,17 +25,17 @@ function main(){
             case 'Cat':
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 pic.src = '../svgs/cat.svg';
-                context.drawImage(pic, 0, 0, pic.width, pic.height);
+                context.drawImage(pic, 0, 0, canvas.width, canvas.height);
                 break;
             case 'Space':
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 pic.src = '../svgs/space.svg';
-                context.drawImage(pic, 0, 0, pic.width, pic.height);
+                context.drawImage(pic, 0, 0, canvas.width, canvas.height);
                 break;
             case 'Sunflower':
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 pic.src = '../svgs/sunflowers.svg';
-                context.drawImage(pic, 0, 0, pic.width, pic.height);
+                context.drawImage(pic, 0, 0, canvas.width, canvas.height);
                 break;
             case 'Blank':
                 context.clearRect(0, 0, canvas.width, canvas.height);
@@ -40,6 +43,15 @@ function main(){
         }
     })
 
+    eraser.addEventListener('change', e => {
+        eraserOn = !eraserOn;
+        if(eraserOn){
+            lastColor = context.strokeStyle;
+            context.strokeStyle = '#FFFFFF';
+        }else{
+            context.strokeStyle = lastColor;
+        }
+    })
     color.addEventListener('change', e => {
         context.strokeStyle = e.target.value;
     })
@@ -66,7 +78,7 @@ function main(){
         context.lineWidth = lineWidth;
         context.lineCap = 'round';
     
-        context.lineTo(e.clientX - offsetX/2, e.clientY - offsetY + 10);
+        context.lineTo(e.clientX - offsetX/2 - 90, e.clientY - offsetY + 10);
         context.stroke();
     }
 

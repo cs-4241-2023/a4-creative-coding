@@ -26,11 +26,15 @@
                 <input id="brushColor" name="brushColor" type="color">
                 <label for="lineWidth">Line Width</label>
                 <input id="lineWidth" name="lineWidth" type="range" min="1" max="25" value="5" class="slider">
+                <label>Eraser</label>
+                <label class="switch">
+                    <input id="eraser" type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
                 <button id="clear">Clear Screen</button>
             </div>
         </section>
-                <canvas id="drawingCanvas">
-                </canvas>
+                <canvas id="drawingCanvas"></canvas>
         </div>
     </body>
 </html>
