@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Mini Website Piano</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="main.css" media="screen" title="no title" charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+  </head>
+  <body>
+    <div id="content">
+      <div id="tweakpane-container"></div>
+      <h1 id="webTitle">Mini Website Piano!</h1>
+      <div id="content2" class="piano">
+        <h1>Please note this is 3rd and 4th octave only.</h1>
+        <button class="stopButton noteButton" onclick="keyClick(this)" value="0" id=" ">
+          <span class="">STOP<br />( SPACEBAR )</span>
+        </button>
+        <ul id="board" class="box"></ul>
+      </div>
+      <script type="text/javascript" src="main.js"></script>
+    </div>
+    <script type="module">
+      // Import the Tweakpane library
+      import { Pane } from "https://cdn.jsdelivr.net/npm/tweakpane@4.0.1/dist/tweakpane.min.js";
+
+      // Get the content and tweakpane container elements
+      const content = document.getElementById("content");
+      const content2 = document.getElementById("webTitle");
+      const tweakpaneContainer = document.getElementById("tweakpane-container");
+
+      // Initialize Tweakpane
+      const pane = new Pane({
+        container: tweakpaneContainer,
+        title: "Background Color",
+      });
+
+      // Define initial RGB values
+      let backgroundColor = { r: 255, g: 255, b: 255 };
+
+      // Add sliders for RGB values
+      const rController = pane.addBinding(backgroundColor, "r", {
+        label: "Red",
+        min: 0,
+        max: 255,
+      });
+
+      const gController = pane.addBinding(backgroundColor, "g", {
+        label: "Green",
+        min: 0,
+        max: 255,
+      });
+
+      const bController = pane.addBinding(backgroundColor, "b", {
+        label: "Blue",
+        min: 0,
+        max: 255,
+      });
+
+      // Function to update the background color
+      function updateBackgroundColor() {
+        content.style.backgroundColor = `rgb(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b})`;
+        var ir = Math.abs(255 - backgroundColor.r),
+          ig = Math.abs(255 - backgroundColor.g),
+          ib = Math.abs(255 - backgroundColor.b);
+        content2.style.color = `rgb(${ir}, ${ig}, ${ib})`;
+      }
+
+      // Listen for changes in RGB values and update the background color
+      rController.on("change", updateBackgroundColor);
+      gController.on("change", updateBackgroundColor);
+      bController.on("change", updateBackgroundColor);
+
+      // Initialize the background color
+      updateBackgroundColor();
+    </script>
+  </body>
+</html>
