@@ -1,4 +1,35 @@
+body {
+	height: 100vh;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	overflow-y: auto;
+}
+
+main {
+	width: 100vw;
+	display: flex;
+	flex-flow: row;
+	align-items: flex-start;
+	justify-content: space-evenly;
+}
+
 canvas {
 	background-color: hotpink;
 	border: 1px solid black;
+}
+
+#canvasDiv {
+	padding: 0 2em;
+}
+
+#optionsDiv {
+	margin: 0 auto;
+
+	padding: 0 1em;
+	box-sizing: border-box;
+}
+
+#optionsDiv > * {
+	min-width: 290px;
 }

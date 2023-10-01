@@ -1,0 +1,91 @@
+/**
+ * All css in this file was taken from the tweakpane-plugin-infodump-0.3.0.js file.
+ * I don't know why it wasn't being applied automatically, but I have already spent
+ * long enough getting the plugin to work in the first place and this gets the job done.
+ * Source: https://github.com/doersino/tweakpane-plugin-infodump
+ */
+.tp-induv {
+	position: relative;
+	align-items: center;
+	display: flex;
+	line-height: 1.3;
+	padding-left: var(--cnt-h-p);
+	padding-right: var(--cnt-h-p)
+}
+
+.tp-induv.tp-v-disabled {
+	opacity: .5
+}
+
+.tp-induv .tp-induv_t {
+	color: var(--lbl-fg);
+	flex: 1;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	padding: 2px 4px 2px;
+	width: 1px
+}
+
+.tp-induv .tp-induv_t>*:first-child {
+	margin-top: 0
+}
+
+.tp-induv .tp-induv_t>*:last-child {
+	margin-bottom: 0
+}
+
+.tp-induv .tp-induv_t p,
+.tp-induv .tp-induv_t h1,
+.tp-induv .tp-induv_t h2,
+.tp-induv .tp-induv_t h3,
+.tp-induv .tp-induv_t ol,
+.tp-induv .tp-induv_t ul,
+.tp-induv .tp-induv_t blockquote,
+.tp-induv .tp-induv_t pre {
+	margin: .5em 0
+}
+
+.tp-induv .tp-induv_t a {
+	color: var(--btn-bg)
+}
+
+.tp-induv .tp-induv_t a:active {
+	color: var(--btn-bg-a)
+}
+
+.tp-induv .tp-induv_t a:hover {
+	color: var(--btn-bg-h)
+}
+
+.tp-induv .tp-induv_t h1 {
+	font-size: 1.3em;
+	font-weight: bold
+}
+
+.tp-induv .tp-induv_t h2 {
+	font-size: 1em;
+	font-weight: bold
+}
+
+.tp-induv .tp-induv_t h3 {
+	font-size: 1em;
+	font-weight: normal
+}
+
+.tp-induv .tp-induv_t ol,
+.tp-induv .tp-induv_t ul,
+.tp-induv .tp-induv_t blockquote {
+	padding-left: 28px
+}
+
+.tp-indubv::before {
+	border: var(--mo-fg) dashed 1px;
+	border-radius: var(--elm-br);
+	bottom: 0;
+	content: "";
+	left: var(--cnt-v-p);
+	opacity: .3;
+	position: absolute;
+	right: var(--cnt-v-p);
+	top: 0
+}
