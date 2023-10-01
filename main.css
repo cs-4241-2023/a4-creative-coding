@@ -1,0 +1,10 @@
+body {
+  .selector-for-some-widget {
+    box-sizing: content-box;
+  }
+  svg {
+    border: 1px solid #ddd;
+  }
+
+
+}
