@@ -3,6 +3,7 @@ import { Graph } from '../model/graph';
 
 /*
 Stores the global state of the application. This is a singleton service.
+Handles syncing client with server state, and undo/redo.
 */
 
 @Injectable({
@@ -10,9 +11,10 @@ Stores the global state of the application. This is a singleton service.
 })
 export class StateService {
 
-  constructor(private graph: Graph) { 
+  private graph: Graph;
 
-
+  constructor() {
+    this.graph = new Graph();
   }
 
   public getGraph(): Graph {

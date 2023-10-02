@@ -2,15 +2,20 @@ import { Coord } from "./coord";
 import { Edge } from "./edge";
 import { IDHolder } from "./id-holder";
 import { Node } from "./node";
+import { Serializable } from "./serializable";
 
 /*
 The graph model that stores the nodes and edges of the graph.
 */
 
-export class Graph {
+export class Graph implements Serializable {
 
     private nodes: { [id: number] : Node} = [];
     private edges: { [id: number] : Edge} = [];
+
+    private zoom: number = 1;
+    private textSize: number = 12;
+    private showGraph: boolean = true;
 
     constructor() {
         this.reset();
@@ -20,8 +25,14 @@ export class Graph {
     PRIVATE METHODS
     */
 
-    private addEdge(edge: Edge) {
+    private addNode(node: Node): Node {
+        this.nodes[node.id] = node;
+        return node;
+    }
+
+    private addEdge(edge: Edge): Edge {
         this.edges[edge.id] = edge;
+        return edge;
     }
 
     // returns a unique id for a new node by finding the smallest nonzero integer not already used
@@ -64,10 +75,6 @@ export class Graph {
         return Object.values(this.edges);
     }
 
-    private addNode(node: Node) {
-        this.nodes[node.id] = node;
-    }
-
     /*
     PUBLIC FACING METHODS THAT MODIFY THE GRAPH
     */
@@ -77,7 +84,9 @@ export class Graph {
         this.nodes = [];
         this.edges = [];
 
-        this.addNode(this.constructNode(new Coord(0, 0)));
+        let node = this.addNode(this.constructNode(new Coord(50, 50)));
+        this.generateNewNode(new Coord(200, 50), node);
+        console.log(this);
 
     }
 
@@ -92,5 +101,22 @@ export class Graph {
 
         return newNode;
     }
+
+    /*
+    SERIALIZATION
+    */
+    public serialize(): string {
+        return JSON.stringify([this.nodes, this.edges, this.zoom, this.textSize, this.showGraph]);
+    }
+
+    public deserialize(json: string): void {
+        let parsed = JSON.parse(json);
+        this.nodes = parsed[0];
+        this.edges = parsed[1];
+        this.zoom = parsed[2];
+        this.textSize = parsed[3];
+        this.showGraph = parsed[4];
+    }
+
 
 }

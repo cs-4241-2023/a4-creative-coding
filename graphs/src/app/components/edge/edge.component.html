@@ -1,0 +1,9 @@
+<ng-container *ngIf="exists()">
+    <svg:line
+        [attr.x1]="start().pos.x"
+        [attr.y1]="start().pos.y"
+        [attr.x2]="end().pos.x"
+        [attr.y2]="end().pos.y"
+         style="stroke:rgb(0,0,0);stroke-width:2" />
+
+</ng-container>

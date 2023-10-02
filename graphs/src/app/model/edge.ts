@@ -1,4 +1,5 @@
 import { Coord } from "./coord";
+import { Graph } from "./graph";
 import { IDHolder } from "./id-holder";
 import { Node } from "./node";
 
@@ -13,5 +14,13 @@ export class Edge implements IDHolder {
         public endNodeID: number,
         public isDirected: boolean = false
         ) {}
+
+    public getStartNode(graph: Graph): Node {
+        return graph.getNode(this.startNodeID);
+    }
+
+    public getEndNode(graph: Graph): Node {
+        return graph.getNode(this.endNodeID);
+    }
 
 }
