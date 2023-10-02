@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="client.js" defer></script>
+        <link rel="stylesheet" href="main.css">
+        <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <title>Retro Soundscape</title>
+        <h1>Retro Soundscape</h1>
+        <div class='middlediv' style="text-align:right;">
+            <button onclick="openModal()">Help</button>
+        </div>
+        
+        <div style="text-align:center; padding-bottom:5px;" class="middlediv">
+            <span id="startButton">Start/Stop</span>
+        </div>
+        <div>
+            <div id="editor">
+                <div id="editorsliders">
+                    <label for="volumeSlider">Volume</label>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="50">
+                    <label for="distortionSlider">Distortion</label>
+                    <input type="range" id="distortionSlider" min="0" max="1000" value="500">
+                    <label for="rotationSlider">Flatline rotation</label>
+                    <input type="range" id="rotationSlider" min="0" max="100" value="50">
+                    <label for="vertSlider">VertSlider</label>
+                    <input type="range" id="vertSlider" min="0" max="100" value="0";>
+                </div>
+                <div class="modifButtons">
+                    <button id="wavetype">sine wave</button>
+                    <button id="displayType">Droopy Mountain</button>
+                </div>
+                <div>
+                   <label for="scaleInput">Musical Scale</label>
+                    <input type="text" id="scaleInput" placeholder="Enter scale name">
+                    <button type="submit" id='submitButton'>Submit</button> 
+                    <p id="currentscale">Current Scale: C</p>
+                </div>               
+                <div id="bindingsdiv">
+                    <p>Current Key Bindings:</p>
+                    <span id="bindings">[ z x c v m , . / ]</span>
+                    <p style="text-align: center;">Enter New Bindings (separated by whitespace)</p>
+                    <input type="text" id="bindingsInput" placeholder="Key Bindings">
+                    <button id="bindingsButton">Apply</button>
+                </div>
+                <div class="modifButtons">
+                    <button id="moreSounds">Save Sound</button>
+                    <button id="deleteSound">Delete Sound</button>
+                </div>
+                
+                <span id="errorText"></span>
+            </div>
+
+        </div>
+        
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span onclick="closeModal()" style="float: right; cursor: pointer;">&times;</span>
+                <iframe src="popup.html" width="100%" height="400px"></iframe>
+            </div>
+        </div>
+        <script>
+        </script>
+    </body>
+</html>
