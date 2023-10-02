@@ -2,6 +2,13 @@ import { Injectable } from '@angular/core';
 import { Interactor } from '../interaction/interactor';
 import { Coord } from '../model/coord';
 
+/*
+This service keeps track of global state for the interaction system, such as which
+objects are selected, and whether they are being dragged. It takes in raw mouse events
+from the view and converts them to selection and drag events, which are then sent to
+Interactors.
+*/
+
 @Injectable({
   providedIn: 'root'
 })

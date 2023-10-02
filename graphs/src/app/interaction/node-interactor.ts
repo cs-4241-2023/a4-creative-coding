@@ -2,6 +2,11 @@ import { Coord } from "../model/coord";
 import { Node } from "../model/node";
 import { Interactor } from "./interactor";
 
+/*
+This interactor defines the following behaviors:
+- Dragging the node moves it
+*/
+
 export class NodeInteractor extends Interactor {
 
     private nodePosBeforeDrag?: Coord;

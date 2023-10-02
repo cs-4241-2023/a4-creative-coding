@@ -1,5 +1,19 @@
 import { Coord } from "../model/coord";
 
+/*
+You should subclass Interactor to create Interactors specific to your interactive components, like nodes
+and edges. Your subclass will define how the model should be modified when events like
+selection and dragging occur.
+
+You can override hooks like handleSelect and handleDrag to define how they will update model state.
+In those functions, you can use public fields defined here like isSelected and dragOffset for your
+convenience. These fields will be updated in this class.
+
+You should only define hooks that change the model. Superficial changes that only affect the component,
+like changing the color when it is selected, only need to be specified the view.
+
+*/
+
 export abstract class Interactor {
 
     public isSelected: boolean = false;
