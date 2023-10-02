@@ -8,6 +8,14 @@ export class NodeInteractor extends Interactor {
         super(true, true);
     }
 
+    public override onSelect(): void {
+        console.log(this.node.name, "selected");
+    }
+
+    public override onDeselect(): void {
+        console.log(this.node.name, "deselected");
+    }
+
     public override onDrag(dragOffset: Coord): void {
         this.node.move(dragOffset);
     }

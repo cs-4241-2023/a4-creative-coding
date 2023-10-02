@@ -1,21 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Node } from 'src/app/model/node';
+import { AbstractInteractiveComponent } from '../abstract-interactive/abstract-interactive.component';
+import { Interactor } from 'src/app/interaction/interactor';
+import { NodeInteractor } from 'src/app/interaction/node-interactor';
 
 @Component({
   selector: '[app-node]',
   templateUrl: './node.component.html',
   styleUrls: ['./node.component.css']
 })
-export class NodeComponent implements OnInit{
+export class NodeComponent extends AbstractInteractiveComponent implements OnInit{
 
   @Input() node!: Node;
 
-  constructor() {
-
-  }
-
-  ngOnInit(): void { // node is guaranteed to exist by the time this is called
-    
+  override registerInteractor(): Interactor {
+    return new NodeInteractor(this.node);
   }
 
   public getX(): number {
