@@ -11,9 +11,7 @@
         <img src="../svgs/cat.svg" width="0px" height="0px"/>
         <img src="../svgs/space.svg" width="0px" height="0px"/>
         <img src="../svgs/sunflowers.svg" width="0px" height="0px"/>
-        <h1>Make Art</h1>
         <div class="fullScreen">
-        <section class="container">
             <div id="choices">
                 <label for="coloringPage">Coloring Page Choice</label>
                 <select id="coloringPage" name="coloringPage">
@@ -29,12 +27,14 @@
                 <label>Eraser</label>
                 <label class="switch">
                     <input id="eraser" type="checkbox">
-                    <span class="slider round"></span>
-                  </label>
+                    <span class="eslider round"></span>
+                </label>
                 <button id="clear">Clear Screen</button>
             </div>
-        </section>
-                <canvas id="drawingCanvas"></canvas>
+            <div>
+                <h1>Make Art</h1>
+                <canvas id="drawingCanvas" width="700" height="700"></canvas>
+            </div>
         </div>
     </body>
 </html>

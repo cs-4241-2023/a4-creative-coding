@@ -9,8 +9,6 @@ function main(){
 
     const offsetX = canvas.offsetLeft;
     const offsetY = canvas.offsetTop;
-    canvas.width = window.innerWidth - offsetX;
-    canvas.height = window.innerHeight - offsetY;
 
     var lineWidth = 5;
     var isDrawing = false;
@@ -53,7 +51,11 @@ function main(){
         }
     })
     color.addEventListener('change', e => {
-        context.strokeStyle = e.target.value;
+        if(eraserOn){
+            lastColor = e.target.value;
+        }else{
+            context.strokeStyle = e.target.value;
+        }
     })
 
     clear.addEventListener('click', e => {
@@ -68,6 +70,7 @@ function main(){
         isDrawing = true;
         drawX = e.clientX - offsetX;
         drawY = e.clientY - offsetY;
+        console.log(drawX + "," + drawY)
     })
 
     const draw = (e) => {
@@ -78,7 +81,7 @@ function main(){
         context.lineWidth = lineWidth;
         context.lineCap = 'round';
     
-        context.lineTo(e.clientX - offsetX/2 - 90, e.clientY - offsetY + 10);
+        context.lineTo(e.clientX - offsetX, e.clientY - offsetY);
         context.stroke();
     }
 
