@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Node } from 'src/app/model/node';
 
 @Component({
@@ -6,17 +6,16 @@ import { Node } from 'src/app/model/node';
   templateUrl: './node.component.html',
   styleUrls: ['./node.component.css']
 })
-export class NodeComponent {
+export class NodeComponent implements OnInit{
 
-  @Input() node: Node | undefined;
+  @Input() node!: Node;
 
   constructor() {
 
   }
 
-  public exists(): boolean {
-    console.log("node", this.node);
-    return this.node !== undefined;
+  ngOnInit(): void { // node is guaranteed to exist by the time this is called
+    
   }
 
   public getX(): number {
@@ -28,7 +27,7 @@ export class NodeComponent {
   }
 
   public getRadius(): number {
-    return 5;
+    return 20;
   }
 
   public getColor(): string {

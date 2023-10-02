@@ -11,7 +11,7 @@ import { StateService } from 'src/app/services/state.service';
 })
 export class EdgeComponent {
 
-  @Input() edge: Edge | undefined;
+  @Input() edge!: Edge;
 
   constructor(public stateService: StateService) {
 
@@ -21,18 +21,16 @@ export class EdgeComponent {
     return this.stateService.getGraph();
   }
 
-  public exists(): boolean {
-    console.log("edge", this.edge);
-    return this.edge !== undefined;
-    
-  }
-
   public start(): Node {
     return this.edge!.getStartNode(this.getGraph());
   }
 
   public end(): Node {
     return this.edge!.getEndNode(this.getGraph());
+  }
+
+  public getWidth(): number {
+    return 5;
   }
 
 }

@@ -13,4 +13,8 @@ export class Node implements IDHolder {
         this.name = id.toString();
     }
 
+    public move(offset: Coord) {
+        this.pos = this.pos.add(offset);
+    }
+
 }

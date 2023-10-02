@@ -1,7 +1,7 @@
-<!-- Iterate through nodes and edges and display them in the template. -->
-<ng-container *ngFor="let node of getNodes()">
-    <svg:g app-node [node]="node" />
-</ng-container>
+<!-- Iterate through nodes and edges and display them in the template. Draw edges then nodes-->
 <ng-container *ngFor="let edge of getEdges()">
     <svg:g app-edge [edge]="edge" />
+</ng-container>
+<ng-container *ngFor="let node of getNodes()">
+    <svg:g app-node [node]="node" />
 </ng-container>

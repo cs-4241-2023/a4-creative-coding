@@ -35,6 +35,14 @@ export class Graph implements Serializable {
         return edge;
     }
 
+    private deleteNode(node: Node): void {
+        delete this.nodes[node.id];
+    }
+
+    private deleteEdge(edge: Edge): void {
+        delete this.edges[edge.id];
+    }
+
     // returns a unique id for a new node by finding the smallest nonzero integer not already used
     private getNewID(idHolders: IDHolder[]): number {
         let id = 0;
