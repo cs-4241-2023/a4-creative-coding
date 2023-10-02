@@ -1,0 +1,40 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Coloring Book App</title>
+        <script src="./index.js"></script>
+    </head>
+    <body onload="main()">
+        <img src="../svgs/cat.svg" width="0px" height="0px"/>
+        <img src="../svgs/space.svg" width="0px" height="0px"/>
+        <img src="../svgs/sunflowers.svg" width="0px" height="0px"/>
+        <div class="fullScreen">
+            <div id="choices">
+                <label for="coloringPage">Coloring Page Choice</label>
+                <select id="coloringPage" name="coloringPage">
+                    <option value="Blank">Blank</option>
+                    <option value="Cat">Cat</option>
+                    <option value="Space">Space</option>
+                    <option value="Sunflower">Sunflower</option>
+                </select>
+                <label for="brushColor">Brush Color</label>
+                <input id="brushColor" name="brushColor" type="color">
+                <label for="lineWidth">Line Width</label>
+                <input id="lineWidth" name="lineWidth" type="range" min="1" max="25" value="5" class="slider">
+                <label>Eraser</label>
+                <label class="switch">
+                    <input id="eraser" type="checkbox">
+                    <span class="eslider round"></span>
+                </label>
+                <button id="clear">Clear Screen</button>
+            </div>
+            <div>
+                <h1>Make Art</h1>
+                <canvas id="drawingCanvas" width="700" height="700"></canvas>
+            </div>
+        </div>
+    </body>
+</html>
