@@ -18,6 +18,7 @@ export class Graph implements Serializable {
     private showGraph: boolean = true;
 
     constructor() {
+        console.log("Graph constructor");
         this.reset();
     }
 

@@ -1,5 +1,8 @@
-<svg:circle
+<svg:circle appInteractable [interaction]="getInteractor()"
     [attr.cx]="getX()"
     [attr.cy]="getY()"
     [attr.r]="getRadius()"
-    [attr.fill]="getColor()" />
+    [attr.fill]="getColor()"
+    stroke="black"
+    [attr.stroke-width]="getStrokeWidth()"
+    />

@@ -9,7 +9,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
 })
 export abstract class AbstractInteractiveComponent implements OnInit, OnDestroy {
 
-  protected interactor!: Interactor;
+  private interactor!: Interactor;
 
   constructor(protected interactionService: InteractionService) { }
 
@@ -18,6 +18,10 @@ export abstract class AbstractInteractiveComponent implements OnInit, OnDestroy 
   ngOnInit(): void {
     this.interactor = this.registerInteractor();
     this.interactionService.register(this.interactor);
+  }
+
+  public getInteractor(): Interactor {
+    return this.interactor;
   }
 
   ngOnDestroy(): void {

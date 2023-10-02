@@ -9,7 +9,7 @@ import { NodeInteractor } from 'src/app/interaction/node-interactor';
   templateUrl: './node.component.html',
   styleUrls: ['./node.component.css']
 })
-export class NodeComponent extends AbstractInteractiveComponent implements OnInit{
+export class NodeComponent extends AbstractInteractiveComponent {
 
   @Input() node!: Node;
 
@@ -31,6 +31,10 @@ export class NodeComponent extends AbstractInteractiveComponent implements OnIni
 
   public getColor(): string {
     return "blue";
+  }
+
+  public getStrokeWidth(): number {
+    return this.getInteractor().isSelected ? 3 : 0;
   }
 
 }

@@ -17,6 +17,8 @@ export class InteractionService {
   // select the object and unselect all others
   private onMouseDown(object: Interactor, event: MouseEvent): void {
 
+    console.log("InteractionService.onMouseDown", object, event);
+
     this.isDragging = true;
 
     let isAlreadySelected = this.selected.has(object);
@@ -26,7 +28,7 @@ export class InteractionService {
     this.selected.forEach((oldObj) => {
       if (oldObj !== object) {
         oldObj.isSelected = false;
-        oldObj.onDeselect();
+        oldObj.onDeselect(event);
       }
     });
 
@@ -34,36 +36,46 @@ export class InteractionService {
     this.selected.clear();
     this.selected.add(object);
     object.isSelected = true;
-    if (!isAlreadySelected) object.onSelect();
+    if (!isAlreadySelected) object.onSelect(event);
+
+    object.onDragStart(event);
   
-    console.log("onMouseDown", object, event)
     event.stopPropagation(); // don't let parent components handle this event
   }
 
   private onMouseUp(object: Interactor, event: MouseEvent): void {
 
+    console.log("InteractionService.onMouseUp", object, event)
+
+    this.selected.forEach((obj) => obj.onDragEnd(event));
     this.isDragging = false;
   
-    console.log("onMouseUp", object, event)
     event.stopPropagation(); // don't let parent components handle this event
   }
 
   // if mouse is down, then drag the selected objects
   private onMouseMove(object: Interactor, event: MouseEvent): void {
 
+    console.log("InteractionService.onMouseMove", object, event)
+
     if (this.isDragging) {
-      let dragOffset = new Coord(event.movementX, event.movementY);
-      this.selected.forEach((obj) => obj.onDrag(dragOffset));
+      this.selected.forEach((obj) => obj.onDrag(event));
     }
   
-    console.log("onMouseMove", object, event)
     event.stopPropagation(); // don't let parent components handle this event
   }
 
+  // registers an interactor to receive mouse events
   public register(interactor: Interactor): void {
 
+    console.log("InteractionService.register", interactor);
+
     // set up hooks for interactor to call on model events when view sends mouse events
-    interactor.initInteraction(this.onMouseDown, this.onMouseUp, this.onMouseMove);
+    interactor.initInteraction(
+      this.onMouseDown.bind(this),
+      this.onMouseUp.bind(this),
+      this.onMouseMove.bind(this)
+    );
 
     this.objects.push(interactor);
   }
@@ -71,6 +83,18 @@ export class InteractionService {
   // make sure to unregister when the object is destroyed
   public unregister(interactor: Interactor): void {
     this.objects = this.objects.filter((obj) => obj !== interactor);
+  }
+
+  public getObjectDebug(): string[] {
+    return this.objects.map((obj) => obj.toString());
+  }
+
+  public getSelectedDebug(): string[] {
+    return Array.from(this.selected).map((obj) => obj.toString());
+  }
+
+  public getDragging(): boolean {
+    return this.isDragging;
   }
 
 }

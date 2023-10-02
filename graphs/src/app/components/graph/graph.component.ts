@@ -10,7 +10,9 @@ import { StateService } from 'src/app/services/state.service';
 })
 export class GraphComponent {
 
-  constructor(public stateService: StateService) { }
+  constructor(public stateService: StateService) {
+    console.log("GraphComponent.constructor");
+  }
 
   public getNodes(): Node[] {
     console.log("getNodes", this.stateService.getGraph().getNodes());

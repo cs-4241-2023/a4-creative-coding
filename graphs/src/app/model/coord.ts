@@ -8,4 +8,8 @@ export class Coord {
         return new Coord(this.x + other.x, this.y + other.y);
     }
 
+    public sub(other: Coord): Coord {
+        return new Coord(this.x - other.x, this.y - other.y);
+    }
+
 }

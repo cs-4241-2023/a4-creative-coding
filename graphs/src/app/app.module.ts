@@ -7,8 +7,8 @@ import { GridLinesComponent } from './components/grid-lines/grid-lines.component
 import { GraphComponent } from './components/graph/graph.component';
 import { NodeComponent } from './components/node/node.component';
 import { EdgeComponent } from './components/edge/edge.component';
-import { InteractionDirective } from './directives/interaction.directive';
-import { AbstractInteractiveComponent } from './components/abstract-interactive/abstract-interactive.component';
+import { InteractionDirective } from './directives/interactable';
+import { DebugComponent } from './components/debug/debug.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { AbstractInteractiveComponent } from './components/abstract-interactive/
     NodeComponent,
     EdgeComponent,
     InteractionDirective,
-    AbstractInteractiveComponent,
+    DebugComponent,
   ],
   imports: [
     BrowserModule

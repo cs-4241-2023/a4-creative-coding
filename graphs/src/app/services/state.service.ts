@@ -14,6 +14,7 @@ export class StateService {
   private graph: Graph;
 
   constructor() {
+    console.log("StateService constructor");
     this.graph = new Graph();
   }
 
