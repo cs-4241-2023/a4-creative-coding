@@ -16,6 +16,22 @@ export class EdgeInteractor extends Interactor {
 
     constructor(public edge: Edge, private stateService: StateService) {
         super(true, true);
+
+        this.onDragStart$.subscribe((event) => {
+            this.startPosBeforeDrag = this.getStartNode().pos;
+            this.endPosBeforeDrag = this.getEndNode().pos;
+        });
+
+        this.onDrag$.subscribe((event) => {
+            this.getStartNode().setPosition(this.startPosBeforeDrag!.add(this.dragOffset!));
+            this.getEndNode().setPosition(this.endPosBeforeDrag!.add(this.dragOffset!));
+        });
+
+        this.onDragEnd$.subscribe((event) => {
+            this.startPosBeforeDrag = undefined;
+            this.endPosBeforeDrag = undefined;
+        });
+
     }
 
     private getStartNode(): Node {
@@ -24,22 +40,6 @@ export class EdgeInteractor extends Interactor {
 
     private getEndNode(): Node {
         return this.edge.getEndNode(this.stateService.getGraph());
-    }
-
-    public override handleDragStart(event: MouseEvent): void {
-        this.startPosBeforeDrag = this.getStartNode().pos;
-        this.endPosBeforeDrag = this.getEndNode().pos;
-    }
-
-    public override handleDrag(event: MouseEvent): void {
-        this.getStartNode().setPosition(this.startPosBeforeDrag!.add(this.dragOffset!));
-        this.getEndNode().setPosition(this.endPosBeforeDrag!.add(this.dragOffset!));
-    }
-
-    public override handleDragEnd(event: MouseEvent): void {
-        this.startPosBeforeDrag = undefined;
-        this.endPosBeforeDrag = undefined;
-
     }
 
     public override toString(): string {

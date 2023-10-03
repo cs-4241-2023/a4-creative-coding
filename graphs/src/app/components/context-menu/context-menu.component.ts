@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ContextMenuOption } from 'src/app/interaction/interactor';
 
 @Component({
   selector: 'app-context-menu',
@@ -7,6 +6,28 @@ import { ContextMenuOption } from 'src/app/interaction/interactor';
   styleUrls: ['./context-menu.component.css']
 })
 export class ContextMenuComponent {
-  @Input() contextMenuOptions: ContextMenuOption[] = [];
+
+  @Input() position = { x: 0, y: 0 };
+  isVisible = false;
+
+  onOption1Click() {
+    alert('Option 1 clicked');
+    this.hide();
+  }
+
+  onOption2Click() {
+    alert('Option 2 clicked');
+    this.hide();
+  }
+
+  show(x: number, y: number) {
+    this.position.x = x;
+    this.position.y = y;
+    this.isVisible = true;
+  }
+
+  hide() {
+    this.isVisible = false;
+  }
 
 }

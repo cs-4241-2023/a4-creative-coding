@@ -13,19 +13,18 @@ export class NodeInteractor extends Interactor {
 
     constructor(public node: Node) {
         super(true, true);
-    }
 
+        this.onDragStart$.subscribe((event) => {
+            this.nodePosBeforeDrag = this.node.pos;
+        });
 
-    public override handleDragStart(event: MouseEvent): void {
-        this.nodePosBeforeDrag = this.node.pos;
-    }
+        this.onDrag$.subscribe((event) => {
+            this.node.setPosition(this.nodePosBeforeDrag!.add(this.dragOffset!));
+        });
 
-    public override handleDrag(event: MouseEvent): void {
-        this.node.setPosition(this.nodePosBeforeDrag!.add(this.dragOffset!));
-    }
-
-    public override handleDragEnd(event: MouseEvent): void {
-        this.nodePosBeforeDrag = undefined;
+        this.onDragEnd$.subscribe((event) => {
+            this.nodePosBeforeDrag = undefined;
+        });
 
     }
     

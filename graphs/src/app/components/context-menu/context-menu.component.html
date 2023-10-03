@@ -1,11 +1,6 @@
-<div id='contextMenu' class='fade-in-out' cdkMenu>
-    <div *ngFor='let menuItem of contextMenuOptions'>
-      <div id='menu-item' cdkMenuItem (cdkMenuItemTriggered)='menuItem.action'
-           >
-        <button>{{menuItem.label}}</button>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- class='{{menuItem.disabled ? "disabledItem" : ""}}' [cdkMenuItemDisabled]='menuItem.disabled' -->
+<div class="context-menu" [ngStyle]="{'top.px': position.y, 'left.px': position.x}" *ngIf="isVisible">
+  <ul>
+    <li (click)="onOption1Click()">Option 1</li>
+    <li (click)="onOption2Click()">Option 2</li>
+  </ul>
+</div>

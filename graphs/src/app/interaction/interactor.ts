@@ -1,3 +1,4 @@
+import { Subject } from "rxjs";
 import { Coord } from "../model/coord";
 
 /*
@@ -27,6 +28,13 @@ export abstract class Interactor {
     public mouseStartPos?: Coord;
     public dragOffset?: Coord;
 
+    public onSelect$ = new Subject<MouseEvent>();
+    public onDeselect$ = new Subject<MouseEvent>();
+    public onDragStart$ = new Subject<MouseEvent>();
+    public onDrag$ = new Subject<MouseEvent>();
+    public onDragEnd$ = new Subject<MouseEvent>();
+    public onRightClick$ = new Subject<MouseEvent>();
+
     private mouseDownAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
     private mouseUpAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
     private mouseMoveAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
@@ -55,42 +63,40 @@ export abstract class Interactor {
     }
 
     // redirect mouse events to interaction service as (interactor, event)
-    public onMouseDown(event: MouseEvent): void {this.mouseDownAction(this, event); }
-    public onMouseUp(event: MouseEvent): void {this.mouseUpAction(this, event); }
-    public onMouseMove(event: MouseEvent): void {this.mouseMoveAction(this, event); }
-    public onRightClick(event: MouseEvent): void {this.mouseRightClickAction(this, event); }
+    public _onRawMouseDown(event: MouseEvent): void {this.mouseDownAction(this, event); }
+    public _onRawMouseUp(event: MouseEvent): void {this.mouseUpAction(this, event); }
+    public _onRawMouseMove(event: MouseEvent): void {this.mouseMoveAction(this, event); }
+    public _onRawRightClick(event: MouseEvent): void {this.mouseRightClickAction(this, event); }
 
-    // hooks for interaction service to call. This updates mouse state and calls subclass hooks
-    public onSelect(event: MouseEvent): void {
+    // hooks for interaction service to call.
+    // This updates Interactor state and sends events to subscribers.
+    public _onSelect(event: MouseEvent): void {
         this.isSelected = true;
-        this.handleSelect(event);
+        this.onSelect$.next(event);
     }
-    public onDeselect(event: MouseEvent): void {
+    public _onDeselect(event: MouseEvent): void {
         this.isSelected = false;
-        this.handleDeselect(event);
+        this.onDeselect$.next(event);
     }
-    public onDragStart(event: MouseEvent): void {
+    public _onDragStart(event: MouseEvent): void {
         this.mouseStartPos = new Coord(event.clientX, event.clientY);
         this.isDragged = true;
-        this.handleDragStart(event);
+        this.onDragStart$.next(event);
     }
-    public onDrag(event: MouseEvent): void {
+    public _onDrag(event: MouseEvent): void {
         this.dragOffset = new Coord(event.clientX, event.clientY).sub(this.mouseStartPos!);
-        this.handleDrag(event);
+        this.onDrag$.next(event);
     }
-    public onDragEnd(event: MouseEvent): void {
+    public _onDragEnd(event: MouseEvent): void {
         this.isDragged = false;
         this.mouseStartPos = undefined;
         this.dragOffset = undefined;
-        this.handleDragEnd(event);
+        this.onDragEnd$.next(event);
     }
 
-    // hooks for subclasses to override to update model state
-    protected handleSelect(event: MouseEvent): void {}
-    protected handleDeselect(event: MouseEvent): void {}
-    protected handleDragStart(event: MouseEvent): void {}
-    protected handleDrag(event: MouseEvent): void {}
-    protected handleDragEnd(event: MouseEvent): void {}
+    public _onRightClick(event: MouseEvent): void {
+        this.onRightClick$.next(event);
+    }
 
     // functions for subclasses to specify behavior
     public specifyContextMenu(): ContextMenuOption[] {

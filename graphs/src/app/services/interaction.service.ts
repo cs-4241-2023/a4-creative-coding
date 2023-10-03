@@ -30,7 +30,7 @@ export class InteractionService {
     this.selected.forEach((oldObj) => {
       if (oldObj !== object) {
         oldObj.isSelected = false;
-        oldObj.onDeselect(event);
+        oldObj._onDeselect(event);
       }
     });
 
@@ -38,7 +38,7 @@ export class InteractionService {
     this.selected.clear();
     this.selected.add(object);
     object.isSelected = true;
-    if (!isAlreadySelected && object.selectable) object.onSelect(event);
+    if (!isAlreadySelected && object.selectable) object._onSelect(event);
   }
 
   // select the object and unselect all others
@@ -53,7 +53,7 @@ export class InteractionService {
 
     // if the object is draggable, then start dragging it
     this.isDragging = true;
-    if (object.draggable) object.onDragStart(event);
+    if (object.draggable) object._onDragStart(event);
   
     event.stopPropagation(); // don't let parent components handle this event
   }
@@ -64,6 +64,8 @@ export class InteractionService {
     this.selectNewObject(object, event);
     this.isDragging = false;
 
+    object._onRightClick(event);
+
     event.stopPropagation();
   }
 
@@ -72,7 +74,7 @@ export class InteractionService {
     console.log("InteractionService.onMouseUp", object, event);
 
     this.selected.forEach((obj) => {
-      if (obj.draggable) obj.onDragEnd(event);
+      if (obj.draggable) obj._onDragEnd(event);
     });
     this.isDragging = false;
   
@@ -84,7 +86,7 @@ export class InteractionService {
 
     if (this.isDragging) {
       this.selected.forEach((obj) => {
-        if (obj.draggable) obj.onDrag(event);
+        if (obj.draggable) obj._onDrag(event);
       });
     }
   

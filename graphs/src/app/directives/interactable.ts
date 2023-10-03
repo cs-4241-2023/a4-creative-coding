@@ -19,17 +19,22 @@ export class InteractionDirective {
 
   @HostListener('mousedown', ['$event'])
   onMouseDown(event: MouseEvent) {
-    this.interaction.onMouseDown(event);
+    this.interaction._onRawMouseDown(event);
   }
 
   @HostListener('mouseup', ['$event'])
   onMouseUp(event: MouseEvent) {
-    this.interaction.onMouseUp(event);
+    this.interaction._onRawMouseUp(event);
   }
 
   @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
-    this.interaction.onMouseMove(event);
+    this.interaction._onRawMouseMove(event);
+  }
+
+  @HostListener('contextmenu', ['$event'])
+  onRightClick(event: MouseEvent) {
+    this.interaction._onRawRightClick(event);
   }
 
 }

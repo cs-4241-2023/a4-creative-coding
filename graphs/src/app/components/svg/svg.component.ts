@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AbstractInteractiveComponent } from '../abstract-interactive/abstract-interactive.component';
 import { SvgInteractor } from 'src/app/interaction/svg-interactor';
 import { ContextMenuOption, Interactor } from 'src/app/interaction/interactor';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { ContextMenuComponent } from '../context-menu/context-menu.component';
 
 @Component({
   selector: 'app-svg',
