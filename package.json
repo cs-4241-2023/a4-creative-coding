@@ -1,0 +1,15 @@
+{
+    "name": "a4-jade-logan",
+    "version": "0.1.0",
+    "description": "CS 4241 Assignment 4",
+    "author": "Jade Logan",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2"
+    },
+    "engines": {
+        "node": "16.x"
+    }
+}
