@@ -1,0 +1,20 @@
+{
+  "name": "",
+  "version": "",
+  "description": "",
+  "author": "",
+  "scripts": {
+    "start": "node server.improved.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.16.4",
+    "tweakpane": "^4.0.1"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "devDependencies": {
+    "vite": "^4.4.9"
+  }
+}
