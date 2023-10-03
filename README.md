@@ -1,6 +1,6 @@
 ## Browser Instrument
 
-http://a4-jade-logan.glitch.me
+https://a4-jade-logan.glitch.me
 
 The goal of the application is to provide a screen-based instrument that is played by clicking and dragging the mouse on the screen. The pitch and volume changes depending on the mouse position. The user is able to lock the volume so it isn't controlled by movement and adjust the volume dial. The user can change the waveform for the oscillator, and set a scale so that the screen is divided into regions corresponding to notes on the chosen scale rather than the frequency being totally dependant on mouse position.
 
