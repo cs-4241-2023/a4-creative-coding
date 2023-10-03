@@ -1,4 +1,5 @@
 Conway's Game of Life
+
 http://a4-bright183.glitch.me
 
 A simple Implementation of Conway's Game of Life using HTML (Canvas) and JavaScript. 
