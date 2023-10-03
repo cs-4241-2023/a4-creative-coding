@@ -1,0 +1,42 @@
+/* public/styles.css */
+
+body {
+    text-align: center;
+    background-color: #111;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+/* Adjust the size of the canvas */
+canvas {
+    background-color: #000;
+    max-width: 60%; /* Set the maximum width */
+    max-height: 60vh; /* Set the maximum height */
+    display: block;
+    margin: 0 auto;
+}
+
+/* Add scrollbars if the content overflows */
+#canvas-container {
+    overflow: auto;
+    height: 100%; /* Ensure the container takes full height */
+}
+/* Define custom bar styles for each preset */
+.default-bars {
+    /* Define default bar styles here */
+    background-color: #ff5733; /* Example color */
+}
+
+.preset1-bars {
+    /* Define preset 1 bar styles here */
+    background-color: #00ff00; /* Example color */
+}
+
+.preset2-bars {
+    /* Define preset 2 bar styles here */
+    background-color: #0000ff; /* Example color */
+}
+
+
