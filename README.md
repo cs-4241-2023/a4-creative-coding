@@ -1,6 +1,5 @@
 Conway's Game of Life
-
-your hosting link e.g. http://a4-bright183.glitch.me
+http://a4-bright183.glitch.me
 
 A simple Implementation of Conway's Game of Life using HTML (Canvas) and JavaScript. 
 Using Express as the server with a local host port 3000.
