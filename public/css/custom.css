@@ -1,0 +1,42 @@
+body {
+	min-height: 100vh;
+	margin: 0;
+	padding: 1em;
+	display: flex;
+	align-items: center;
+	overflow-y: auto;
+	box-sizing: border-box;
+}
+
+main {
+	width: 100vw;
+	display: flex;
+	flex-flow: row;
+	align-items: flex-start;
+	justify-content: space-evenly;
+}
+
+canvas {
+	background-color: black;
+	border: 1px solid black;
+}
+
+#canvasDiv {
+	padding: 0 1em;
+}
+
+#optionsDiv {
+	margin: 0 auto;
+
+	padding: 0 1em;
+	box-sizing: border-box;
+}
+
+#optionsDiv > * {
+	min-width: 333px;
+}
+
+.tp-rotv {
+	/*font-size: 13px !important;*/
+	font-size: smaller !important;
+}
