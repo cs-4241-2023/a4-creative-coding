@@ -15,12 +15,10 @@ export class GraphComponent {
   }
 
   public getNodes(): Node[] {
-    console.log("getNodes", this.stateService.getGraph().getNodes());
     return this.stateService.getGraph().getNodes();
   }
 
   public getEdges(): Edge[] {
-    console.log("getEdges", this.stateService.getGraph().getEdges());
     return this.stateService.getGraph().getEdges();
   }
 

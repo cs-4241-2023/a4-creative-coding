@@ -9,7 +9,6 @@ export class AppComponent {
   title = 'graphs';
 
   constructor() {
-    console.log("AppComponent.constructor");
   }
 
 }

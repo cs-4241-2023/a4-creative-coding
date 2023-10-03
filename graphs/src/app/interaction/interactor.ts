@@ -17,6 +17,7 @@ like changing the color when it is selected, only need to be specified the view.
 export interface ContextMenuOption {
     label: string;
     action: () => void;
+    disabled: boolean;
   }
 
 export abstract class Interactor {
@@ -29,9 +30,10 @@ export abstract class Interactor {
     private mouseDownAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
     private mouseUpAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
     private mouseMoveAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
+    private mouseRightClickAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
 
 
-    constructor(selectable: boolean, draggable: boolean) {
+    constructor(public selectable: boolean, public draggable: boolean) {
 
         if (draggable && !selectable) {
             throw new Error("Error: draggable objects must be selectable");
@@ -43,17 +45,20 @@ export abstract class Interactor {
     public initInteraction(
         mouseDownAction: (interactor: Interactor, event: MouseEvent) => void,
         mouseUpAction: (interactor: Interactor, event: MouseEvent) => void,
-        mouseMoveAction: (interactor: Interactor, event: MouseEvent) => void): void {
+        mouseMoveAction: (interactor: Interactor, event: MouseEvent) => void,
+        mouseRightClickAction: (interactor: Interactor, event: MouseEvent) => void): void {
 
         this.mouseDownAction = mouseDownAction;
         this.mouseUpAction = mouseUpAction;
         this.mouseMoveAction = mouseMoveAction;
+        this.mouseRightClickAction = mouseRightClickAction;
     }
 
     // redirect mouse events to interaction service as (interactor, event)
     public onMouseDown(event: MouseEvent): void {this.mouseDownAction(this, event); }
     public onMouseUp(event: MouseEvent): void {this.mouseUpAction(this, event); }
     public onMouseMove(event: MouseEvent): void {this.mouseMoveAction(this, event); }
+    public onRightClick(event: MouseEvent): void {this.mouseRightClickAction(this, event); }
 
     // hooks for interaction service to call. This updates mouse state and calls subclass hooks
     public onSelect(event: MouseEvent): void {

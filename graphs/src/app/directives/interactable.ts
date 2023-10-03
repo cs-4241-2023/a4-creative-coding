@@ -19,26 +19,17 @@ export class InteractionDirective {
 
   @HostListener('mousedown', ['$event'])
   onMouseDown(event: MouseEvent) {
-    console.log("InteractionDirective.onMouseDown");
     this.interaction.onMouseDown(event);
   }
 
   @HostListener('mouseup', ['$event'])
   onMouseUp(event: MouseEvent) {
-    console.log("InteractionDirective.onMouseUp");
     this.interaction.onMouseUp(event);
   }
 
   @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
-    console.log("InteractionDirective.onMouseMove");
     this.interaction.onMouseMove(event);
-  }
-
-  @HostListener('contextmenu', ['$event'])
-  onContextMenu(event: MouseEvent) {
-    console.log("InteractionDirective.onContextMenu");
-    event.preventDefault();
   }
 
 }

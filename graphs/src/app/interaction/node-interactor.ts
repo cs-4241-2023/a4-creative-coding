@@ -36,7 +36,8 @@ export class NodeInteractor extends Interactor {
                 label: "Delete",
                 action: () => {
                     console.log("delete node");
-                }
+                },
+                disabled: false
             }
         ];
         

@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Node } from 'src/app/model/node';
 import { AbstractInteractiveComponent } from '../abstract-interactive/abstract-interactive.component';
 import { Interactor } from 'src/app/interaction/interactor';
 import { NodeInteractor } from 'src/app/interaction/node-interactor';
+
 
 @Component({
   selector: '[app-node]',

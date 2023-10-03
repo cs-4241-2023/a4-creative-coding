@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Interactor } from '../interaction/interactor';
+import { ContextMenuOption, Interactor } from '../interaction/interactor';
 import { Coord } from '../model/coord';
 
 /*
@@ -19,14 +19,9 @@ export class InteractionService {
   private selected = new Set<Interactor>(); // set of currently-selected objects
   private isDragging: boolean = false; // whether the selected objects are being dragged
 
-  constructor() { }
 
-  // select the object and unselect all others
-  private onMouseDown(object: Interactor, event: MouseEvent): void {
-
-    console.log("InteractionService.onMouseDown", object, event);
-
-    this.isDragging = true;
+  // select the object and deselect all others
+  private selectNewObject(object: Interactor, event: MouseEvent): void {
 
     let isAlreadySelected = this.selected.has(object);
 
@@ -43,18 +38,42 @@ export class InteractionService {
     this.selected.clear();
     this.selected.add(object);
     object.isSelected = true;
-    if (!isAlreadySelected) object.onSelect(event);
+    if (!isAlreadySelected && object.selectable) object.onSelect(event);
+  }
 
-    object.onDragStart(event);
+  // select the object and unselect all others
+  private onMouseDown(object: Interactor, event: MouseEvent): void {
+
+    if (event.button !== 0) return; // only handle left click. should not be called on right click/context menu
+
+    console.log("InteractionService.onMouseDown", object, event);
+
+
+    this.selectNewObject(object, event);
+
+    // if the object is draggable, then start dragging it
+    this.isDragging = true;
+    if (object.draggable) object.onDragStart(event);
   
     event.stopPropagation(); // don't let parent components handle this event
   }
 
+  private onMouseRightClick(object: Interactor, event: MouseEvent): void {
+
+    console.log("InteractionService.onMouseRightClick", object, event);
+    this.selectNewObject(object, event);
+    this.isDragging = false;
+
+    event.stopPropagation();
+  }
+
   private onMouseUp(object: Interactor, event: MouseEvent): void {
 
-    console.log("InteractionService.onMouseUp", object, event)
+    console.log("InteractionService.onMouseUp", object, event);
 
-    this.selected.forEach((obj) => obj.onDragEnd(event));
+    this.selected.forEach((obj) => {
+      if (obj.draggable) obj.onDragEnd(event);
+    });
     this.isDragging = false;
   
     event.stopPropagation(); // don't let parent components handle this event
@@ -63,10 +82,10 @@ export class InteractionService {
   // if mouse is down, then drag the selected objects
   private onMouseMove(object: Interactor, event: MouseEvent): void {
 
-    console.log("InteractionService.onMouseMove", object, event)
-
     if (this.isDragging) {
-      this.selected.forEach((obj) => obj.onDrag(event));
+      this.selected.forEach((obj) => {
+        if (obj.draggable) obj.onDrag(event);
+      });
     }
   
     event.stopPropagation(); // don't let parent components handle this event
@@ -81,7 +100,8 @@ export class InteractionService {
     interactor.initInteraction(
       this.onMouseDown.bind(this),
       this.onMouseUp.bind(this),
-      this.onMouseMove.bind(this)
+      this.onMouseMove.bind(this),
+      this.onMouseRightClick.bind(this)
     );
 
     this.objects.push(interactor);

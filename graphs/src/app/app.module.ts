@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 
 
@@ -11,6 +12,7 @@ import { NodeComponent } from './components/node/node.component';
 import { EdgeComponent } from './components/edge/edge.component';
 import { InteractionDirective } from './directives/interactable';
 import { DebugComponent } from './components/debug/debug.component';
+import { ContextMenuComponent } from './components/context-menu/context-menu.component';
 
 @NgModule({
   declarations: [
@@ -22,10 +24,12 @@ import { DebugComponent } from './components/debug/debug.component';
     EdgeComponent,
     InteractionDirective,
     DebugComponent,
+    ContextMenuComponent,
   ],
   imports: [
     BrowserModule,
-    MatMenuModule
+    MatMenuModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

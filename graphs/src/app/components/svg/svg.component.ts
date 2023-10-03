@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AbstractInteractiveComponent } from '../abstract-interactive/abstract-interactive.component';
 import { SvgInteractor } from 'src/app/interaction/svg-interactor';
-import { Interactor } from 'src/app/interaction/interactor';
+import { ContextMenuOption, Interactor } from 'src/app/interaction/interactor';
+import { InteractionService } from 'src/app/services/interaction.service';
 
 @Component({
   selector: 'app-svg',
@@ -10,9 +11,13 @@ import { Interactor } from 'src/app/interaction/interactor';
 })
 export class SvgComponent extends AbstractInteractiveComponent {
 
+  constructor(public override interactionService: InteractionService) {
+    super(interactionService);
+  }
+
 
   override registerInteractor(): Interactor {
     return new SvgInteractor();
   }
-
+  
 }
