@@ -35,4 +35,10 @@ export class InteractionDirective {
     this.interaction.onMouseMove(event);
   }
 
+  @HostListener('contextmenu', ['$event'])
+  onContextMenu(event: MouseEvent) {
+    console.log("InteractionDirective.onContextMenu");
+    event.preventDefault();
+  }
+
 }

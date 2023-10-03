@@ -23,4 +23,5 @@ export class Edge implements IDHolder {
         return graph.getNode(this.endNodeID);
     }
 
+
 }

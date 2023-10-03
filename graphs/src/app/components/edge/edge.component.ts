@@ -3,19 +3,28 @@ import { Edge } from 'src/app/model/edge';
 import { Node } from 'src/app/model/node';
 import { Graph } from 'src/app/model/graph';
 import { StateService } from 'src/app/services/state.service';
+import { Interactor } from 'src/app/interaction/interactor';
+import { AbstractInteractiveComponent } from '../abstract-interactive/abstract-interactive.component';
+import { InteractionService } from 'src/app/services/interaction.service';
+import { EdgeInteractor } from 'src/app/interaction/edge-interactor';
 
 @Component({
   selector: '[app-edge]',
   templateUrl: './edge.component.html',
   styleUrls: ['./edge.component.css']
 })
-export class EdgeComponent {
+export class EdgeComponent extends AbstractInteractiveComponent {
 
   @Input() edge!: Edge;
 
-  constructor(public stateService: StateService) {
-
+  constructor(private is: InteractionService, private stateService: StateService) {
+    super(is);
   }
+
+  override registerInteractor(): Interactor {
+    return new EdgeInteractor(this.edge, this.stateService);
+  }
+
 
   private getGraph(): Graph {
     return this.stateService.getGraph();
@@ -30,7 +39,7 @@ export class EdgeComponent {
   }
 
   public getWidth(): number {
-    return 5;
+    return this.getInteractor().isSelected ? 8 : 5;
   }
 
 }

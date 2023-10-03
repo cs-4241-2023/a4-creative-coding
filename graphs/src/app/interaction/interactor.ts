@@ -14,6 +14,11 @@ like changing the color when it is selected, only need to be specified the view.
 
 */
 
+export interface ContextMenuOption {
+    label: string;
+    action: () => void;
+  }
+
 export abstract class Interactor {
 
     public isSelected: boolean = false;
@@ -34,6 +39,7 @@ export abstract class Interactor {
 
     }
 
+    // set the interaction service's mouse event handlers
     public initInteraction(
         mouseDownAction: (interactor: Interactor, event: MouseEvent) => void,
         mouseUpAction: (interactor: Interactor, event: MouseEvent) => void,
@@ -44,7 +50,7 @@ export abstract class Interactor {
         this.mouseMoveAction = mouseMoveAction;
     }
 
-    // hooks for views to call on events
+    // redirect mouse events to interaction service as (interactor, event)
     public onMouseDown(event: MouseEvent): void {this.mouseDownAction(this, event); }
     public onMouseUp(event: MouseEvent): void {this.mouseUpAction(this, event); }
     public onMouseMove(event: MouseEvent): void {this.mouseMoveAction(this, event); }
@@ -80,6 +86,11 @@ export abstract class Interactor {
     protected handleDragStart(event: MouseEvent): void {}
     protected handleDrag(event: MouseEvent): void {}
     protected handleDragEnd(event: MouseEvent): void {}
+
+    // functions for subclasses to specify behavior
+    public specifyContextMenu(): ContextMenuOption[] {
+        return [];
+    }
 
     // for debugging. Override this for more useful information
     public toString(): string {

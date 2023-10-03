@@ -14,4 +14,11 @@ export class SvgInteractor extends Interactor {
         return "SvgInteractor()";
     }
 
+    public override handleDragStart(event: MouseEvent): void {
+        console.log("drag start");
+    }
+    public override handleDragEnd(event: MouseEvent): void {
+        console.log("drag end");
+    }
+
 }

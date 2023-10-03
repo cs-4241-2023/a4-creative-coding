@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatMenuModule } from '@angular/material/menu';
+
 
 import { AppComponent } from './app.component';
 import { SvgComponent } from './components/svg/svg.component';
@@ -22,7 +24,8 @@ import { DebugComponent } from './components/debug/debug.component';
     DebugComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 import { Coord } from "../model/coord";
 import { Node } from "../model/node";
-import { Interactor } from "./interactor";
+import { ContextMenuOption, Interactor } from "./interactor";
 
 /*
 This interactor defines the following behaviors:
@@ -26,6 +26,20 @@ export class NodeInteractor extends Interactor {
 
     public override handleDragEnd(event: MouseEvent): void {
         this.nodePosBeforeDrag = undefined;
+
+    }
+    
+    public override specifyContextMenu(): ContextMenuOption[] {
+
+        return [
+            {
+                label: "Delete",
+                action: () => {
+                    console.log("delete node");
+                }
+            }
+        ];
+        
     }
 
     public override toString(): string {
