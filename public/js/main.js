@@ -100,6 +100,7 @@ window.onload = function() {
 	const pane = new Pane({container: document.getElementById('optionsDiv')})
 	pane.registerPlugin(TweakpaneInfodumpPlugin)
 
+
 	let infoFolder = pane.addFolder({
 		title: 'Information',
 		expanded: true
@@ -120,10 +121,11 @@ window.onload = function() {
 		
 		Under the 'Rules: Generation' tab you are able to select what number of enabled neighbors a cell is able to have that\
 		will enable it from a disabled state. By default only 3 neighbors is selected.`,
-		
+
 		border: false,
 		markdown: true,
 	})
+
 
 	let generalFolder = pane.addFolder({
 		title: 'General',
@@ -146,20 +148,14 @@ window.onload = function() {
 	})
 
 
-
 	let surviveFolder = pane.addFolder({
 		title: 'Rule: Survival',
 		expanded: false
 	})
 
-	surviveFolder.addBinding(SURVIVE_PARAMS, '1', {label: '1 Neighbor'})
-	surviveFolder.addBinding(SURVIVE_PARAMS, '2', {label: '2 Neighbors'})
-	surviveFolder.addBinding(SURVIVE_PARAMS, '3', {label: '3 Neighbors'})
-	surviveFolder.addBinding(SURVIVE_PARAMS, '4', {label: '4 Neighbors'})
-	surviveFolder.addBinding(SURVIVE_PARAMS, '5', {label: '5 Neighbors'})
-	surviveFolder.addBinding(SURVIVE_PARAMS, '6', {label: '6 Neighbors'})
-	surviveFolder.addBinding(SURVIVE_PARAMS, '7', {label: '7 Neighbors'})
-	surviveFolder.addBinding(SURVIVE_PARAMS, '8', {label: '8 Neighbors'})
+	for(let i = 1; i <= 8; i++) {
+		surviveFolder.addBinding(SURVIVE_PARAMS, `${i}`, {label: `${i} Neighbor(s)`})
+	}
 	
 
 	let bornFolder = pane.addFolder({
@@ -167,14 +163,9 @@ window.onload = function() {
 		expanded: false
 	})
 
-	bornFolder.addBinding(BORN_PARAMS, '1', {label: '1 Neighbor'})
-	bornFolder.addBinding(BORN_PARAMS, '2', {label: '2 Neighbors'})
-	bornFolder.addBinding(BORN_PARAMS, '3', {label: '3 Neighbors'})
-	bornFolder.addBinding(BORN_PARAMS, '4', {label: '4 Neighbors'})
-	bornFolder.addBinding(BORN_PARAMS, '5', {label: '5 Neighbors'})
-	bornFolder.addBinding(BORN_PARAMS, '6', {label: '6 Neighbors'})
-	bornFolder.addBinding(BORN_PARAMS, '7', {label: '7 Neighbors'})
-	bornFolder.addBinding(BORN_PARAMS, '8', {label: '8 Neighbors'})
+	for(let i = 1; i <= 8; i++) {
+		bornFolder.addBinding(BORN_PARAMS, `${i}`, {label: `${i} Neighbor(s)`})
+	}
 }
 
 const paintCells = function() {
