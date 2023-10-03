@@ -1,0 +1,94 @@
+html {
+    font-family: 'M PLUS Code Latin';
+  }
+  
+*{font-family: inherit;} 
+
+#canvas {
+    margin: 0;
+    padding: 0;
+    z-index: -1;
+  }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height : 100%;
+    width : 100%;
+}
+
+p {
+    font-size: large;
+    color: #348feb;
+    text-align: center;
+}
+
+h1 {
+    font-size: xx-large;
+    color: #348feb;
+    text-align: center;
+}
+
+.flex {
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    display: flex;
+}
+
+.controlbar {
+    margin: 20px;
+    padding: 10px;
+    height: fit-content;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    border: 5px solid #348feb;
+    border-radius: 20px;
+    background-color: white;
+    overflow: scroll;
+    max-height: 86.5%;
+}
+
+.controls {
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.intro {
+    z-index: -1;
+    margin:30px;
+    flex-grow: 1;
+    align-self: center;
+}
+
+.notes {
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    margin-top: 1.5vh;
+    display: none;
+}
+
+.stripe {
+    width: 100vw;
+    height: 6.666667vh;
+    text-align: right;
+    user-select: none;
+    overflow: hidden;
+}
+
+.stripe p {
+    color: #348feb;
+    margin-right: 30px;
+    text-align: right;
+    padding: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
