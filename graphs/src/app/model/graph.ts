@@ -26,21 +26,21 @@ export class Graph implements Serializable {
     PRIVATE METHODS
     */
 
-    private addNode(node: Node): Node {
+    private _addNode(node: Node): Node {
         this.nodes[node.id] = node;
         return node;
     }
 
-    private addEdge(edge: Edge): Edge {
+    private _addEdge(edge: Edge): Edge {
         this.edges[edge.id] = edge;
         return edge;
     }
 
-    private deleteNode(node: Node): void {
+    private _deleteNode(node: Node): void {
         delete this.nodes[node.id];
     }
 
-    private deleteEdge(edge: Edge): void {
+    private _deleteEdge(edge: Edge): void {
         delete this.edges[edge.id];
     }
 
@@ -93,22 +93,38 @@ export class Graph implements Serializable {
         this.nodes = [];
         this.edges = [];
 
-        let node = this.addNode(this.constructNode(new Coord(50, 50)));
-        this.generateNewNode(new Coord(200, 50), node);
+        let node = this._addNode(this.constructNode(new Coord(50, 50)));
+        this.createNodeWithLink(new Coord(200, 50), node);
         console.log(this);
 
     }
 
+    public createNode(pos: Coord): Node {
+        let newNode = this.constructNode(pos);
+        this._addNode(newNode);
+        return newNode;
+    }
+
     // creates a new node at the specified position, with an edge connected to specified parent node
     // returns the new node
-    public generateNewNode(pos: Coord, parent: Node): Node {
-        let newNode = this.constructNode(pos);
-        let newEdge = this.constructEdge(parent, newNode);
+    public createNodeWithLink(pos: Coord, parent: Node): Node {
 
-        this.addNode(newNode);
-        this.addEdge(newEdge);
+        let node = this.createNode(pos);
 
-        return newNode;
+        let newEdge = this.constructEdge(parent, node);
+        this._addEdge(newEdge);
+
+        return node;
+    }
+
+    // delete node and any edges connected to it
+    public deleteNode(node: Node): void {
+
+        let edgesToDelete = this.getEdges().filter(edge => edge.startNodeID == node.id || edge.endNodeID == node.id);
+        edgesToDelete.forEach(edge => this._deleteEdge(edge));
+
+        this._deleteNode(node);
+
     }
 
     /*

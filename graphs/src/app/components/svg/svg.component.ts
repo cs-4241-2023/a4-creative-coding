@@ -4,6 +4,7 @@ import { SvgInteractor } from 'src/app/interaction/svg-interactor';
 import { ContextMenuOption, Interactor } from 'src/app/interaction/interactor';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ContextMenuComponent } from '../context-menu/context-menu.component';
+import { StateService } from 'src/app/services/state.service';
 
 @Component({
   selector: 'app-svg',
@@ -12,13 +13,16 @@ import { ContextMenuComponent } from '../context-menu/context-menu.component';
 })
 export class SvgComponent extends AbstractInteractiveComponent {
 
-  constructor(public override interactionService: InteractionService) {
+
+  constructor(public override interactionService: InteractionService, private stateService: StateService) {
     super(interactionService);
   }
 
 
   override registerInteractor(): Interactor {
-    return new SvgInteractor();
+    return new SvgInteractor(this.stateService);
   }
+
+
   
 }

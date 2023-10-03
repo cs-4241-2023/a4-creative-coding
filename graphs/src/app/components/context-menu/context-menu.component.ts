@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ContextMenuOption } from 'src/app/interaction/interactor';
+import { ContextMenuService } from 'src/app/services/context-menu.service';
 
 @Component({
   selector: 'app-context-menu',
@@ -7,27 +9,12 @@ import { Component, Input } from '@angular/core';
 })
 export class ContextMenuComponent {
 
-  @Input() position = { x: 0, y: 0 };
-  isVisible = false;
+  constructor(public contextMenuService: ContextMenuService) { }
 
-  onOption1Click() {
-    alert('Option 1 clicked');
-    this.hide();
-  }
-
-  onOption2Click() {
-    alert('Option 2 clicked');
-    this.hide();
-  }
-
-  show(x: number, y: number) {
-    this.position.x = x;
-    this.position.y = y;
-    this.isVisible = true;
-  }
-
-  hide() {
-    this.isVisible = false;
+  // perform the action specified by the option and then hide the context menu
+  public onClick(option: ContextMenuOption) {
+    option.action();
+    this.contextMenuService.hideContextMenu();
   }
 
 }

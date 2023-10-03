@@ -1,5 +1,8 @@
 import { Coord } from "../model/coord";
 import { Node } from "../model/node";
+import { InteractionService } from "../services/interaction.service";
+import { StateService } from "../services/state.service";
+import { ClickCapture, ClickCaptureID } from "./click-capture";
 import { ContextMenuOption, Interactor } from "./interactor";
 
 /*
@@ -11,7 +14,7 @@ export class NodeInteractor extends Interactor {
 
     private nodePosBeforeDrag?: Coord;
 
-    constructor(public node: Node) {
+    constructor(public node: Node, private stateService: StateService, private interactionService: InteractionService) {
         super(true, true);
 
         this.onDragStart$.subscribe((event) => {
@@ -32,14 +35,30 @@ export class NodeInteractor extends Interactor {
 
         return [
             {
+                label: "Create edge",
+                action: () => {
+                    console.log("Create edge");
+                    this.enterCreateNodeCaptureMode();
+                },
+                disabled: false
+            },
+            {
                 label: "Delete",
                 action: () => {
-                    console.log("delete node");
+                    this.stateService.getGraph().deleteNode(this.node);
                 },
                 disabled: false
             }
         ];
         
+    }
+
+    private enterCreateNodeCaptureMode(): void {
+
+        const capture = new ClickCapture(ClickCaptureID.CREATE_NODE);
+        capture.onClick$.subscribe((mousePos) => {
+            this.stateService.getGraph().createNodeWithLink(mousePos, this.node);
+        });
     }
 
     public override toString(): string {

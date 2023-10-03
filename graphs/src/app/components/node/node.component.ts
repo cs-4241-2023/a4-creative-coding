@@ -3,6 +3,8 @@ import { Node } from 'src/app/model/node';
 import { AbstractInteractiveComponent } from '../abstract-interactive/abstract-interactive.component';
 import { Interactor } from 'src/app/interaction/interactor';
 import { NodeInteractor } from 'src/app/interaction/node-interactor';
+import { StateService } from 'src/app/services/state.service';
+import { InteractionService } from 'src/app/services/interaction.service';
 
 
 @Component({
@@ -14,8 +16,12 @@ export class NodeComponent extends AbstractInteractiveComponent {
 
   @Input() node!: Node;
 
+  constructor(public override interactionService: InteractionService, private stateService: StateService) {
+    super(interactionService);
+  }
+
   override registerInteractor(): Interactor {
-    return new NodeInteractor(this.node);
+    return new NodeInteractor(this.node, this.stateService, this.interactionService);
   }
 
   public getX(): number {

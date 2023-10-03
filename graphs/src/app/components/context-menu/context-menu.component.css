@@ -4,6 +4,8 @@
     background-color: #ffffff;
     z-index: 1000;
     width: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    padding: 5px 0; /* Gap at the top and bottom */
   }
   
   .context-menu ul {
@@ -14,10 +16,22 @@
   
   .context-menu li {
     padding: 8px 12px;
+    padding-left: 36px;  /* Space for the icon */
     cursor: pointer;
+    position: relative;  /* Needed for positioning the icon */
   }
   
   .context-menu li:hover {
-    background-color: #f7f7f7;
+    background-color: #e7e7e7; /* Slightly darker shade on hover */
+  }
+  
+  .context-menu li.disabled {
+    color: #aaa;
+    cursor: not-allowed;
+    background-color: #f2f2f2;
+  }
+  
+  .context-menu li.disabled:hover {
+    background-color: #f2f2f2;
   }
   

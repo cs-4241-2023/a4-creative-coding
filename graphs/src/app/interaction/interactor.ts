@@ -28,12 +28,14 @@ export abstract class Interactor {
     public mouseStartPos?: Coord;
     public dragOffset?: Coord;
 
-    public onSelect$ = new Subject<MouseEvent>();
-    public onDeselect$ = new Subject<MouseEvent>();
-    public onDragStart$ = new Subject<MouseEvent>();
-    public onDrag$ = new Subject<MouseEvent>();
-    public onDragEnd$ = new Subject<MouseEvent>();
-    public onRightClick$ = new Subject<MouseEvent>();
+    public onSelect$ = new Subject<true>();
+    public onDeselect$ = new Subject<true>();
+    public onDragStart$ = new Subject<true>();
+    public onDrag$ = new Subject<true>();
+    public onDragEnd$ = new Subject<true>();
+    public onRightClick$ = new Subject<true>();
+
+    public getMousePos: () => Coord = () => { return new Coord(0, 0); };
 
     private mouseDownAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
     private mouseUpAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
@@ -51,51 +53,65 @@ export abstract class Interactor {
 
     // set the interaction service's mouse event handlers
     public initInteraction(
+        getMousePos: () => Coord,
         mouseDownAction: (interactor: Interactor, event: MouseEvent) => void,
         mouseUpAction: (interactor: Interactor, event: MouseEvent) => void,
         mouseMoveAction: (interactor: Interactor, event: MouseEvent) => void,
         mouseRightClickAction: (interactor: Interactor, event: MouseEvent) => void): void {
 
+        this.getMousePos = getMousePos;
         this.mouseDownAction = mouseDownAction;
         this.mouseUpAction = mouseUpAction;
         this.mouseMoveAction = mouseMoveAction;
         this.mouseRightClickAction = mouseRightClickAction;
     }
 
+
     // redirect mouse events to interaction service as (interactor, event)
-    public _onRawMouseDown(event: MouseEvent): void {this.mouseDownAction(this, event); }
-    public _onRawMouseUp(event: MouseEvent): void {this.mouseUpAction(this, event); }
-    public _onRawMouseMove(event: MouseEvent): void {this.mouseMoveAction(this, event); }
-    public _onRawRightClick(event: MouseEvent): void {this.mouseRightClickAction(this, event); }
+    public _onRawMouseDown(event: MouseEvent): void {
+        this.mouseStartPos = this.getMousePos();
+        this.mouseDownAction(this, event);
+    }
+
+    public _onRawMouseUp(event: MouseEvent): void {
+        this.mouseUpAction(this, event);
+    }
+
+    public _onRawMouseMove(event: MouseEvent): void {
+        this.mouseMoveAction(this, event);
+    }
+
+    public _onRawRightClick(event: MouseEvent): void {
+        this.mouseRightClickAction(this, event);
+    }
 
     // hooks for interaction service to call.
     // This updates Interactor state and sends events to subscribers.
-    public _onSelect(event: MouseEvent): void {
+    public _onSelect(): void {
         this.isSelected = true;
-        this.onSelect$.next(event);
+        this.onSelect$.next(true);
     }
-    public _onDeselect(event: MouseEvent): void {
+    public _onDeselect(): void {
         this.isSelected = false;
-        this.onDeselect$.next(event);
+        this.onDeselect$.next(true);
     }
-    public _onDragStart(event: MouseEvent): void {
-        this.mouseStartPos = new Coord(event.clientX, event.clientY);
+    public _onDragStart(): void {
         this.isDragged = true;
-        this.onDragStart$.next(event);
+        this.onDragStart$.next(true);
     }
-    public _onDrag(event: MouseEvent): void {
-        this.dragOffset = new Coord(event.clientX, event.clientY).sub(this.mouseStartPos!);
-        this.onDrag$.next(event);
+    public _onDrag(): void {
+        this.dragOffset = this.getMousePos().sub(this.mouseStartPos!);
+        this.onDrag$.next(true);
     }
-    public _onDragEnd(event: MouseEvent): void {
+    public _onDragEnd(): void {
         this.isDragged = false;
         this.mouseStartPos = undefined;
         this.dragOffset = undefined;
-        this.onDragEnd$.next(event);
+        this.onDragEnd$.next(true);
     }
 
-    public _onRightClick(event: MouseEvent): void {
-        this.onRightClick$.next(event);
+    public _onRightClick(): void {
+        this.onRightClick$.next(true);
     }
 
     // functions for subclasses to specify behavior
