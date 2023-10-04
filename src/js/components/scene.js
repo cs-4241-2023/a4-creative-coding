@@ -12,14 +12,14 @@ import {
     Vector3,
     TorusGeometry,
     MathUtils
-  } from 'three'
-  import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-  import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-  import Stats from 'stats-js'
-  import LoaderManager from '@/js/managers/LoaderManager'
-  import GUI from 'lil-gui'
-  import Shape from '../shape'
-  import gsap from 'gsap'
+  } from '../node_modules/three'
+  import { OrbitControls } from '../node_modules/three/examples/jsm/controls/OrbitControls.js'
+  import { TextGeometry } from '../node_modules/three/examples/jsm/geometries/TextGeometry.js';
+  import Stats from '../node_modules/stats-js'
+  import LoaderManager from './managers/LoaderManager'
+  import GUI from '../node_modules/lil-gui'
+  import Shape from '/shape.js'
+  import gsap from '../node_modules/gsap'
   
   export default class MainScene {
     #canvas
