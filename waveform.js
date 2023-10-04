@@ -11,9 +11,11 @@ const params = {
 //Audio
 const audioCtx = new AudioContext()
 const audioElement = document.createElement('audio')
+audioElement.crossOrigin = "anonymous";
 document.body.appendChild(audioElement)
 let player = audioCtx.createMediaElementSource(audioElement)
 player.connect(audioCtx.destination)
+audioElement.src = 'https://cdn.glitch.me/31e22436-4cbb-46eb-867b-ce58d0090363/re-ignition.wav'
 
 const analyser = audioCtx.createAnalyser()
 player.connect(analyser)
@@ -22,8 +24,6 @@ const results = new Uint8Array(analyser.frequencyBinCount)
 
 const playAudio = () => {
     audioCtx.resume();
-
-    audioElement.src = './media/re-ignition.wav'
     audioElement.play()
 }
 
