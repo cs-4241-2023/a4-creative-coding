@@ -15,7 +15,7 @@
         float x = round(abs(position.x));
         float y = round(abs(position.y));
 
-        float z = pow( u_amplitude / 10.0 * cos(u_data_array[int(x)] / u_period + u_data_array[int(y)] / u_period), u_modifier);
+        float z = pow( u_amplitude / 10.0 * sin(u_data_array[int(x)] / u_period + u_data_array[int(y)] / u_period), u_modifier);
 
         vec3 newPos = vec3(position.x, position.y, z);
 
