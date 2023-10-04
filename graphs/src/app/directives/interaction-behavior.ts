@@ -37,4 +37,9 @@ export class InteractionDirective {
     this.interaction._onRawRightClick(event);
   }
 
+  @HostListener('keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent) {
+    this.interaction._onRawKeyDown(event);
+  }
+
 }

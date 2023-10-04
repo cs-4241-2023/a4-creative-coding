@@ -34,6 +34,7 @@ export abstract class Interactor {
     public onDrag$ = new Subject<true>();
     public onDragEnd$ = new Subject<true>();
     public onRightClick$ = new Subject<true>();
+    public onKeyDown$ = new Subject<true>();
 
     public getMousePos: () => Coord = () => { return new Coord(0, 0); };
 
@@ -41,7 +42,7 @@ export abstract class Interactor {
     private mouseUpAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
     private mouseMoveAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
     private mouseRightClickAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
-
+    private keyDownAction: (interactor: Interactor, event: KeyboardEvent) => void = (event) => {};
 
     constructor(public selectable: boolean, public draggable: boolean) {
 
@@ -57,13 +58,15 @@ export abstract class Interactor {
         mouseDownAction: (interactor: Interactor, event: MouseEvent) => void,
         mouseUpAction: (interactor: Interactor, event: MouseEvent) => void,
         mouseMoveAction: (interactor: Interactor, event: MouseEvent) => void,
-        mouseRightClickAction: (interactor: Interactor, event: MouseEvent) => void): void {
+        mouseRightClickAction: (interactor: Interactor, event: MouseEvent) => void,
+        keyDownAction: (interactor: Interactor, event: KeyboardEvent) => void): void {
 
         this.getMousePos = getMousePos;
         this.mouseDownAction = mouseDownAction;
         this.mouseUpAction = mouseUpAction;
         this.mouseMoveAction = mouseMoveAction;
         this.mouseRightClickAction = mouseRightClickAction;
+        this.keyDownAction = keyDownAction;
     }
 
 
@@ -83,6 +86,10 @@ export abstract class Interactor {
 
     public _onRawRightClick(event: MouseEvent): void {
         this.mouseRightClickAction(this, event);
+    }
+
+    public _onRawKeyDown(event: KeyboardEvent): void {
+        this.keyDownAction(this, event);
     }
 
     // hooks for interaction service to call.
@@ -112,6 +119,10 @@ export abstract class Interactor {
 
     public _onRightClick(): void {
         this.onRightClick$.next(true);
+    }
+
+    public _onKeyDown(event: KeyboardEvent): void {
+        this.onKeyDown$.next(true);
     }
 
     // functions for subclasses to specify behavior

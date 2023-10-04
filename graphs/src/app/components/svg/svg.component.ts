@@ -22,7 +22,5 @@ export class SvgComponent extends AbstractInteractiveComponent {
   override registerInteractor(): Interactor {
     return new SvgInteractor(this.stateService);
   }
-
-
   
 }

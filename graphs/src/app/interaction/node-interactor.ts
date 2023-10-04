@@ -3,6 +3,7 @@ import { Node } from "../model/node";
 import { InteractionService } from "../services/interaction.service";
 import { StateService } from "../services/state.service";
 import { ClickCapture, ClickCaptureID } from "./click-capture";
+import { CreateNodeCapture } from "./create-node-capture";
 import { ContextMenuOption, Interactor } from "./interactor";
 
 /*
@@ -55,10 +56,11 @@ export class NodeInteractor extends Interactor {
 
     private enterCreateNodeCaptureMode(): void {
 
-        const capture = new ClickCapture(ClickCaptureID.CREATE_NODE);
+        const capture = new CreateNodeCapture(this.node);
         capture.onClick$.subscribe((mousePos) => {
             this.stateService.getGraph().createNodeWithLink(mousePos, this.node);
         });
+        this.interactionService.enterClickCapture(capture);
     }
 
     public override toString(): string {

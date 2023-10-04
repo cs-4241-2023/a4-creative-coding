@@ -136,6 +136,24 @@ export class InteractionService {
   
   }
 
+  private onKeyDown(object: Interactor, event: KeyboardEvent): void {
+
+    // if click capture, consume all keyboard events
+    if (this.clickCapture) {
+      
+      // esc while click capture is active will cancel the click capture
+      if (event.key === "Escape") this.exitClickCapture();
+
+      return // do not propagate keyboard events to other interactors
+    }
+
+    // call onKeyDown on all selected objects
+    this.selected.forEach((obj) => {
+      obj._onKeyDown(event);
+    });
+
+  }
+
   // registers an interactor to receive mouse events
   public register(interactor: Interactor): void {
 
@@ -148,6 +166,7 @@ export class InteractionService {
       this.onMouseUp.bind(this),
       this.onMouseMove.bind(this),
       this.onMouseRightClick.bind(this),
+      this.onKeyDown.bind(this)
     );
 
     this.objects.push(interactor);
@@ -162,7 +181,11 @@ export class InteractionService {
     this.clickCapture = clickCapture;
   }
 
-  public getClickCapture(): ClickCaptureID | undefined {
+  public getClickCapture(): ClickCapture | undefined {
+    return this.clickCapture;
+  }
+
+  public getClickCaptureID(): ClickCaptureID | undefined {
     return this.clickCapture?.id;
   }
 
