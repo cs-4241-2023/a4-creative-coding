@@ -1,8 +1,21 @@
-<svg:circle appInteractable [interaction]="getInteractor()"
-    [attr.cx]="getX()"
-    [attr.cy]="getY()"
-    [attr.r]="getRadius()"
-    [attr.fill]="getColor()"
-    stroke="black"
-    [attr.stroke-width]="getStrokeWidth()"
+<svg:g appInteractable [interaction]="getInteractor()">
+
+    <svg:circle 
+        [attr.cx]="getX()"
+        [attr.cy]="getY()"
+        [attr.r]="getRadius()"
+        [attr.fill]="getColor()"
+        stroke="black"
+        [attr.stroke-width]="getStrokeWidth()"
     />
+
+    <!-- Node name -->
+    <svg:text class = "node-name"
+        [attr.x]="getX()" 
+        [attr.y]="getY()" 
+        alignment-baseline="middle" 
+        text-anchor="middle">
+        {{this.node.name}}
+    </svg:text>
+
+</svg:g>

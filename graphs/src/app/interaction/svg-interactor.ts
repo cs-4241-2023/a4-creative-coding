@@ -10,6 +10,14 @@ export class SvgInteractor extends Interactor {
 
     constructor(private stateService: StateService) {
         super(true, true);
+
+        // on space bar, create a node
+        this.onKeyDown$.subscribe((event) => {
+            if (event.key === " ") {
+                this.stateService.getGraph().createNode(this.getMousePos());
+            }
+        });
+
     }
     
     public override specifyContextMenu(): ContextMenuOption[] {

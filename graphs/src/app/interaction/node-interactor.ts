@@ -30,6 +30,13 @@ export class NodeInteractor extends Interactor {
             this.nodePosBeforeDrag = undefined;
         });
 
+        // if backspace, delete
+        this.onKeyDown$.subscribe((event) => {
+            if (event.key === "Backspace") {
+                this.stateService.getGraph().deleteNode(this.node);
+            }
+        });
+
     }
     
     public override specifyContextMenu(): ContextMenuOption[] {

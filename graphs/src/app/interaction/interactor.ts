@@ -28,13 +28,13 @@ export abstract class Interactor {
     public mouseStartPos?: Coord;
     public dragOffset?: Coord;
 
-    public onSelect$ = new Subject<true>();
-    public onDeselect$ = new Subject<true>();
-    public onDragStart$ = new Subject<true>();
-    public onDrag$ = new Subject<true>();
-    public onDragEnd$ = new Subject<true>();
-    public onRightClick$ = new Subject<true>();
-    public onKeyDown$ = new Subject<true>();
+    public onSelect$ = new Subject<boolean>();
+    public onDeselect$ = new Subject<boolean>();
+    public onDragStart$ = new Subject<boolean>();
+    public onDrag$ = new Subject<boolean>();
+    public onDragEnd$ = new Subject<boolean>();
+    public onRightClick$ = new Subject<boolean>();
+    public onKeyDown$ = new Subject<KeyboardEvent>();
 
     public getMousePos: () => Coord = () => { return new Coord(0, 0); };
 
@@ -115,7 +115,7 @@ export abstract class Interactor {
     }
 
     public _onKeyDown(event: KeyboardEvent): void {
-        this.onKeyDown$.next(true);
+        this.onKeyDown$.next(event);
     }
 
     // functions for subclasses to specify behavior
