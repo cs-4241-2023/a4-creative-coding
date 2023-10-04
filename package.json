@@ -1,15 +1,12 @@
 {
-    "name": "a4-Sameer-Desai",
-    "version": "0.1",
-    "description": "Three.js Audio Visualizer",
+    "name": "a4-sameer-desai",
+    "version": "1.0",
+    "description": "Audio Visualizer",
     "author": "Sameer Desai",
     "scripts": {
-      "start": "node server.js"
-    }, "engines" : { 
-      "node" : "16.x"
+        "start": "node server..js"
     },
     "dependencies": {
-     
+        "express": "^4.18.2"
     }
-  }
-  
+}
