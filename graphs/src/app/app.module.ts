@@ -14,6 +14,7 @@ import { InteractionDirective } from './directives/interaction-behavior';
 import { DebugComponent } from './components/debug/debug.component';
 import { ContextMenuComponent } from './components/context-menu/context-menu.component';
 import { NewNodeLineComponent } from './components/new-node-line/new-node-line.component';
+import { OverlayTextComponent } from './components/overlay-text/overlay-text.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NewNodeLineComponent } from './components/new-node-line/new-node-line.c
     DebugComponent,
     ContextMenuComponent,
     NewNodeLineComponent,
+    OverlayTextComponent,
   ],
   imports: [
     BrowserModule,
