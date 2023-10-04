@@ -5,8 +5,6 @@ import { ContextMenuOption, Interactor } from 'src/app/interaction/interactor';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ContextMenuComponent } from '../context-menu/context-menu.component';
 import { StateService } from 'src/app/services/state.service';
-import { EditPanelService } from 'src/app/services/edit-panel.service';
-import { Displayable } from 'src/app/model/displayable';
 
 @Component({
   selector: 'app-svg',
@@ -16,9 +14,7 @@ import { Displayable } from 'src/app/model/displayable';
 export class SvgComponent extends AbstractInteractiveComponent {
 
 
-  constructor(public override interactionService: InteractionService,
-    private stateService: StateService,
-    private editPanelService: EditPanelService) {
+  constructor(public override interactionService: InteractionService, private stateService: StateService) {
     super(interactionService);
   }
 
@@ -38,14 +34,6 @@ export class SvgComponent extends AbstractInteractiveComponent {
 
   override registerInteractor(): Interactor {
     return new SvgInteractor(this.stateService);
-  }
-
-  public getEditPanelModel(): Displayable | undefined {
-    return this.editPanelService.getActiveModel();
-  }
-
-  public showEditPanel(): boolean {
-    return this.getEditPanelModel() !== undefined;
   }
   
 }

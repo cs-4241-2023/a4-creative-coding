@@ -76,10 +76,6 @@ export class NodeInteractor extends Interactor {
         this.interactionService.enterClickCapture(capture);
     }
 
-    public override getModel(): Node {
-        return this.node;
-    }
-
     public override toString(): string {
         return "NodeInteractor(" + this.node.name + ")";
     }

@@ -14,7 +14,6 @@ import { InteractionDirective } from './directives/interaction-behavior';
 import { DebugComponent } from './components/debug/debug.component';
 import { ContextMenuComponent } from './components/context-menu/context-menu.component';
 import { NewNodeLineComponent } from './components/new-node-line/new-node-line.component';
-import { EditPanelComponent } from './components/edit-panel/edit-panel.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { EditPanelComponent } from './components/edit-panel/edit-panel.component
     DebugComponent,
     ContextMenuComponent,
     NewNodeLineComponent,
-    EditPanelComponent,
   ],
   imports: [
     BrowserModule,

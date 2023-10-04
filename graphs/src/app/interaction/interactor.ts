@@ -124,11 +124,6 @@ export abstract class Interactor {
         return [];
     }
 
-    // override this to specify the model that this interactor modifies
-    public getModel(): any {
-        return undefined
-    }
-
     // for debugging. Override this for more useful information
     public toString(): string {
         return "Unspecified Interactor";
