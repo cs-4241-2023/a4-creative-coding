@@ -41,7 +41,7 @@ export class SvgComponent extends AbstractInteractiveComponent implements OnInit
 
 
   override registerInteractor(): Interactor {
-    let interactor = new SvgInteractor(this.stateService);
+    let interactor = new SvgInteractor(this.stateService, this.saveService);
 
     interactor.onKeyDown$.subscribe((event) => {
       if (event.key === "s") {

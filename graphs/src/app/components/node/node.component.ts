@@ -7,6 +7,7 @@ import { StateService } from 'src/app/services/state.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ClickCaptureID } from 'src/app/interaction/click-capture';
 import { CreateNodeCapture } from 'src/app/interaction/create-node-capture';
+import { SaveService } from 'src/app/services/save.service';
 
 
 @Component({
@@ -18,12 +19,14 @@ export class NodeComponent extends AbstractInteractiveComponent {
 
   @Input() node!: Node;
 
-  constructor(public override interactionService: InteractionService, private stateService: StateService) {
+  constructor(public override interactionService: InteractionService,
+    private stateService: StateService,
+    private saveService: SaveService) {
     super(interactionService);
   }
 
   override registerInteractor(): Interactor {
-    return new NodeInteractor(this.node, this.stateService, this.interactionService);
+    return new NodeInteractor(this.node, this.stateService, this.interactionService, this.saveService);
   }
 
   public getX(): number {

@@ -1,6 +1,7 @@
 import { Coord } from "../model/coord";
 import { Node } from "../model/node";
 import { InteractionService } from "../services/interaction.service";
+import { SaveService } from "../services/save.service";
 import { StateService } from "../services/state.service";
 import { ClickCapture, ClickCaptureID } from "./click-capture";
 import { CreateNodeCapture } from "./create-node-capture";
@@ -15,7 +16,9 @@ export class NodeInteractor extends Interactor {
 
     private nodePosBeforeDrag?: Coord;
 
-    constructor(public node: Node, private stateService: StateService, private interactionService: InteractionService) {
+    constructor(public node: Node, private stateService: StateService,
+        private interactionService: InteractionService,
+        private saveService: SaveService) {
         super(true, true);
 
         this.onDragStart$.subscribe((event) => {
@@ -34,6 +37,7 @@ export class NodeInteractor extends Interactor {
         this.onKeyDown$.subscribe((event) => {
             if (event.key === "Backspace") {
                 this.stateService.getGraph().deleteNode(this.node);
+                this.saveService.save();
             }
         });
 
@@ -71,6 +75,7 @@ export class NodeInteractor extends Interactor {
             } else { // if hovering over a node, create a link to that node
                 this.stateService.getGraph().createLink(this.node, capture.getHoveringNode()!);
             }
+            this.saveService.save();
             
         });
         this.interactionService.enterClickCapture(capture);
