@@ -3,7 +3,7 @@ Assignment 4 - Creative Coding: Interactive Multimedia Experiences
 
 ## Graphs - Ansel Chang
 
-Link: [link]
+Link: https://ansel-graphs-41ee3c49dbb3.herokuapp.com/
 
 Ironically, the goal of this application was not to code nodes and edges. Instead, this project served as a testing bed for developing a custom MVC-based extensible framework in Angular for arbitrary interactable entities stored in fully decoupled models, which are injected into components (views), and are linked by interactors (controllers) that update models based on mouse interaction. The framework features full support for dragging, single-selection, multi-selection, context menus, click-capture modals, and keyboard input, where a central state machine distributes relevant events that are consumed by model-specific Interactors, all fully configurable for arbitrary actions from those events. Because models have no dependencies, it is trivial to implement serialization on top of them, allowing for undo/redo and save/load, where this submission demonstrates a simple save-to-server implementation featuring permanent randomly-generated URLs for saves.
 
