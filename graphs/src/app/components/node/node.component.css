@@ -1,9 +1,0 @@
-.node-name {
-    fill: white;
-    font-size: 1.75em;
-
-    user-select: none;
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none;    /* Firefox */
-    -ms-user-select: none;     /* IE/Edge */
-}
