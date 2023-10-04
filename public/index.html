@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600&family=Poppins:ital,wght@1,200&display=swap" rel="stylesheet">
+    <title>2D Audio Visualizer</title>
+
+    <style>
+      .flex {
+        display: flex;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+       }
+
+      .buttons {
+        justify-content: center;
+      }
+      body {
+        background-color: rgb(0, 0, 0);
+      }
+      label {
+        color: white;
+        font-family: 'Gabarito', sans-serif;
+      }
+      footer,h2,h3,li, h1 {
+        color: #ffffff;
+        text-align: center;
+        padding: 10px;
+        font-family: 'Gabarito', sans-serif;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1 >Black Hole Audio Visualizer </h1>
+    
+  </br>
+  
+  <h2>This is a 2d Audio Visualizer that uses a predetermined mp3 file as a proof of concept of the abilities of the visualiser.
+    This application has 5 points of interest to explore.
+  </h2>
+  </br>
+  <ol>
+    <h3>
+      <li>
+      The Play button is used to initially start the visualization and can also be used to pause the application once it is running.
+    </li>
+    <li>
+      The Brightness slider will change the intensity of the light escapeing from the visualiser.
+    </li>
+    <li>
+      The Bar Size slider will change the length of the bars within the visualiser.
+    </li>
+    <li>
+      The Circle Size slider will change the radius of the visualiser.
+    </li>
+    <li>
+      The Line Width slider will change the width of the bars protruding from the visualiser. 
+    </li>
+  </h3>
+  </ol>
+    </body>
+    </html>
+  </br>
+
+    
+    <div class="flex">
+      <div id="controls">
+        <label for="colorSlider">Brightness:</label>
+        <input type="range" id="colorSlider" min="0" max="255" value="255">
+        <label for="amplitudeSlider">Bar Size: </label>
+        <input type="range" id="amplitudeSlider" min="0.5" max="3.5" value="1.5">
+        <label for="circleRadiusSlider">Circle Size: </label>
+        <input type="range" id="circleRadiusSlider" min="50" max="300" value="175">
+        <label for="lineWidthSlider">Line Width:</label>
+        <input type="range" id="lineWidthSlider" min="1" max="5" value="3">
+      </div>
+      
+    </br>
+
+      <button id = 'playButton'> Play</button>
+      <canvas id="canvas" width="900" height="900"></canvas>
+      
+    </div>
+  </br>
+    <script src="/js/main.js"></script>
+    <footer>
+      <p> 2023 A4 Creative Coding Audio Visualiser</p>
+      <p>Audio from Tiësto & KSHMR feat. Vassy - Secrets </p>
+    </footer>
+    
+  </body>
+</html>
