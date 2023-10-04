@@ -5,6 +5,8 @@ import { Interactor } from 'src/app/interaction/interactor';
 import { NodeInteractor } from 'src/app/interaction/node-interactor';
 import { StateService } from 'src/app/services/state.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { ClickCaptureID } from 'src/app/interaction/click-capture';
+import { CreateNodeCapture } from 'src/app/interaction/create-node-capture';
 
 
 @Component({
@@ -41,7 +43,20 @@ export class NodeComponent extends AbstractInteractiveComponent {
   }
 
   public getStrokeWidth(): number {
-    return this.getInteractor().isSelected ? 3 : 1;
+    if (this.getInteractor().isSelected) {
+      return 4;
+    } else if (this.isCreateNodeCaptureAndHoveringOverThisNode()) {
+      return 6;
+    }
+    return 1;
   }
 
+  // whether in create node click capture mode, and the mouse is hovering over this node
+  public isCreateNodeCaptureAndHoveringOverThisNode(): boolean {
+    if (this.interactionService.getClickCaptureID() === ClickCaptureID.CREATE_NODE) {
+      let capture = this.interactionService.getClickCapture() as CreateNodeCapture;
+      return capture.getHoveringNode() === this.node;
+    }
+    return false;
+  }
 }

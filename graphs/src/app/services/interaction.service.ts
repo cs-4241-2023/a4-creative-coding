@@ -26,6 +26,8 @@ export class InteractionService {
   private mousePos: Coord = new Coord(0, 0); // current mouse position
   private mouseMovedAfterDown: boolean = false; // whether the mouse has moved since the last mouse down event
 
+  public hoveringObject?: Interactor; // object that the mouse is currently hovering over
+
   private clickCapture: ClickCapture | undefined;
 
   constructor(private contextMenuService: ContextMenuService) {}
@@ -155,6 +157,8 @@ export class InteractionService {
     this.mousePos = new Coord(event.clientX, event.clientY);
     this.mouseMovedAfterDown = true;
 
+    this.hoveringObject = object;
+
     event.stopPropagation(); // don't let parent components handle this event
 
     if (this.clickCapture) {
@@ -244,6 +248,10 @@ export class InteractionService {
 
   public exitClickCapture(): void {
     this.clickCapture = undefined;
+  }
+
+  public getHoveringObject(): Interactor | undefined {
+    return this.hoveringObject;
   }
 
   // select and start dragging a given object.

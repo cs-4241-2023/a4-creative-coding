@@ -117,6 +117,15 @@ export class Graph implements Serializable {
         return node;
     }
 
+    // create a link between two nodes
+    public createLink(startNode: Node, endNode: Node): Edge {
+
+        let newEdge = this.constructEdge(startNode, endNode);
+        this._addEdge(newEdge);
+
+        return newEdge;
+    }
+
     // delete node and any edges connected to it
     public deleteNode(node: Node): void {
 

@@ -63,9 +63,15 @@ export class NodeInteractor extends Interactor {
 
     private enterCreateNodeCaptureMode(): void {
 
-        const capture = new CreateNodeCapture(this.node);
+        const capture = new CreateNodeCapture(this.node, this.interactionService);
         capture.onClick$.subscribe((mousePos) => {
-            this.stateService.getGraph().createNodeWithLink(mousePos, this.node);
+            
+            if (capture.getHoveringNode() === undefined) { // if not hovering over a node, create a new node to attach to
+                this.stateService.getGraph().createNodeWithLink(mousePos, this.node);
+            } else { // if hovering over a node, create a link to that node
+                this.stateService.getGraph().createLink(this.node, capture.getHoveringNode()!);
+            }
+            
         });
         this.interactionService.enterClickCapture(capture);
     }
