@@ -42,6 +42,10 @@ export class EdgeInteractor extends Interactor {
         return this.edge.getEndNode(this.stateService.getGraph());
     }
 
+    public override getModel(): Edge {
+        return this.edge;
+    }
+
     public override toString(): string {
         return "EdgeInteractor(" + this.getStartNode().name + "," + this.getEndNode().name + ")";
     }

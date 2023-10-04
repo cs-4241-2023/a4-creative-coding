@@ -254,6 +254,10 @@ export class InteractionService {
     return this.hoveringObject;
   }
 
+  public getSelectedObjects(): Set<Interactor> {
+    return this.selected;
+  }
+
   // select and start dragging a given object.
   // useful ie. for creating and dragging a new node on creation from context menu
   public startDraggingObject(object: Interactor): void {

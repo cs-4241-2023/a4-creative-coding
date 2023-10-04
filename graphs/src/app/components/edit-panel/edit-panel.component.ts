@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Displayable } from 'src/app/model/displayable';
+import { EditPanelService } from 'src/app/services/edit-panel.service';
 import { Pane } from 'tweakpane';
 
 @Component({
@@ -6,25 +8,40 @@ import { Pane } from 'tweakpane';
   templateUrl: './edit-panel.component.html',
   styleUrls: ['./edit-panel.component.css']
 })
-export class EditPanelComponent implements OnInit {
+export class EditPanelComponent implements OnInit, OnChanges {
+@Input() model?: Displayable;
 
-  constructor() {
+  private PANE_PARAMS = {
+    displayID: "",
+    name: "",
+  }
+
+  constructor(private editPanelService: EditPanelService) {
     
   }
 
   ngOnInit(): void {
-    return;
-    const PARAMS = {
-      factor: 123,
-      title: 'hello',
-      color: '#ff0055',
-    };
-    
+
     const pane = new Pane();
+
+    let displayBinding = pane.addBinding(this.PANE_PARAMS, 'displayID', {readonly: true});
+    let nameBinding = pane.addBinding(this.PANE_PARAMS, 'name', {readonly: false});
     
-    pane.addBinding(PARAMS, 'factor');
-    pane.addBinding(PARAMS, 'title');
-    pane.addBinding(PARAMS, 'color');
+    // update model name when changed in edit panel
+    nameBinding.on('change', (ev) => {
+      let activeModel = this.editPanelService.getActiveModel();
+      if (activeModel === undefined) return;
+      activeModel.name = ev.value;
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("on changes");
+    let activeModel = this.editPanelService.getActiveModel();
+    if (activeModel === undefined) return;
+
+    this.PANE_PARAMS.displayID = activeModel.getDisplayID();
+    this.PANE_PARAMS.name = activeModel.name;
   }
 
 }
