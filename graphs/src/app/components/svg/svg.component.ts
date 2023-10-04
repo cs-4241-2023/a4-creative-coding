@@ -1,21 +1,28 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { AbstractInteractiveComponent } from '../abstract-interactive/abstract-interactive.component';
 import { SvgInteractor } from 'src/app/interaction/svg-interactor';
 import { ContextMenuOption, Interactor } from 'src/app/interaction/interactor';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ContextMenuComponent } from '../context-menu/context-menu.component';
 import { StateService } from 'src/app/services/state.service';
+import { SaveService } from 'src/app/services/save.service';
 
 @Component({
   selector: 'app-svg',
   templateUrl: './svg.component.html',
   styleUrls: ['./svg.component.css']
 })
-export class SvgComponent extends AbstractInteractiveComponent {
+export class SvgComponent extends AbstractInteractiveComponent implements OnInit {
 
 
-  constructor(public override interactionService: InteractionService, private stateService: StateService) {
+  constructor(public override interactionService: InteractionService,
+    private stateService: StateService,
+    private saveService: SaveService) {
     super(interactionService);
+  }
+
+  override async ngOnInit(): Promise<void> {
+      await this.saveService.load();
   }
 
   // handle keyboard events and send to interaction service
@@ -33,7 +40,15 @@ export class SvgComponent extends AbstractInteractiveComponent {
 
 
   override registerInteractor(): Interactor {
-    return new SvgInteractor(this.stateService);
+    let interactor = new SvgInteractor(this.stateService);
+
+    interactor.onKeyDown$.subscribe((event) => {
+      if (event.key === "s") {
+        this.saveService.save();
+      }
+    });
+
+    return interactor;
   }
   
 }

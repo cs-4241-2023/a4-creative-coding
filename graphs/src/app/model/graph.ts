@@ -13,9 +13,6 @@ export class Graph implements Serializable {
     private nodes: { [id: number] : Node} = [];
     private edges: { [id: number] : Edge} = [];
 
-    private zoom: number = 1;
-    private textSize: number = 12;
-    private showGraph: boolean = true;
 
     constructor() {
         console.log("Graph constructor");
@@ -93,8 +90,8 @@ export class Graph implements Serializable {
         this.nodes = [];
         this.edges = [];
 
-        let node = this._addNode(this.constructNode(new Coord(50, 50)));
-        this.createNodeWithLink(new Coord(200, 50), node);
+        let node = this._addNode(this.constructNode(new Coord(300, 300)));
+        this.createNodeWithLink(new Coord(400, 400), node);
         console.log(this);
 
     }
@@ -140,16 +137,13 @@ export class Graph implements Serializable {
     SERIALIZATION
     */
     public serialize(): string {
-        return JSON.stringify([this.nodes, this.edges, this.zoom, this.textSize, this.showGraph]);
+        return JSON.stringify([this.nodes, this.edges]);
     }
 
     public deserialize(json: string): void {
         let parsed = JSON.parse(json);
         this.nodes = parsed[0];
         this.edges = parsed[1];
-        this.zoom = parsed[2];
-        this.textSize = parsed[3];
-        this.showGraph = parsed[4];
     }
 
 
