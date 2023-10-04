@@ -1,7 +1,7 @@
 {
     "name": "A4 CC",
     "version": "1.0.0",
-    "description": "2D Audio Visualizer with Express",
+    "description": "2D Audio Visualizer",
     "main": "server.js",
     "scripts": {
       "start": "node server.js"
