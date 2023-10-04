@@ -14,7 +14,7 @@ export class EdgeInteractor extends Interactor {
     private startPosBeforeDrag?: Coord;
     private endPosBeforeDrag?: Coord;
 
-    constructor(public edge: Edge) {
+    constructor(public edge: Edge, private stateService: StateService) {
         super(true, true);
 
         this.onDragStart$.subscribe((event) => {

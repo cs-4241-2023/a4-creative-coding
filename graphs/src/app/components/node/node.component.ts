@@ -14,11 +14,14 @@ import { InteractionService } from 'src/app/services/interaction.service';
 })
 export class NodeComponent extends AbstractInteractiveComponent {
 
-  public node!: Node;
+  @Input() node!: Node;
 
-  override ngOnInit(): void {
-    super.ngOnInit();
-    this.node = this.model as Node;
+  constructor(public override interactionService: InteractionService, private stateService: StateService) {
+    super(interactionService);
+  }
+
+  override registerInteractor(): Interactor {
+    return new NodeInteractor(this.node, this.stateService, this.interactionService);
   }
 
   public getX(): number {

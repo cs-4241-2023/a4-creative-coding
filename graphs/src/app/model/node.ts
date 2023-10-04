@@ -1,14 +1,11 @@
-import { Interactor } from "../interaction/interactor";
-import { NodeInteractor } from "../interaction/node-interactor";
 import { Coord } from "./coord";
 import { IDHolder } from "./id-holder";
-import { Interactable } from "./interactable";
 
 /*
 Part of the graph model. Stores a single node.
 */
 
-export class Node implements IDHolder, Interactable {
+export class Node implements IDHolder {
 
     public name: string;
 
@@ -18,10 +15,6 @@ export class Node implements IDHolder, Interactable {
 
     public setPosition(pos: Coord): void {
         this.pos = pos;
-    }
-
-    public getInteractor(): Interactor {
-        return new NodeInteractor(this);
     }
 
 }
