@@ -1,0 +1,15 @@
+{
+    "name": "a4-brendan-mannion",
+    "version": "1.0.0",
+    "description": "CS 4241 Assignment 4 Creative Coding",
+    "author": "Brendan Mannion",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2"
+    },
+    "engines": {
+        "node": "16.x"
+    }
+}
