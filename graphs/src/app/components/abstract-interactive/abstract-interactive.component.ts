@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Interactor } from 'src/app/interaction/interactor';
+import { Interactable } from 'src/app/model/interactable';
 import { InteractionService } from 'src/app/services/interaction.service';
 
 /*
@@ -15,24 +16,20 @@ to implement registerInteractor() so that this class can bind the interactor.
   styleUrls: ['./abstract-interactive.component.css']
 })
 export abstract class AbstractInteractiveComponent implements OnInit, OnDestroy {
-
-  private interactor!: Interactor;
+  @Input() model!: Interactable;
 
   constructor(protected interactionService: InteractionService) { }
 
-  abstract registerInteractor(): Interactor;
-
-  ngOnInit(): void {
-    this.interactor = this.registerInteractor();
-    this.interactionService.register(this.interactor);
+  public getInteractor(): Interactor {
+    return this.model.getInteractor();
   }
 
-  public getInteractor(): Interactor {
-    return this.interactor;
+  ngOnInit(): void {
+    this.interactionService.register(this.getInteractor());
   }
 
   ngOnDestroy(): void {
-    this.interactionService.unregister(this.interactor);
+    this.interactionService.unregister(this.getInteractor());
   }
 
 }

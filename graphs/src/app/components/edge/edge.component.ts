@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Edge } from 'src/app/model/edge';
 import { Node } from 'src/app/model/node';
 import { Graph } from 'src/app/model/graph';
@@ -13,16 +13,17 @@ import { EdgeInteractor } from 'src/app/interaction/edge-interactor';
   templateUrl: './edge.component.html',
   styleUrls: ['./edge.component.css']
 })
-export class EdgeComponent extends AbstractInteractiveComponent {
+export class EdgeComponent extends AbstractInteractiveComponent implements OnInit {
 
-  @Input() edge!: Edge;
+  edge!: Edge;
 
   constructor(private is: InteractionService, private stateService: StateService) {
     super(is);
   }
 
-  override registerInteractor(): Interactor {
-    return new EdgeInteractor(this.edge, this.stateService);
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.edge = this.model as Edge;
   }
 
 

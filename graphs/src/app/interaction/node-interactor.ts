@@ -14,7 +14,7 @@ export class NodeInteractor extends Interactor {
 
     private nodePosBeforeDrag?: Coord;
 
-    constructor(public node: Node, private stateService: StateService, private interactionService: InteractionService) {
+    constructor(public node: Node) {
         super(true, true);
 
         this.onDragStart$.subscribe((event) => {
