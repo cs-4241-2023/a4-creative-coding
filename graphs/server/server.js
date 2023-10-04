@@ -43,13 +43,12 @@ app.get('/', (req, res) => {
 
 app.post('/api/save', async (req, res) => {
     const {saveID, data} = req.body;
-    console.log(saveID, data);
 
     // save or overwrite data for this saveID
     try {
       const doc = await Save.findOneAndUpdate(
         { saveID: saveID },
-        data,
+        {data : data},
         { upsert: true, new: true } // means "create this doc if it doesn't exist"
       );
       console.log('Successfully saved:', doc);
@@ -61,14 +60,14 @@ app.post('/api/save', async (req, res) => {
 });
 
 app.get('/api/load', async (req, res) => {
-    const {saveID} = req.body;
+    const saveID = req.query.saveID;
     console.log(saveID);
 
     // load data for this saveID
     try {
       const doc = await Save.findOne({ saveID: saveID });
       console.log('Successfully loaded:', doc);
-      res.status(200).json(doc);
+      res.status(200).json(doc.data);
     } catch (err) {
       console.error('Error during the load:', err);
       res.status(500).json({message: 'error'});

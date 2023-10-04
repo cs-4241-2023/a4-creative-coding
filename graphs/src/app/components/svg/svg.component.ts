@@ -22,7 +22,8 @@ export class SvgComponent extends AbstractInteractiveComponent implements OnInit
   }
 
   override async ngOnInit(): Promise<void> {
-      await this.saveService.load();
+    super.ngOnInit();
+    await this.saveService.load();
   }
 
   // handle keyboard events and send to interaction service

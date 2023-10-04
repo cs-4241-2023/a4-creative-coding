@@ -12,7 +12,6 @@ export class Edge implements IDHolder {
     constructor(public id: number,
         public startNodeID: number,
         public endNodeID: number,
-        public isDirected: boolean = false
         ) {}
 
     public getStartNode(graph: Graph): Node {

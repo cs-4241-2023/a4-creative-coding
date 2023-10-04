@@ -141,9 +141,15 @@ export class Graph implements Serializable {
     }
 
     public deserialize(json: string): void {
+        console.log("Deserializing", json);
         let parsed = JSON.parse(json);
-        this.nodes = parsed[0];
-        this.edges = parsed[1];
+        console.log(parsed);
+        this.nodes = parsed[0].map((node: any) => {
+            return new Node(node.id, new Coord(node.pos.x, node.pos.y), node.name);
+        });
+        this.edges = parsed[1].map((edge: any) => {
+            return new Edge(edge.id, edge.startNodeID, edge.endNodeID);
+        });
     }
 
 

@@ -76,7 +76,7 @@ export class SaveService {
     console.log("SaveService.load", saveID);
 
     // send request to server
-    const response = await fetch('/api/load/' + saveID, {
+    const response = await fetch('/api/load/?' + new URLSearchParams({saveID: saveID}), {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -93,6 +93,7 @@ export class SaveService {
     
     console.log("SaveService.load: data", data);
     this.stateService.getGraph().deserialize(data);
+    this.saveID = saveID;
 
   }
 

@@ -9,8 +9,9 @@ export class Node implements IDHolder {
 
     public name: string;
 
-    constructor(public id: number, public pos: Coord) {
-        this.name = id.toString();
+    constructor(public id: number, public pos: Coord, name?: string) {
+        if (name) this.name = name;
+        else this.name = id.toString();
     }
 
     public setPosition(pos: Coord): void {
