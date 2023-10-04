@@ -1,61 +1,127 @@
-Assignment 4 - Creative Coding: Interactive Multimedia Experiences
-===
+# 2D Audio Visualizer Documentation
+Welcome to the 2D Audio Visualizer documentation. This page provides a detailed overview of the project structure, file contents, and the high-level design of the application.
 
-Due: October 2nd, by 11:59 AM.
+To acccess the project, please navigate to http://mamcinerney.com. Note that SSL is not yet supported, and the domain seems to be blocked on campus WiFi, so you will need to access it either through a VPN or off-campus and it is important that you type "http://" beforehand to avoid encountering an SSL_PROTOCOL_ERROR.
 
-For this assignment we will focus on client-side development using popular audio/graphics/visualization technologies. The goal of this assignment is to refine our JavaScript knowledge while exploring the multimedia capabilities of the browser.
+Additionally, commit history can be tracked at https://github.com/michael-mcinerney/webware, which is the repository in which I had set up source control for on my DigitalOcean web server.
+## Directory Structure
+```java
+.
+├── public/
+│   ├── index.js
+│   ├── style.css
+├── views/
+│   ├── index.html
+├── package.json
+├── server.js
+```
 
-[WebAudio / Canvas Tutorial](https://github.com/cs-4241-2023/cs4241-2023.github.io/blob/main/using.webaudio_and_canvas.md)  
-[SVG + D3 tutorial](https://github.com/cs-4241-2023/cs-4241-2023.github.io/blob/main/using.svg_and_d3.md)  
+## Files
+### 1. public/index.js
+The index.js file contains the client-side JavaScript code responsible for the functionality of the 2D audio visualizer. Here's a breakdown of its key components:
 
-Baseline Requirements
----
+**UI Interaction:**
 
-Your application is required to implement the following functionalities:
+- Event listeners are implemented for various UI elements, such as color pickers, opacity sliders, playback controls, and zoom buttons.
+- Users can control audio playback, navigate through the audio track, and adjust the visualizer settings.
 
-- A server created using Express. This server can be as simple as needed.
-- A client-side interactive experience using at least one of the following web technologies frameworks.
-  - [Three.js](https://threejs.org/): A library for 3D graphics / VR experiences
-  - [D3.js](https://d3js.org): A library that is primarily used for interactive data visualizations
-  - [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D raster drawing API included in all modern browsers
-  - [SVG](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D vector drawing framework that enables shapes to be defined via XML.
-  - [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API): An API for audio synthesis, analysis, processing, and file playback.
-- A user interface for interaction with your project, which must expose at least four parameters for user control. [tweakpane](https://cocopon.github.io/tweakpane/) is highly recommended for this, but you can also use regular HTML `<input>` tags (the `range` type is useful to create sliders). You might also explore interaction by tracking mouse movement via the `window.onmousemove` event handler in tandem with the `event.clientX` and `event.clientY` properties. Consider using the [Pointer Events API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events) to ensure that that both mouse and touch events will both be supported in your app.
-- Your application should display basic documentation for the user interface when the application first loads.
+**Server Communication:**
 
-The interactive experience should possess a reasonable level of complexity. Some examples:
-### Three.js
-- A generative algorithm creates simple agents that move through a virtual world. Your interface controls the behavior / appearance of these agents.
-- A simple 3D game... you really want this to be a simple as possible or it will be outside the scope of this assignment.
-- An 3D audio visualization of a song of your choosing. User interaction should control aspects of the visualization. 
-### Canvas
-- Implement a generative algorithm such as [Conway's Game of Life](https://bitstorm.org/gameoflife/) (or 1D cellular automata) and provide interactive controls. Note that the Game of Life has been created by 100s of people using `<canvas>`; we'll be checking to ensure that your implementation is not a copy of these.
-- Design a 2D audio visualizer of a song of your choosing. User interaction should control visual aspects of the experience. 
-### Web Audio API
-- Create a screen-based musical instrument using the Web Audio API. You can use projects such as [Interface.js](http://charlie-roberts.com/interface/) or [Nexus UI](https://nexus-js.github.io/ui/api/#Piano) to provide common musical interface elements, or use dat.GUI in combination with mouse/touch events (use the Pointer Events API). Your GUI should enable users to control aspects of sound synthesis. If you want to use higher-level instruments instead of the raw WebAudio API sounds, consider trying the instruments provided by [Tone.js]() or [Gibber](https://github.com/charlieroberts/gibber.audio.lib).
-### D3.js
-- Create visualizations using the datasets found at [Awesome JSON Datasets](https://github.com/jdorfman/Awesome-JSON-Datasets). Experiment with providing different visualizations of the same data set, and providing users interactive control over visualization parameters and/or data filtering. Alternatively, create a single visualization with using one of the more complicated techniques shown at [d3js.org](d3js.org) and provide meaningful points of interaction for users.
+- Functions like goBack, goAhead, zoomIn, and zoomOut make POST requests to the server to fetch updated audio samples based on user interactions.
 
-Deliverables
----
+**Audio Playback:**
 
-Do the following to complete this assignment:
+- The audioPlayback function uses the Web Audio API to play the audio based on the selected samples.
 
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. *NOTE: If you don't use Glitch for hosting (where we can see the files) then you must include all project files that you author in your repo for this assignment*.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
+**Canvas Drawing:**
 
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
+- The drawWaveform function is responsible for rendering the audio waveform on the HTML canvas, taking into account user-selected colors and opacities.
 
-## Your Web Application Title
+**File Upload:**
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+- The upload button triggers a file upload action, and the selected audio file is sent to the server for processing.
 
-Include a very brief summary of your project here. Images are encouraged when needed, along with concise, high-level text. Be sure to include:
 
-- the goal of the application
-- challenges you faced in realizing the application
-- the instructions you present in the website should be clear enough to use the application, but if you feel any need to provide additional instructions please do so here.
+### 2. public/style.css
+- The style.css file defines the styles for the 2D audio visualizer, with a specific focus on the positioning and appearance of the canvas element. Notably, it centers the canvas horizontally and sets its height and border.
+
+
+### 3. views/index.html
+- The index.html file provides the structure for the visualizer's user interface. Key elements include:
+
+**File Upload Form:**
+
+- Users can select an audio file to upload, and the form triggers the server-side upload handling.
+
+**Playback Controls:**
+
+- Buttons for uploading, playing audio, navigating backward and forward, and zooming in and out.
+
+**Dashboard Section:**
+
+- UI elements for configuring left and right waveform colors and opacities.
+
+**Waveform Canvas:**
+
+- The canvas element where the audio waveform is visually represented.
+
+
+### 4. package.json
+The package.json file describes the project's metadata and dependencies. Key configurations include:
+
+**Dependencies:**
+
+- Express, Multer, Node-lame are utilized for server-side functionality.
+
+**Scripts:**
+
+- The start script is defined to run the server using node server.js.
+
+
+### 5. server.js
+The server.js file contains the server-side logic for handling various aspects of the audio visualizer. Notable components include:
+
+**File Upload Handling:**
+
+- Multer is configured to store uploaded files in memory, and the uploaded audio file is processed for decoding and waveform generation.
+
+**Audio Processing Endpoints:**
+
+- Server-side endpoints (/fast-forward, /backtrack, /zoom-in, /zoom-out) handle requests for fetching specific segments of the audio waveform based on user interactions.
+
+**Session Management:**
+
+- Express-session is used for managing user sessions, including storing uploaded audio file data and playback position.
+
+**Audio Decoding:**
+
+- Node-lame is employed to decode the uploaded audio file, and the resulting buffer is stored for waveform generation.
+
+**Server Initialization:**
+
+- The server is set up to listen on port 3001.
+
+## High-Level Design
+The 2D audio visualizer employs a client-server architecture. The client-side (implemented in public/index.js and public/style.css) is responsible for user interaction, audio playback, and waveform visualization. The server-side (implemented in server.js) handles file uploads, audio processing, and responds to user interaction requests.
+
+### Key Technical Achievements:
+
+**Audio Decoding:**
+
+- Node-lame is used for efficient decoding of audio files, allowing for smooth audio playback and waveform generation.
+
+**Real-time Interaction:**
+
+- Server endpoints enable real-time interaction with the audio track, allowing users to navigate, zoom, and adjust settings dynamically.
+
+**Session Management:**
+
+- Express-session is utilized to manage user sessions, ensuring a seamless experience and maintaining state across interactions.
+
+**Canvas Drawing:**
+
+The HTML canvas is employed for rendering the audio waveform, providing an intuitive and visually appealing representation of the audio data.
+
+**WebAudio API:**
+
+- WebAudio is used on the client side, using the array with amplitude values for the waveform passed to the client to enable the actual playback of fetched audio.
