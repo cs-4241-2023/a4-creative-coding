@@ -1,4 +1,4 @@
-import { Directive, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, Renderer2 } from '@angular/core';
 import { Interactor } from '../interaction/interactor';
 
 /*
@@ -13,9 +13,6 @@ those events to selection and drag events.
 export class InteractionDirective {
   @Input() interaction!: Interactor;
   
-  constructor() {
-    
-  }
 
   @HostListener('mousedown', ['$event'])
   onMouseDown(event: MouseEvent) {
@@ -35,11 +32,6 @@ export class InteractionDirective {
   @HostListener('contextmenu', ['$event'])
   onRightClick(event: MouseEvent) {
     this.interaction._onRawRightClick(event);
-  }
-
-  @HostListener('keydown', ['$event'])
-  onKeyDown(event: KeyboardEvent) {
-    this.interaction._onRawKeyDown(event);
   }
 
 }

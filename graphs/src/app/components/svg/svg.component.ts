@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { AbstractInteractiveComponent } from '../abstract-interactive/abstract-interactive.component';
 import { SvgInteractor } from 'src/app/interaction/svg-interactor';
 import { ContextMenuOption, Interactor } from 'src/app/interaction/interactor';
@@ -16,6 +16,13 @@ export class SvgComponent extends AbstractInteractiveComponent {
 
   constructor(public override interactionService: InteractionService, private stateService: StateService) {
     super(interactionService);
+  }
+
+  // handle keyboard events and send to interaction service
+  @HostListener('document:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent) {
+    console.log("InteractionDirective.onKeyDown", event.key);
+    this.interactionService.onKeyDown(event);
   }
 
 

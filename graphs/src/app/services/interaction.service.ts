@@ -136,7 +136,9 @@ export class InteractionService {
   
   }
 
-  private onKeyDown(object: Interactor, event: KeyboardEvent): void {
+  public onKeyDown(event: KeyboardEvent): void {
+
+    console.log(event.key);
 
     // if click capture, consume all keyboard events
     if (this.clickCapture) {
@@ -166,7 +168,6 @@ export class InteractionService {
       this.onMouseUp.bind(this),
       this.onMouseMove.bind(this),
       this.onMouseRightClick.bind(this),
-      this.onKeyDown.bind(this)
     );
 
     this.objects.push(interactor);
