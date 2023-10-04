@@ -21,7 +21,10 @@ export class InteractionService {
   private selected = new Set<Interactor>(); // set of currently-selected objects
   private isDragging: boolean = false; // whether the selected objects are being dragged
 
+  private heldKeys: Set<string> = new Set<string>(); // keys currently being held down
+
   private mousePos: Coord = new Coord(0, 0); // current mouse position
+  private mouseMovedAfterDown: boolean = false; // whether the mouse has moved since the last mouse down event
 
   private clickCapture: ClickCapture | undefined;
 
@@ -29,30 +32,38 @@ export class InteractionService {
 
 
   // select the object and deselect all others
-  private selectNewObject(object: Interactor): void {
+  private selectNewObject(object: Interactor, deselectOldObjects: boolean = true): void {
 
     let isAlreadySelected = this.selected.has(object);
 
-    // deselect all other objects and call onDeselect().
-    // if the object is already selected, do not call onDeselect() on it.
-    this.selected.forEach((oldObj) => {
-      if (oldObj !== object) {
-        oldObj.isSelected = false;
-        oldObj._onDeselect();
-      }
-    });
+    if (deselectOldObjects) {
+      // deselect all other objects and call onDeselect().
+      // if the object is already selected, do not call onDeselect() on it.
+      this.selected.forEach((oldObj) => {
+        if (oldObj !== object) {
+          oldObj.isSelected = false;
+          oldObj._onDeselect();
+        }
+      });
 
-    // select the object and call onSelect()
-    this.selected.clear();
+      // select the object and call onSelect()
+      this.selected.clear();
+    }
+
+    if (isAlreadySelected) return;
+
+
     this.selected.add(object);
-    object.isSelected = true;
-    if (!isAlreadySelected && object.selectable) object._onSelect();
+    if (object.selectable) object._onSelect();
   }
 
   // select the object and unselect all others
   private onMouseDown(object: Interactor, event: MouseEvent): void {
 
     this.mousePos = new Coord(event.clientX, event.clientY);
+    
+    this.mouseMovedAfterDown = false;
+
     event.stopPropagation(); // don't let parent components handle this event
 
     // if click capture, handle special case
@@ -69,18 +80,23 @@ export class InteractionService {
     // hide any context menus
     this.contextMenuService.hideContextMenu();
 
-
-    this.selectNewObject(object);
+    // don't deselect old objects if shift is held down (ie. multi-select)
+    let alreadySelected = this.selected.has(object);
+    this.selectNewObject(object, !this.isPressingKey("Shift") && !alreadySelected);
+    
+    this.isDragging = true;
 
     // if the object is draggable, then start dragging it
-    this.isDragging = true;
-    if (object.draggable) object._onDragStart();
+    this.selected.forEach((obj) => {
+      if (obj.draggable) obj._onDragStart();
+    });
   
   }
 
   private onMouseRightClick(object: Interactor, event: MouseEvent): void {
 
     this.mousePos = new Coord(event.clientX, event.clientY);
+    this.mouseMovedAfterDown = false;
 
     event.preventDefault(); // prevent context menu from appearing
     event.stopPropagation(); // don't let parent components handle this event
@@ -108,6 +124,22 @@ export class InteractionService {
     this.mousePos = new Coord(event.clientX, event.clientY);
     event.stopPropagation(); // don't let parent components handle this event
 
+    // if it was a click, deselect objects that were not clicked on
+    // if shift is held down, don't do this (ie. multi-select)
+    if (!this.mouseMovedAfterDown && !this.isPressingKey("Shift")) {
+      // deselect all objects that are not object
+
+      let objectsToRemove = new Set<Interactor>();
+      this.selected.forEach((obj) => {
+        if (obj !== object) {
+          obj._onDeselect();
+          objectsToRemove.add(obj);
+        }
+      });
+      objectsToRemove.forEach((obj) => this.selected.delete(obj));
+
+    }
+
     console.log("InteractionService.onMouseUp", object, event);
 
     this.selected.forEach((obj) => {
@@ -121,6 +153,8 @@ export class InteractionService {
   private onMouseMove(object: Interactor, event: MouseEvent): void {
 
     this.mousePos = new Coord(event.clientX, event.clientY);
+    this.mouseMovedAfterDown = true;
+
     event.stopPropagation(); // don't let parent components handle this event
 
     if (this.clickCapture) {
@@ -140,6 +174,11 @@ export class InteractionService {
 
     console.log(event.key);
 
+    // add key to heldKeys
+    if (!this.heldKeys.has(event.key)) {
+      this.heldKeys.add(event.key);
+    }
+
     // if click capture, consume all keyboard events
     if (this.clickCapture) {
       
@@ -154,6 +193,19 @@ export class InteractionService {
       obj._onKeyDown(event);
     });
 
+  }
+
+  public onKeyUp(event: KeyboardEvent): void {
+
+    // remove key from heldKeys
+    if (this.heldKeys.has(event.key)) {
+      this.heldKeys.delete(event.key);
+    }
+
+  }
+
+  public isPressingKey(key: string): boolean {
+    return this.heldKeys.has(key);
   }
 
   // registers an interactor to receive mouse events

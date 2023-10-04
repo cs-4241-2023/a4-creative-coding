@@ -69,7 +69,6 @@ export abstract class Interactor {
 
     // redirect mouse events to interaction service as (interactor, event)
     public _onRawMouseDown(event: MouseEvent): void {
-        this.mouseStartPos = this.getMousePos();
         this.mouseDownAction(this, event);
     }
 
@@ -89,6 +88,7 @@ export abstract class Interactor {
     // This updates Interactor state and sends events to subscribers.
     public _onSelect(): void {
         this.isSelected = true;
+        this.mouseStartPos = this.getMousePos();
         this.onSelect$.next(true);
     }
     public _onDeselect(): void {
@@ -97,6 +97,7 @@ export abstract class Interactor {
     }
     public _onDragStart(): void {
         this.isDragged = true;
+        this.mouseStartPos = this.getMousePos();
         this.onDragStart$.next(true);
     }
     public _onDrag(): void {

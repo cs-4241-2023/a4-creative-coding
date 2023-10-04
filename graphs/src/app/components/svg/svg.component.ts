@@ -25,6 +25,12 @@ export class SvgComponent extends AbstractInteractiveComponent {
     this.interactionService.onKeyDown(event);
   }
 
+  @HostListener('document:keyup', ['$event'])
+  onKeyUp(event: KeyboardEvent) {
+    console.log("InteractionDirective.onKeyUp", event.key);
+    this.interactionService.onKeyUp(event);
+  }
+
 
   override registerInteractor(): Interactor {
     return new SvgInteractor(this.stateService);

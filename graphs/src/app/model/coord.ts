@@ -12,4 +12,8 @@ export class Coord {
         return new Coord(this.x - other.x, this.y - other.y);
     }
 
+    public equals(other: Coord): boolean {
+        return this.x === other.x && this.y === other.y;
+    }
+
 }
