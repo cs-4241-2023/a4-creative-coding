@@ -7,6 +7,7 @@ import { Interactor } from 'src/app/interaction/interactor';
 import { AbstractInteractiveComponent } from '../abstract-interactive/abstract-interactive.component';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { EdgeInteractor } from 'src/app/interaction/edge-interactor';
+import { SaveService } from 'src/app/services/save.service';
 
 @Component({
   selector: '[app-edge]',
@@ -17,12 +18,12 @@ export class EdgeComponent extends AbstractInteractiveComponent {
 
   @Input() edge!: Edge;
 
-  constructor(private is: InteractionService, private stateService: StateService) {
+  constructor(private is: InteractionService, private stateService: StateService, private saveService: SaveService) {
     super(is);
   }
 
   override registerInteractor(): Interactor {
-    return new EdgeInteractor(this.edge, this.stateService);
+    return new EdgeInteractor(this.edge, this.stateService, this.saveService);
   }
 
 

@@ -133,6 +133,11 @@ export class Graph implements Serializable {
 
     }
 
+    // delete edge
+    public deleteEdge(edge: Edge): void {
+        this._deleteEdge(edge);
+    }
+
     /*
     SERIALIZATION
     */

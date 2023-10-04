@@ -1,8 +1,9 @@
 import { Coord } from "../model/coord";
 import { Edge } from "../model/edge";
 import { Node } from "../model/node";
+import { SaveService } from "../services/save.service";
 import { StateService } from "../services/state.service";
-import { Interactor } from "./interactor";
+import { ContextMenuOption, Interactor } from "./interactor";
 
 /*
 This interactor defines the following behaviors:
@@ -14,7 +15,7 @@ export class EdgeInteractor extends Interactor {
     private startPosBeforeDrag?: Coord;
     private endPosBeforeDrag?: Coord;
 
-    constructor(public edge: Edge, private stateService: StateService) {
+    constructor(public edge: Edge, private stateService: StateService, private saveService: SaveService) {
         super(true, true);
 
         this.onDragStart$.subscribe((event) => {
@@ -34,6 +35,22 @@ export class EdgeInteractor extends Interactor {
 
     }
 
+    public override specifyContextMenu(): ContextMenuOption[] {
+
+        return [
+            {
+                label: "Delete edge",
+                action: () => {
+                    console.log("Delete edge");
+                    this.stateService.getGraph().deleteEdge(this.edge);
+                    this.saveService.save();
+                },
+                disabled: false
+            }
+        ];
+        
+    }
+
     private getStartNode(): Node {
         return this.edge.getStartNode(this.stateService.getGraph());
     }
@@ -45,5 +62,6 @@ export class EdgeInteractor extends Interactor {
     public override toString(): string {
         return "EdgeInteractor(" + this.getStartNode().name + "," + this.getEndNode().name + ")";
     }
+    
 
 }

@@ -3,6 +3,7 @@ import { ContextMenuOption, Interactor } from '../interaction/interactor';
 import { Coord } from '../model/coord';
 import { ContextMenuService } from './context-menu.service';
 import { ClickCapture, ClickCaptureID } from '../interaction/click-capture';
+import { Subject } from 'rxjs';
 
 /*
 This service keeps track of global state for the interaction system, such as which
@@ -27,6 +28,10 @@ export class InteractionService {
   private mouseMovedAfterDown: boolean = false; // whether the mouse has moved since the last mouse down event
 
   public hoveringObject?: Interactor; // object that the mouse is currently hovering over
+
+  // a SINGULAR notification that a drag has ended. Use when you don't want to receive
+  // multiple notifications when multiple objects are finished dragging. useful i.e. for saving / doing computations
+  public onDragEndOnce$ = new Subject<boolean>();
 
   private clickCapture: ClickCapture | undefined;
 
@@ -144,9 +149,19 @@ export class InteractionService {
 
     console.log("InteractionService.onMouseUp", object, event);
 
+    let somethingDragged = false;
     this.selected.forEach((obj) => {
-      if (obj.draggable) obj._onDragEnd();
+      if (obj.draggable) {
+        somethingDragged = true;
+        obj._onDragEnd();
+      }
     });
+
+    // something was changed after drag
+    if (this.isDragging && this.mouseMovedAfterDown && somethingDragged) {
+      this.onDragEndOnce$.next(true);
+    }
+
     this.isDragging = false;
   
   }

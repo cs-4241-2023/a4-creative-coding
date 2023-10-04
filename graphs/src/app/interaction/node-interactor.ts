@@ -58,6 +58,7 @@ export class NodeInteractor extends Interactor {
                 label: "Delete",
                 action: () => {
                     this.stateService.getGraph().deleteNode(this.node);
+                    this.saveService.save();
                 },
                 disabled: false
             }
