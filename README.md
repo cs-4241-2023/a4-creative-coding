@@ -2,6 +2,8 @@
 Welcome to the 2D Audio Visualizer documentation. This page provides a detailed overview of the project structure, file contents, and the high-level design of the application.
 
 To acccess the project, please navigate to http://mamcinerney.com. Note that SSL is not yet supported, and the domain seems to be blocked on campus WiFi, so you will need to access it either through a VPN or off-campus and it is important that you type "http://" beforehand to avoid encountering an SSL_PROTOCOL_ERROR.
+
+Additionally, commit history can be tracked at https://github.com/michael-mcinerney/webware, which is the repository in which I had set up source control for on my DigitalOcean web server.
 ## Directory Structure
 ```java
 .
