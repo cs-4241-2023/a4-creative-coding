@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <title>Draw!</title>
+</head>
+<body>
+    <h1>Draw!</h1>
+    <div class="color-buttons">
+        <button onclick="changePenColor('red')" style="background-color: red;">Red</button>
+        <button onclick="changePenColor('blue')" style="background-color: blue;">Blue</button>
+        <button onclick="changePenColor('green')" style="background-color: green;">Green</button>
+        <button onclick="changePenColor('black')" style="background-color: black; color: white;">Black</button>
+        <button onclick="changePenColor('white')" style="background-color: white;">White</button>
+        <button onclick="changePenColor('yellow')" style="background-color: yellow;">Yellow</button>
+        <button onclick="changePenColor('orange')" style="background-color: orange;">Orange</button>
+        <button onclick="changePenColor('purple')" style="background-color: purple;">Purple</button>
+        <button onclick="changePenColor('pink')" style="background-color: pink;">Pink</button>
+    </div>
+  
+    <div class="size-buttons">
+        <button onclick="changePenSize(1)">Size 1</button>
+        <button onclick="changePenSize(3)">Size 3</button>
+        <button onclick="changePenSize(5)">Size 5</button>
+        <button onclick="changePenSize(7)">Size 7</button>
+        <button onclick="changePenSize(10)">Size 10</button>
+    </div>
+  
+    <div class="action-buttons">
+        <button onclick="clearCanvas()">Clear</button>
+        <button onclick="rotateCanvas()">Rotate</button>
+        <button onclick="undoAction()">Undo</button>
+    </div>
+  
+    <div class="overview-box">
+        <h2>Button Overview</h2>
+        <p><strong>Colors:</strong> Change pen color</p>
+        <p><strong>Sizes:</strong> Change pen size</p>
+        <p><strong>Clear:</strong> Clear the canvas</p>
+        <p><strong>Rotate:</strong> Rotate the canvas 90 degrees clockwise</p>
+        <p><strong>Undo:</strong> Undo the last action</p>
+    </div>
+
+    <canvas id="drawingCanvas" width="800" height="600"></canvas>
+    <script src="main.js"></script>
+</body>
+</html>
