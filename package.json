@@ -1,0 +1,28 @@
+{
+  "name": "a2_assignment",
+  "version": "",
+  "description": "College Schedule Maker",
+  "author": "Thea Caplan",
+  "scripts": {
+    "start": "node server.improved.js"
+  },
+  "dependencies": {
+    "@panzoom/panzoom": "^4.5.1",
+    "axios": "^1.5.0",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mime": "^2.6.0",
+    "mongodb": "^6.1.0",
+    "node-fetch": "^3.3.2",
+    "octokit": "^3.1.1",
+    "passport": "^0.6.0",
+    "passport-github2": "^0.1.12",
+    "passport-oauth2": "^1.7.0",
+    "sanitize.css": "^13.0.0"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}

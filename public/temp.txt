@@ -1,0 +1,11 @@
+    ctx.beginPath();
+    ctx.moveTo(this.draw_x + this.radius, this.draw_y);
+    ctx.lineTo(this.draw_x + this.width - this.radius, this.draw_y);
+    ctx.arcTo(this.draw_x + this.width, this.draw_y, this.draw_x + this.width, this.draw_y + this.radius, this.radius);
+    ctx.lineTo(this.draw_x + this.width, this.draw_y + this.height - this.radius);
+    ctx.arcTo(this.draw_x + this.width, this.draw_y + this.height, this.draw_x + this.width - this.radius, this.draw_y + this.height, this.radius);
+    ctx.lineTo(this.draw_x + this.radius, this.draw_y + this.height);
+    ctx.arcTo(this.draw_x, this.draw_y + this.height, this.draw_x, this.draw_y + this.height - this.radius, this.radius);
+    ctx.lineTo(this.draw_x, this.draw_y + this.radius);
+    ctx.arcTo(this.draw_x, this.draw_y, this.draw_x + this.radius, this.draw_y, this.radius);
+    ctx.closePath();
