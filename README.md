@@ -1,7 +1,6 @@
 ## a4-sameer-desai
 
-Glitch url: http://a4-sameer-desai.glitch.me
-
+Glitch url: couldn't get working
 Song used: https://soundcloud.com/knowwless/perfect-pair-ft-jel
 
 ![](https://github.com/SmeeBoi/a4-sameer-desai/blob/main/assets/a4visual.gif)
