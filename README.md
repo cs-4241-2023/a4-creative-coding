@@ -1,4 +1,4 @@
-AThis has a very basic server that hosts the webpage. This implements Three.js and Ammo.js for 3d spaces and physics.
+This has a very basic server that hosts the webpage. This implements Three.js and Ammo.js for 3d spaces and physics.
 Unfortunately three.js' drag functionality was not able to be implemented, as the raytrace was unable to find any objects.
 In place, there has been started an idea to create a sphere around the cursor that will act as a holder for the dice, 
 tracking the mouse movements to shake the dice, before despawning to release the dice into the box. 
