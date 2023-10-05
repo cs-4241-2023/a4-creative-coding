@@ -15,9 +15,5 @@ app.use( express.urlencoded({ extended: true }) )
 app.use(express.static('./public'))
 app.use(express.json())
 
-// GETs and POSTs
-// app.post('/', async (request, response) => {
-// })
-
 // set up the server
 app.listen(`${process.env.PORT}`)

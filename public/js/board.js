@@ -1,37 +1,35 @@
 canvasBoard = document.getElementById('canvas')
-canvasBoard.innerHTML = ''
-canvas = document.createElement( 'canvas' )
-canvasBoard.appendChild(canvas)
-
-// const panzoom = Panzoom(canvas, {
-//   maxScale: 5
-// })
-// panzoom.pan(10, 10)
-// panzoom.zoom(2, { animate: true })
-// canvas.parentElement.addEventListener('wheel', () => zooming ? panzoom.zoomWithWheel() : 0)
 
 grid = []
 controls = {}
 play = true
-panning = false
-zooming = false
-click_x = null
-click_y = null
+mousePressed = false
+random_color = false
 
-SQUARE_SIZE = 20
+SQUARE_SIZE = 7
 MARGIN = 2
 CONTROL_HEIGHT = 100
-BOARD_SIZE = 5
+BOARD_SIZE = 20
 LIGHT_BACKGROUND_COLOR = `rgb(220, 220, 220)`
 DARK_BACKGROUND_COLOR = 'grey'
-CLICK_COLOR = 'purple'
-LIVE_COLOR = 'green'
-BUTTON_BASE_COLOR = 'blue'
-BUTTON_FONT_COLOR = 'yellow'
+LIVE_COLOR = '#008000'
+EVOLVE_TIME = 1000
 
-canvas.width = SQUARE_SIZE * BOARD_SIZE + MARGIN * (BOARD_SIZE + 1)
-canvas.height =  SQUARE_SIZE * BOARD_SIZE + MARGIN * (BOARD_SIZE+1)
-ctx = canvas.getContext( '2d' )
+
+function init() {
+  canvasBoard.innerHTML = ''
+  canvas = document.createElement( 'canvas' )
+  canvas.syle = "text-align: center;"
+  canvasBoard.appendChild(canvas)
+  ctx = canvas.getContext( '2d' )
+  canvas.width = SQUARE_SIZE * BOARD_SIZE + (MARGIN * (parseInt(BOARD_SIZE) + 1))
+  canvas.height =  SQUARE_SIZE * BOARD_SIZE + (MARGIN * (parseInt(BOARD_SIZE) + 1))
+  grid = createGrid()
+  drawBackground()
+  grid.map(row => row.map(val => val.draw()))
+}
+
+const genRandHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
 
 function Square(x, y, alive) {
   this.x = x
@@ -41,7 +39,7 @@ function Square(x, y, alive) {
   this.alive = alive
 
   this.draw = () => {
-    ctx.fillStyle = this.alive ? LIVE_COLOR : LIGHT_BACKGROUND_COLOR
+    ctx.fillStyle = this.alive ? (random_color ? '#' + genRandHex(6) : LIVE_COLOR) : LIGHT_BACKGROUND_COLOR
     ctx.fillRect(this.draw_x, this.draw_y, SQUARE_SIZE, SQUARE_SIZE)
   }
 
@@ -124,10 +122,14 @@ function Square(x, y, alive) {
 
 function createGrid() {
   arr = []
-  for(x = 0; x < BOARD_SIZE*2; x++) {
+  for(x = 0; x < BOARD_SIZE; x++) {
     arr[x] = []
     for(y = 0; y < BOARD_SIZE; y++) {
-      z = new Square(x, y, false)
+      alive = false
+      if(grid.length > x && grid[0].length > y) {
+        alive = grid[x][y].alive
+      }
+      z = new Square(x, y, alive)
       z.draw()
       arr[x][y] = z
     }
@@ -138,14 +140,12 @@ function createGrid() {
 
 function drawBackground() {
   ctx.fillStyle = DARK_BACKGROUND_COLOR 
-  ctx.fillRect( 0,0,canvas.width,canvas.height/*-CONTROL_HEIGHT*/ )
+  ctx.fillRect( 0,0,canvas.width,canvas.height )
 }
 
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
-mousePressed = false
 
 function getCursorPosition(event) {
   const rect = canvas.getBoundingClientRect()
@@ -156,27 +156,11 @@ function getCursorPosition(event) {
 
 mouseListener = (e) => {
   [x, y] = getCursorPosition(e)
-  if(panning) {
-    grid = grid.map(row => row.map( square => {
-      trans_x = x - click_x;
-      trans_y = x - click_y;
-
-      temp = new Square(square.x, square.y, square.alive) 
-      temp.draw_x = square.draw_x + trans_x
-      temp.draw_y = square.draw_y + trans_y
-    }))
-    
-  } else {
-    grid.map(row => row.map(val => val.clicked(x, y)))
-  }
+  grid.map(row => row.map(val => val.clicked(x, y)))
 }
 
 canvas.addEventListener('mousedown', (e) => {
   mousePressed = true
-  if(panning) {
-    click_x = x
-    click_y = y
-  }
   mouseListener(e)
 })
 
@@ -188,50 +172,83 @@ canvas.addEventListener('mousemove',  (e) => {
 
 canvas.addEventListener('mouseup',  (e) => {
   mousePressed = false
-  if(panning) {
-    click_x = 0
-    click_y = 0
-  }
 })
 
 // initialize buttons
-document.getElementById('pause').onclick = () => {
+
+// pause button
+pause = document.getElementById('pause')
+pause.onclick = () => {
   play = !play
   if(play) {
-    document.getElementById('pause').innerHTML = 'Play'
+    pause.innerHTML = 'Pause'
   } else {
-    document.getElementById('pause').innerHTML = 'Pause'
+    pause.innerHTML = 'Play'
   }
 }
-document.getElementById('panning').onclick = () => {
-  panning = !panning
-  if(panning) {
-    document.getElementById('panning').innerHTML = 'Panning On'
-  } else {
-    document.getElementById('panning').innerHTML = 'Panning Off'
-  }
-}
-document.getElementById('zoom').onclick = () => {
-  zooming = !zooming
-  if(zooming) {
-    document.getElementById('zoom').innerHTML = 'Zoom On'
-  } else {
-    document.getElementById('zoom').innerHTML = 'Zoom Off'
-  }
+if(play) {
+  pause.innerHTML = 'Pause'
+} else {
+  pause.innerHTML = 'Play'
 }
 
-// create the grid squares
-grid = createGrid()
-// createControls();
+// color picker
+color_picker = document.getElementById('color-picker')
+color_picker.value = LIVE_COLOR
+color_picker.addEventListener('change', () => {
+  LIVE_COLOR = color_picker.value
+  grid.map(row => row.map(square => square.draw()))
+}, false)
 
-// draw everything
-drawBackground()
-grid.map(row => row.map(val => val.draw()))
+color_rand = document.getElementById('random-color')
+color_rand.value = random_color
+color_rand.addEventListener('change', () => {
+  if(color_rand.checked) {
+    random_color = true
+  } else {
+    random_color = false
+    grid.map(row => row.map(square => square.draw()))
+  }
+})
+
+// size of board slider
+size_display = document.getElementById('size-display')
+size_display.innerHTML = BOARD_SIZE
+size_slider = document.getElementById('board-size')
+size_slider.value = BOARD_SIZE
+size_slider.addEventListener('change', () => {
+  if(parseInt(size_slider.value) < parseInt(BOARD_SIZE)) {
+    console.log(size_slider.value + " " + BOARD_SIZE)
+    if(confirm(`Are you sure you want to resize the board to ${size_slider.value}?\n\n Data may be lost`)) {
+      BOARD_SIZE = size_slider.value
+      size_display.innerHTML = BOARD_SIZE
+      init()
+    } else {
+      size_slider.value = BOARD_SIZE
+    }
+  } else {
+    BOARD_SIZE = size_slider.value
+    size_display.innerHTML = BOARD_SIZE
+    init()
+  } 
+}, false)
+
+// time between evolutions
+time_display = document.getElementById('time-display')
+time_display.innerHTML = EVOLVE_TIME
+time_slider = document.getElementById('time-slider')
+time_slider.value = EVOLVE_TIME
+time_slider.addEventListener('change', () => {
+  EVOLVE_TIME = time_slider.value
+  time_display.innerHTML = EVOLVE_TIME
+}, false)
+
+init()
 
 update = async function() {
 
   // delay
-  await delay(1000).then()
+  await delay(EVOLVE_TIME).then()
 
   // temporal recursion, call the function in the future
   window.requestAnimationFrame( update )

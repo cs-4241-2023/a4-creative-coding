@@ -4,7 +4,6 @@
     <title>CS4241 Assignment 2</title>
     <meta charset="utf-8" name="description" content="Author: tcaplan">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./css/sanitize.css" media="screen,handheld">
     <link rel="stylesheet" type="text/css" href="./css/main.css" media="screen,handheld">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
@@ -14,16 +13,72 @@
     <h1>Game of Life</h1>
     </header>
 
-    <div id="game_area">
-      <div id="canvas" pointer-events: none>       
+    <main>
+      <div id="canvas">       
       </div>
   
       <div id="controlPanel">
-        <button id="pause">Pause</button>
-        <button id="panning">Panning Off</button>
-        <button id="zoom">Zoom Off</button>
+        <button id="pause" class="column">Pause</button>
+        <div class="column">
+          <div>
+            <label for="color-picker">Pick Square Color</label>
+          </div>
+          <input type="color" id="color-picker"></input>
+          <p>- OR -</p>
+          <input type="checkbox" id="random-color">Use Random Colors</input>
+        </div>
+        <div class="column">
+          <div class="inline">
+            <label for="board-size">Set Board Size (4-50)</label>
+            <input type="range" id="board-size" min="4" max="50" value="20"></input>
+            <div class="column">
+              <label for="size-display">Current Size</label>
+              <p id="size-display"></p>
+            </div>
+          </div>  
+          <div class="inline">
+            <label for="time-slider">Set Time (100ms-2s)</label>
+            <input type="range" id="time-slider" min="100" max="2000" value="1000"></input>
+            <div class="column">
+              <label for="time-display">Current Time</label>
+              <p id="time-display"></p>
+            </div>
+          </div>   
+        </div>
       </div>
+      
+    <div id="description">
+      <h2>Description</h2>
+      <ol>
+        <h3>Originally created by John Conway (1970)</h3>
+  
+        <p>The Game of Life is a zero-player game. The result is determined by the initial state, though edits can be made by a user while the game runs.</p>
+    
+        <p>The game includes a grid of squares. Each square can be in one of two states: alive or dead. Following the rules of the game, the squares 'evolve' each turn (Evolution Time).</p>
+    
+        <p class="bold">Here are the Rules for The Game of Life:</p>
+        <ol class="bold">
+            <li>Any live square with fewer than two live neighbors dies (underpopulation).</li>
+            <li>Any live square with two or three live neighbors survives to the next generation.</li>
+            <li>Any live square with more than three live neighbors dies (overpopulation).</li>
+            <li>Any dead square with exactly three live neighbors becomes a live square (reproduction).</li>
+        </ol>
+    
+        <p>The rules can lead to interesting patterns. The game has created patterns of real world patterns such as oscillators and spaceships. </p>
+      </ol>
+      
+      <h2>Controls</h2>
+
+      <p>There are 5 Different Features of the Game the user can control:</p>
+      <ol class="bold">
+        <li>What squares are alive and what squares are dead (control by clicking on squares)</li>
+        <li>Pause or Play the Game (button)</li>
+        <li>Change the color of the squares (Pick a Square Color) or Use Random Colors (checkbox)</li>
+        <li>Change to Board Size (slider on top)</li>
+        <li>Change to Evolution Time (slider on bottom)</li>
+      </ol>
     </div>
+    </main>
     
     <script src="js/board.js" async="true"></script>
 </body>
