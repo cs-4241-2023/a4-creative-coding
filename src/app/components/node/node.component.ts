@@ -46,10 +46,10 @@ export class NodeComponent extends AbstractInteractiveComponent {
   }
 
   public getStrokeWidth(): number {
-    if (this.getInteractor().isSelected) {
-      return 4;
-    } else if (this.isCreateNodeCaptureAndHoveringOverThisNode()) {
+    if (this.isCreateNodeCaptureAndHoveringOverThisNode()) {
       return 6;
+    } else if (this.getInteractor().isSelected) {
+      return 4;
     }
     return 1;
   }

@@ -33,6 +33,14 @@ export class EdgeInteractor extends Interactor {
             this.endPosBeforeDrag = undefined;
         });
 
+        // if backspace, delete
+        this.onKeyDown$.subscribe((event) => {
+            if (event.key === "Backspace") {
+                this.stateService.getGraph().deleteEdge(this.edge);
+                this.saveService.save();
+            }
+        });
+
     }
 
     public override specifyContextMenu(): ContextMenuOption[] {
