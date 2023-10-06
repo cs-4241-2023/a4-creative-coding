@@ -38,11 +38,6 @@ export abstract class Interactor {
 
     public getMousePos: () => Coord = () => { return new Coord(0, 0); };
 
-    private mouseDownAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
-    private mouseUpAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
-    private mouseMoveAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
-    private mouseRightClickAction: (interactor: Interactor, event: MouseEvent) => void = (event) => {};
-
     constructor(public selectable: boolean, public draggable: boolean) {
 
         if (draggable && !selectable) {
@@ -52,37 +47,10 @@ export abstract class Interactor {
     }
 
     // set the interaction service's mouse event handlers
-    public initInteraction(
-        getMousePos: () => Coord,
-        mouseDownAction: (interactor: Interactor, event: MouseEvent) => void,
-        mouseUpAction: (interactor: Interactor, event: MouseEvent) => void,
-        mouseMoveAction: (interactor: Interactor, event: MouseEvent) => void,
-        mouseRightClickAction: (interactor: Interactor, event: MouseEvent) => void): void {
-
+    public initInteraction(getMousePos: () => Coord): void {
         this.getMousePos = getMousePos;
-        this.mouseDownAction = mouseDownAction;
-        this.mouseUpAction = mouseUpAction;
-        this.mouseMoveAction = mouseMoveAction;
-        this.mouseRightClickAction = mouseRightClickAction;
     }
 
-
-    // redirect mouse events to interaction service as (interactor, event)
-    public _onRawMouseDown(event: MouseEvent): void {
-        this.mouseDownAction(this, event);
-    }
-
-    public _onRawMouseUp(event: MouseEvent): void {
-        this.mouseUpAction(this, event);
-    }
-
-    public _onRawMouseMove(event: MouseEvent): void {
-        this.mouseMoveAction(this, event);
-    }
-
-    public _onRawRightClick(event: MouseEvent): void {
-        this.mouseRightClickAction(this, event);
-    }
 
     // hooks for interaction service to call.
     // This updates Interactor state and sends events to subscribers.

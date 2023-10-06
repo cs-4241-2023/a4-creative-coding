@@ -65,7 +65,7 @@ export class InteractionService {
   }
 
   // select the object and unselect all others
-  private onMouseDown(object: Interactor, event: MouseEvent): void {
+  public _onMouseDown(object: Interactor, event: MouseEvent): void {
 
     this.mousePos = new Coord(event.clientX, event.clientY);
     
@@ -100,7 +100,7 @@ export class InteractionService {
   
   }
 
-  private onMouseRightClick(object: Interactor, event: MouseEvent): void {
+  public _onMouseRightClick(object: Interactor, event: MouseEvent): void {
 
     this.mousePos = new Coord(event.clientX, event.clientY);
     this.mouseMovedAfterDown = false;
@@ -126,7 +126,7 @@ export class InteractionService {
 
   }
 
-  private onMouseUp(object: Interactor, event: MouseEvent): void {
+  public _onMouseUp(object: Interactor, event: MouseEvent): void {
 
     this.mousePos = new Coord(event.clientX, event.clientY);
     event.stopPropagation(); // don't let parent components handle this event
@@ -167,7 +167,7 @@ export class InteractionService {
   }
 
   // if mouse is down, then drag the selected objects
-  private onMouseMove(object: Interactor, event: MouseEvent): void {
+  public _onMouseMove(object: Interactor, event: MouseEvent): void {
 
     this.mousePos = new Coord(event.clientX, event.clientY);
     this.mouseMovedAfterDown = true;
@@ -229,18 +229,7 @@ export class InteractionService {
 
   // registers an interactor to receive mouse events
   public register(interactor: Interactor): void {
-
-    console.log("InteractionService.register", interactor);
-
-    // set up hooks for interactor to call on model events when view sends mouse events
-    interactor.initInteraction(
-      this.getMousePos.bind(this),
-      this.onMouseDown.bind(this),
-      this.onMouseUp.bind(this),
-      this.onMouseMove.bind(this),
-      this.onMouseRightClick.bind(this),
-    );
-
+    interactor.initInteraction(this.getMousePos.bind(this));
     this.objects.push(interactor);
   }
 

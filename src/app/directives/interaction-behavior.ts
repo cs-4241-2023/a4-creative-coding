@@ -1,5 +1,6 @@
 import { Directive, ElementRef, HostListener, Input, Renderer2 } from '@angular/core';
 import { Interactor } from '../interaction/interactor';
+import { InteractionService } from '../services/interaction.service';
 
 /*
 InteractionDirectives are attached to some component that MUST extend AbstractInteractiveComponent.
@@ -12,26 +13,28 @@ those events to selection and drag events.
 })
 export class InteractionDirective {
   @Input() interaction!: Interactor;
+
+  constructor(private interactionService: InteractionService) {}
   
 
   @HostListener('mousedown', ['$event'])
   onMouseDown(event: MouseEvent) {
-    this.interaction._onRawMouseDown(event);
+    this.interactionService._onMouseDown(this.interaction, event);
   }
 
   @HostListener('mouseup', ['$event'])
   onMouseUp(event: MouseEvent) {
-    this.interaction._onRawMouseUp(event);
+    this.interactionService._onMouseUp(this.interaction, event);
   }
 
   @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
-    this.interaction._onRawMouseMove(event);
+    this.interactionService._onMouseMove(this.interaction, event);
   }
 
   @HostListener('contextmenu', ['$event'])
   onRightClick(event: MouseEvent) {
-    this.interaction._onRawRightClick(event);
+    this.interactionService._onMouseRightClick(this.interaction, event);
   }
 
 }
