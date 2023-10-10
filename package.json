@@ -1,0 +1,17 @@
+{
+  "name": "a4-william-dufault",
+  "version": "1.0.0",
+  "description": "cs4241 webware a4",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "author": "will dufault",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

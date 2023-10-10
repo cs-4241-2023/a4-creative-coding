@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang='en'>
+	<head>
+		<meta charset='utf-8'/>
+		<meta http-equiv='x-ua-compatible' content='ie=edge'>
+		<meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+		<link rel='stylesheet' href='/css/style.css'/>
+		<link rel='stylesheet' href='/css/reset.css'/>
+		<!-- <link rel='icon' type='image/png' href='/images/favicon.png'/> -->
+		<title>fractal playground</title>
+	</head>
+	<body>
+		<div class='options-wrapper div-readable'>
+			<h2>fractal playground</h2>
+			<div class='input-wrapper'>
+				<label for='minimum-real'>minimum real:&nbsp;</label>
+				<input id='minimum-real' type='number' step='any' min='-500' max='500'/>
+			</div>
+			<div class='input-wrapper'>
+				<label for='maximum-real'>maximum real:&nbsp;</label>
+				<input id='maximum-real' type='number' step='any' min='-500' max='500'/>
+			</div>
+			<div class='input-wrapper'>
+				<label for='minimum-imaginary'>minimum imaginary:&nbsp;</label>
+				<input id='minimum-imaginary' type='number' step='any' min='-500' max='500'/>
+			</div>
+			<div class='input-wrapper'>
+				<label for='maximum-imaginary'>maximum imaginary:&nbsp;</label>
+				<input id='maximum-imaginary' type='number' step='any' min='-500' max='500'/>
+			</div>
+			<div class='input-wrapper'>
+				<label for='iterations'># of iterations:&nbsp;</label>
+				<input id='iterations' type='number' min='1' max='10000'/>
+			</div>
+			<div class='input-wrapper'>
+				<label for='z-real'>z real:&nbsp;</label>
+				<input id='z-real' type='number' step='0.01' min='-500' max='500'/>
+			</div>
+			<div class='input-wrapper'>
+				<label for='z-imaginary'>z imaginary:&nbsp;</label>
+				<input id='z-imaginary' type='number' step='0.01' min='-500' max='500'/>
+			</div>
+			<div class='input-wrapper'>
+				<label for='flip-c-and-z'>flip c and z?</label>
+				<input id='flip-c-and-z' type='checkbox'/>
+			</div>
+			<div class='input-wrapper'>
+				<label for='plot-diverging'>plot diverging?</label>
+				<input id='plot-diverging' type='checkbox'/>
+			</div>
+			<button id='generate-button'>generate fractal</button>
+			<button id='instructions-button'>instructions</button>
+		</div>
+		<div class='presets-wrapper div-readable'>
+			<h2>presets</h2>
+			<button id='mandelbrot-button'>mandelbrot</button>
+			<button id='julia-1-button'>julia 1</button>
+			<button id='julia-2-button'>julia 2</button>
+			<button id='julia-3-button'>julia 3</button>
+			<button id='julia-4-button'>julia 4</button>
+			<button id='julia-5-button'>julia 5</button>
+			<button id='julia-6-button'>julia 6</button>
+			<button id='white-circle-button'>white circle</button>
+			<button id='black-circle-button'>black circle</button>
+		</div>
+		<canvas id='canvas' class='canvas'></canvas>
+		<script src='/js/main.js' type='module'></script>
+	</body>
+</html>
