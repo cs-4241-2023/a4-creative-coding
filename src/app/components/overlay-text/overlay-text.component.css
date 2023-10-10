@@ -1,0 +1,9 @@
+.overlay {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: black;
+    display: flex;
+    pointer-events: none; /* so the SVG remains interactive beneath */
+    font-size: 16px;
+}
